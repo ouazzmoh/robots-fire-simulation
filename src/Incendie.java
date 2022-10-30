@@ -1,7 +1,17 @@
 
 public class Incendie {
+	/**
+	 * Classe Incendie, une classe qui nous donne toutes les informations d'une incendie:
+	 * ses coordonnées dans la carte
+	 * Son intensité (nb de litres nécessaire pour éteindre le feu
+	 */
 	private Case position;
-	private double intensite; //Nombre de litre necessaire pour l'eteindre
+	private double intensite;
+	/**
+	 * Constructeur public, qui crée une nouvelle incendie 
+	 * @param position case dans laquelle l'incendie se situe dans la carte
+	 * @param intensite volume nécessaire pour arrêter l'incendie
+	 */
 	public Incendie(Case position, double intensite) {
 		this.position = position;
 		this.intensite = intensite;
@@ -16,6 +26,10 @@ public class Incendie {
 	public double getIntensite() {
 		return intensite;
 	}
+	/**
+	 * Méthode qui réduit l'intensité d'une incendie grâce à l'aide d'un robot
+	 * @param vol volume déversé
+	 */
 	public void eaudeversee(double vol) {
 		intensite -= vol;
 	}
@@ -25,6 +39,10 @@ public class Incendie {
 	public void setIntensite(double intensite) {
 		this.intensite = intensite;
 	}
+	/**
+	 * Méthode qui met à jour l'intensité de l'incendie,
+	 * @param vol volume qu'il faut deverser en plus
+	 */
 	public void updateIntensite(double vol) {
 		intensite += vol;
 	}

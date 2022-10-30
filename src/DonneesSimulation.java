@@ -1,9 +1,22 @@
 
 
 public class DonneesSimulation {
+	/**
+	 * Classe DonneesSimulation, une classe qui regroupe toutes les données dont le simulateur aura besoin, à savoir :
+	 * la carte, la taille des cases, le format et les cases (ou encore les natures des terrains)
+	 * Informations sur les incendies : leurs positions et leurs intensités
+	 * Informations sur les robots : leurs positions, leurs types, vitesse et réservoir
+	 */
 	private Carte carte;
 	private Incendie[] incendies;
 	private Robot[] robots;
+	/**
+	 * Constructeur public de classe, qui crée un objet DonneesSimulation avec tous ses attribus=ts, ce qui est logique
+	 * car en l'absence d'un seul attribut il n'aura pas de simulation
+	 * @param carte la carte sur laquelle la simulation aura lieu 
+	 * @param incendies tableau de TOUTES les incendies dans la carte
+	 * @param robots tableau de TOUS les robots dans la carte 
+	 */
 	public DonneesSimulation(Carte carte, Incendie[] incendies, Robot[] robots) {
 		this.carte = carte;
 		this.incendies = incendies;

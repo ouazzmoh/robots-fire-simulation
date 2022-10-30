@@ -1,10 +1,26 @@
 
 public class Drone extends Robot {
+	/**
+	 * La classe Drone, une classe fille de la classe robot, qui caractérise un nouveau type de robots:
+	 * Les drones, qui ont une vitesse maximale de 150 km/h, un réservoir de 10000 L et qui peuvent 
+	 * traverser tout type de terrain. 
+	 */
 	private double reservoir;
+	/**
+	 * Constructeur public, qiu crée un nouveau drone qui a une vitesse par défaut (ie 100 km/h)
+	 * @param position case dans laquelle le drone se trouve dans la carte
+	 * @param reservoir volume d'eau dans son reservoir
+	 */
 	public Drone(Case position, double reservoir) {
 		super(100, position);
 		this.reservoir = reservoir;
 	}
+	/**
+	 * Constructeur public, qui crée un nouveau drone 
+	 * @param vitesse vitesse du drone, qui ne doit pas dépasser 150 km/h
+	 * @param position case dans laquelle le drone se trouve dans la carte
+	 * @param reservoir volume d'eau dans son reservoir
+	 */
 	public Drone(double vitesse, Case position, double reservoir) {
 		super(vitesse, position);
 		if (this.vitesse > 150) {
