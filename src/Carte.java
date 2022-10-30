@@ -104,7 +104,7 @@ public class Carte {
 		return carte[new_lig][new_col];
 		}
 		else {
-			throw new IllegalArgumentException("ce voisin n'existe pas!!!")
+			throw new IllegalArgumentException("ce voisin n'existe pas!!!");
 		}
 	}
 }
