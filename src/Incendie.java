@@ -1,7 +1,7 @@
 
 public class Incendie {
 	private Case position;
-	private double intensite;
+	private double intensite; //Nombre de litre necessaire pour l'eteindre
 	public Incendie(Case position, double intensite) {
 		this.position = position;
 		this.intensite = intensite;

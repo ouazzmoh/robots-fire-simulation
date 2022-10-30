@@ -5,6 +5,7 @@ public class Carte {
 	private int nbColonnes;
 	private Case[][] carte;
 	public Carte(int tailleCases, int nbLignes, int nbColonnes) {
+		this.tailleCases = tailleCases;
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.carte = new Case[nbLignes][nbColonnes];
@@ -59,6 +60,7 @@ public class Carte {
 	public Case getVoisin(Case src, Direction dir) {
 		int new_lig = src.getLigne();
 		int new_col = src.getColonne();
+		//TODO: Test si le voisin existe avant de le retourner
 		switch(dir) {
 			case NORD:
 				new_lig -= 1;

@@ -1,8 +1,11 @@
+
 import java.io.*;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
+
+
 
 public class NewLecteurDonnees {
 	public static DonneesSimulation lire(String fichierDonnees)
