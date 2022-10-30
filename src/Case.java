@@ -1,13 +1,29 @@
 
 public class Case {
+	/**
+	 * classe case, qui nous permet de caractériser une case par :
+	 * la ligne et la colonne  où elle se trouve
+	 * et la nature de terrain dans cette case 
+	 */
 	private int ligne;
 	private int colonne;
 	private NatureTerrain nature;
+	/**
+	 * Constructeur qui crée un case sans connaitre la  nature de terrain
+	 * @param ligne ligne où elle se triuve dans la carte
+	 * @param colonne colonne où elle se trouve dans la carte
+	 */
 	public Case(int ligne, int colonne) {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.nature = null;
 	}
+	/**
+	 * Constructeur qui crée une case avec tous ses attributs 
+	 * @param ligne ligne où elle se trouve dans la carte
+	 * @param colonne colonne où elle se trouve dans la carte
+	 * @param nature nature du terrain de la case
+	 */
 	public Case(int ligne, int colonne, NatureTerrain nature) {
 		this.ligne = ligne;
 		this.colonne = colonne;
@@ -25,6 +41,11 @@ public class Case {
 	public NatureTerrain getNature() {
 		return nature;
 	}
+	/**
+	 * Méthode qui sert a définir la nature du terrain d'une case créé par le premier constructeur, 
+	 * ou bien changer la nature du terrain (qui n'est pas utile dans notre cas)
+	 * @param nature (nouvelle) nature du terrain de la case
+	 */
 	public void setNature(NatureTerrain nature) {
 		this.nature = nature;
 	}
