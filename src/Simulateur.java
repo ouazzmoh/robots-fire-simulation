@@ -2,6 +2,7 @@ import gui.Simulable;
 import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
+import gui.Text;
 
 /**Classe qui implement simulable
  * Le but c'est de visualiser les donnees recu par NewLecteurDonnees
@@ -25,31 +26,11 @@ public class Simulateur implements Simulable {
 	}
 	
 	
-	
-//	/**
-//	 * Initialiser la fenetre en fonction des Donnees de simulation
-//	 * */
-//private void initGUI() {
-//		/**
-//		 * Variables utiles
-//		 * */
-//		Carte carteToDraw = donnees.getCarte();
-//		
-//		int tailleCases = carteToDraw.getTailleCases();
-//		int nbLig = carteToDraw.getNbLignes();
-//		int nbCol = carteToDraw.getNBColonnes();
-//		
-//		this.gui = new GUISimulator(nbCol*tailleCases, nbLig*tailleCases, Color.BLACK, this);
-//		
-//	}
-	
-	
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
 	 * */
 	private void draw() {
 		
-//		initGUI();
 		/**
 		 * Variables utiles
 		 * */
@@ -57,25 +38,41 @@ public class Simulateur implements Simulable {
 		Incendie[] incendieTableau = donnees.getIncendie();
 		Robot[]	robotTableau = donnees.getrobot();
 		
-		int tailleCases = carteToDraw.getTailleCases();
-		int tailleCasesPixel = tailleCases / 100;
 		int nbLig = carteToDraw.getNbLignes();
 		int nbCol = carteToDraw.getNBColonnes();
+		
+		
+		//Anchor = centre
+        int xMax = gui.getWidth();
+        xMax -= xMax % 10;
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10;
+        
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		
+		int yMin = tailleCases_length /2;
+		int xMin = tailleCases_width /2;
 	
 		/*
 		 * Boucler sur les cases et utiliser la bonne couleur
 		 * **/
 		int count = 0;
-		for (int x = 0; x < nbLig; x++) {
-			for (int y = 0; y < nbCol; y++) {
+		for (int y = 0; y < nbLig; y++) {
+			for (int x = 0; x < nbCol; x++) {
 				if (count % 2 == 0) {
-					gui.addGraphicalElement(new Rectangle(x*tailleCasesPixel, y*tailleCasesPixel , Color.BLUE, Color.BLUE, 1));
+					gui.addGraphicalElement(new Rectangle(x*tailleCases_width + xMin, y*tailleCases_length + yMin , Color.WHITE, Color.BLUE, tailleCases_width, tailleCases_length));
+					
 				}
 				else {
-					gui.addGraphicalElement(new Rectangle(x*tailleCasesPixel, y*tailleCasesPixel , Color.BLACK, Color.BLACK, 1));
+					gui.addGraphicalElement(new Rectangle(x*tailleCases_width + xMin, y*tailleCases_length + yMin , Color.WHITE, Color.BLACK, tailleCases_width, tailleCases_length));
 				}
 				
 				count++;
+				Case caseCourante = carteToDraw.getCase(x, y);
+				String text = "" + caseCourante.getNature();
+		        gui.addGraphicalElement(new Text(x*tailleCases_width + xMin, y*tailleCases_length + yMin, Color.GREEN, text));
+
 			}
 		}
 	}
