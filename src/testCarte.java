@@ -17,7 +17,7 @@ public class testCarte {
 			int nbLig = carteToDraw.getNbLignes();
 			int nbCol = carteToDraw.getNBColonnes();
 			
-			GUISimulator gui = new GUISimulator(20, 1400, Color.RED);
+			GUISimulator gui = new GUISimulator(800, 600, Color.RED);
 			Simulateur simulateur = new Simulateur(gui, donnees);
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
