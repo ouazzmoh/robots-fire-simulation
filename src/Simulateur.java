@@ -54,8 +54,8 @@ public class Simulateur implements Simulable {
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
 		
-//		int yMin = tailleCases_length /2;
-//		int xMin = tailleCases_width /2;
+		int yMin = tailleCases_length /2;
+		int xMin = tailleCases_width /2;
 	
 		/**
 		 * Boucler sur les cases, et les dessiner selon la nature du terrain
@@ -70,11 +70,24 @@ public class Simulateur implements Simulable {
 		/**
 		 * Faire l'incendie
 		 */
-		
+		for (int i = 0; i < incendieTableau.length; i++) {
+			Case positionCase = incendieTableau[i].getPosition();
+			double intensite = incendieTableau[i].getIntensite();
+			int x = positionCase.getColonne();
+			int y = positionCase.getColonne();
+			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+		}
 		
 		/**
 		 * Deployer les robots
 		 */
+		for (int i = 0; i < robotTableau.length; i++) {
+			Case positionCase = robotTableau[i].getPosition();
+//			double vitesse = robotTableau[i].getVitesse();
+			int x = positionCase.getColonne();
+			int y = positionCase.getColonne();
+			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
+		}
 	}
 	
 

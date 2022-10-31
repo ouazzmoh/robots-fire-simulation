@@ -9,7 +9,7 @@ public class testCarte {
 
 	public static void main(String[] args) {
 		try {
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/desertOfDeath-20x20.map");
 			Carte carteToDraw = donnees.getCarte();
 			
 			int tailleCases = carteToDraw.getTailleCases();
