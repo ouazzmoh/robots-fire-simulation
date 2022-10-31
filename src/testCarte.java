@@ -19,7 +19,14 @@ public class testCarte {
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 
-			Simulateur simulateur = new Simulateur(gui, donnees);
+			Simulateur simulateur = new Simulateur(gui, donnees, 11);
+			for (int i = 2 ; i <= 10 ; i += 2) {
+				simulateur.ajouteEvenement (new EventMessage (i , " [ PING ]") ) ;
+			}
+			for (int i = 3 ; i <= 9 ; i += 3) {
+				simulateur.ajouteEvenement (new EventMessage (i , " [ PONG ]") ) ;
+			}
+			
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {

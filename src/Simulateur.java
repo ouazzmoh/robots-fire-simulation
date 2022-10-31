@@ -12,21 +12,57 @@ import gui.ImageElement;
  * Output: visualisation de tout les elements de la simulation**/
 public class Simulateur implements Simulable {
 	
+	private static final boolean TRUE = false;
+
 	/** Interface graphique */
 	private GUISimulator gui;
 	
 	/** Donnees a visualiser */
 	private DonneesSimulation donnees;
 	
+	/** entier qui permet de suivre l'execution des evenements */
+	private long dateSimualtion;
+	
+	/** Liste evenement*/
+	Evenement[] Evenements;
+	
 	/** Constructeur, et association a la gui*/
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements) {
 		this.gui = gui;
 		this.donnees = donnees;
+		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.Evenements = new Evenement[(int) nbEvenements];
 		gui.setSimulable(this);
 		draw();
 		
 	}
 	
+	public void  incrementeDate() {
+		this.dateSimualtion += 1;
+	}
+	
+	public void ajouteEvenement(Evenement e) {
+		int count = (int) e.getDate();
+		while (Evenements[count] != null) {
+			count += 1;
+		}
+		this.Evenements[count] = e;
+	}
+	
+	public boolean simulationTerminee() {
+		return (this.dateSimualtion == Evenements.length);
+	}
+	/*
+	public void executeEvenement() {
+		while (!(simulationTerminee())) {
+			System.out.println("Next... Current date :" + this.dateSimualtion);
+			if (Evenements[(int) this.dateSimualtion] != null) {
+				Evenements[(int) this.dateSimualtion].execute();
+			}
+			incrementeDate();
+					
+		}
+	}*/
 	
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
@@ -94,6 +130,14 @@ public class Simulateur implements Simulable {
 	@Override
 	public void next() {
 		// TODO Auto-generated method stub
+		if (!(simulationTerminee())) {
+			System.out.println("Next... Current date :" + this.dateSimualtion);
+			if (Evenements[(int) this.dateSimualtion] != null) {
+				Evenements[(int) this.dateSimualtion].execute();
+			}
+			incrementeDate();
+					
+		}
 		
 	}
 
