@@ -46,6 +46,9 @@ public class Carte {
 	public Case getCase(int lig, int col) {
 		return carte[lig][col];
 	}
+	public Case[][] getCarte(){
+		return carte;
+	}
 	public void setCase(int lig, int col, Case new_case) {
 		carte[lig][col] = new_case;
 	}
