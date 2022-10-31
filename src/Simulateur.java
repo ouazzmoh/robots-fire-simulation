@@ -63,8 +63,8 @@ public class Simulateur implements Simulable {
 		 * */
 		for (int y = 0; y < nbLig; y++) {
 			for (int x = 0; x < nbCol; x++) {
-				Case caseCourante = carteToDraw.getCase(x, y);
-		        gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + caseCourante.getNature() +".jpeg", tailleCases_width, tailleCases_length, null));
+				Case caseCourante = carteToDraw.getCase(y, x);
+		        gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + caseCourante.getNature() +".png", tailleCases_width, tailleCases_length, null));
 			}
 		}
 		
