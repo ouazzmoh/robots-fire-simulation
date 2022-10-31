@@ -96,6 +96,21 @@ public class Simulateur implements Simulable {
 
 			}
 		}
+		
+		
+		for (int index = 0; index<incendieTableau.length; index++) {
+			Incendie incendieCourante = incendieTableau[index];
+			Case caseIncendie = incendieCourante.getPosition();
+	        gui.addGraphicalElement(new Text(caseIncendie.getColonne()*tailleCases_width + xMin + 10, caseIncendie.getLigne()*tailleCases_length + yMin + 10, Color.RED, "FEU"));
+			
+		}
+		
+		for (int index = 0; index<robotTableau.length; index++) {
+			Robot robotCourant = robotTableau[index];
+			Case caseRobot = robotCourant.getPosition();
+	        gui.addGraphicalElement(new Text(caseRobot.getColonne()*tailleCases_width + xMin + 30, caseRobot.getLigne()*tailleCases_length + yMin + 30, Color.WHITE, "ROBOT"));
+			
+		}
 	}
 	
 
