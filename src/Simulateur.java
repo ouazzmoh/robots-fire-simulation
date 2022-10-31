@@ -18,6 +18,7 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donnees;
 	
 	/** Constructeur, et association a la gui*/
+
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
 		this.donnees = donnees;
@@ -47,9 +48,9 @@ public class Simulateur implements Simulable {
 		
 		
         int xMax = gui.getWidth();
-        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile du fenetre
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
         int yMax = gui.getHeight();
-        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile du fenetre
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
@@ -74,7 +75,7 @@ public class Simulateur implements Simulable {
 			Case positionCase = incendieTableau[i].getPosition();
 			double intensite = incendieTableau[i].getIntensite();
 			int x = positionCase.getColonne();
-			int y = positionCase.getColonne();
+			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
 		}
 		
@@ -85,7 +86,7 @@ public class Simulateur implements Simulable {
 			Case positionCase = robotTableau[i].getPosition();
 //			double vitesse = robotTableau[i].getVitesse();
 			int x = positionCase.getColonne();
-			int y = positionCase.getColonne();
+			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 		}
 	}
