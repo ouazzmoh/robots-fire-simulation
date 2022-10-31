@@ -1,3 +1,5 @@
+import gui.ImageElement;
+import gui.GUISimulator;
 
 public class Case {
 	/**
@@ -49,4 +51,16 @@ public class Case {
 	public void setNature(NatureTerrain nature) {
 		this.nature = nature;
 	}
+	
+//	/**
+//	 * Méthode pour dessiner la case selon sa nature
+//	 * @param imageName
+//	 * @param x,y
+//	 * @param caseWidth, caseHeight
+//	 * @param GUISimulator gui
+//	 */
+//	
+//	public void draw(String imageName, int x, int y, int caseWidth, int caseHeight, GUISimulator gui) {
+//		gui.addGraphicalElement(new ImageElement(x, y, imageName, caseWidth, caseHeight, null));
+//	}
 }

@@ -9,7 +9,7 @@ public class testCarte {
 
 	public static void main(String[] args) {
 		try {
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
 			Carte carteToDraw = donnees.getCarte();
 			
 			int tailleCases = carteToDraw.getTailleCases();
@@ -17,7 +17,7 @@ public class testCarte {
 			int nbLig = carteToDraw.getNbLignes();
 			int nbCol = carteToDraw.getNBColonnes();
 			
-			GUISimulator gui = new GUISimulator(800, 600, Color.RED);
+			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 			Simulateur simulateur = new Simulateur(gui, donnees);
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
