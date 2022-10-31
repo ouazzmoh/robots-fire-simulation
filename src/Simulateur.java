@@ -1,4 +1,5 @@
 import gui.Simulable;
+import gui.Text;
 import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
@@ -89,7 +90,6 @@ public class Simulateur implements Simulable {
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 		}
 	}
-	
 
 	@Override
 	public void next() {
