@@ -18,6 +18,7 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donnees;
 	
 	/** Constructeur, et association a la gui*/
+
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
 		this.donnees = donnees;
@@ -47,9 +48,9 @@ public class Simulateur implements Simulable {
 		
 		
         int xMax = gui.getWidth();
-        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile du fenetre
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
         int yMax = gui.getHeight();
-        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile du fenetre
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
