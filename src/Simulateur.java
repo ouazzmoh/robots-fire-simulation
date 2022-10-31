@@ -74,7 +74,7 @@ public class Simulateur implements Simulable {
 			Case positionCase = incendieTableau[i].getPosition();
 			double intensite = incendieTableau[i].getIntensite();
 			int x = positionCase.getColonne();
-			int y = positionCase.getColonne();
+			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
 		}
 		
@@ -85,7 +85,7 @@ public class Simulateur implements Simulable {
 			Case positionCase = robotTableau[i].getPosition();
 //			double vitesse = robotTableau[i].getVitesse();
 			int x = positionCase.getColonne();
-			int y = positionCase.getColonne();
+			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 		}
 	}
