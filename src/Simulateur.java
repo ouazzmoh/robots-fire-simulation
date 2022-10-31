@@ -3,6 +3,7 @@ import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
 import gui.Text;
+import gui.ImageElement;
 
 /**Classe qui implement simulable
  * Le but c'est de visualiser les donnees recu par NewLecteurDonnees
@@ -42,39 +43,38 @@ public class Simulateur implements Simulable {
 		int nbCol = carteToDraw.getNBColonnes();
 		
 		
-		//Anchor = centre
+		//Anchor = centre for rectangles and text, topleft for image
+		
+		
         int xMax = gui.getWidth();
-        xMax -= xMax % 10;
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile du fenetre
         int yMax = gui.getHeight();
-        yMax -= yMax % 10;
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile du fenetre
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
 		
-		int yMin = tailleCases_length /2;
-		int xMin = tailleCases_width /2;
+//		int yMin = tailleCases_length /2;
+//		int xMin = tailleCases_width /2;
 	
-		/*
-		 * Boucler sur les cases et utiliser la bonne couleur
-		 * **/
-		int count = 0;
+		/**
+		 * Boucler sur les cases, et les dessiner selon la nature du terrain
+		 * */
 		for (int y = 0; y < nbLig; y++) {
 			for (int x = 0; x < nbCol; x++) {
-				if (count % 2 == 0) {
-					gui.addGraphicalElement(new Rectangle(x*tailleCases_width + xMin, y*tailleCases_length + yMin , Color.WHITE, Color.BLUE, tailleCases_width, tailleCases_length));
-					
-				}
-				else {
-					gui.addGraphicalElement(new Rectangle(x*tailleCases_width + xMin, y*tailleCases_length + yMin , Color.WHITE, Color.BLACK, tailleCases_width, tailleCases_length));
-				}
-				
-				count++;
 				Case caseCourante = carteToDraw.getCase(x, y);
-				String text = "" + caseCourante.getNature();
-		        gui.addGraphicalElement(new Text(x*tailleCases_width + xMin, y*tailleCases_length + yMin, Color.GREEN, text));
-
+		        gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + caseCourante.getNature() +".jpeg", tailleCases_width, tailleCases_length, null));
 			}
 		}
+		
+		/**
+		 * Faire l'incendie
+		 */
+		
+		
+		/**
+		 * Deployer les robots
+		 */
 	}
 	
 

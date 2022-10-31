@@ -1,5 +1,4 @@
 
-
 public class DonneesSimulation {
 	/**
 	 * Classe DonneesSimulation, une classe qui regroupe toutes les données dont le simulateur aura besoin, à savoir :
