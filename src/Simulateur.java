@@ -27,6 +27,7 @@ public class Simulateur implements Simulable {
 	Evenement[] Evenements;
 	
 	/** Constructeur, et association a la gui*/
+
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements) {
 		this.gui = gui;
 		this.donnees = donnees;
@@ -84,9 +85,9 @@ public class Simulateur implements Simulable {
 		
 		
         int xMax = gui.getWidth();
-        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile du fenetre
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
         int yMax = gui.getHeight();
-        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile du fenetre
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
@@ -99,8 +100,8 @@ public class Simulateur implements Simulable {
 		 * */
 		for (int y = 0; y < nbLig; y++) {
 			for (int x = 0; x < nbCol; x++) {
-				Case caseCourante = carteToDraw.getCase(x, y);
-		        gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + caseCourante.getNature() +".jpeg", tailleCases_width, tailleCases_length, null));
+				Case caseCourante = carteToDraw.getCase(y, x);
+		        gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + caseCourante.getNature() +".png", tailleCases_width, tailleCases_length, null));
 			}
 		}
 		
