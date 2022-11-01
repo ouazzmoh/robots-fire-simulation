@@ -3,11 +3,13 @@ import gui.ImageElement;
 public class EventRobotDeplace extends Evenement {
 	private String message ;
 	Robot robot;
+	NatureTerrain nouvelleNature;
 	
-	public EventRobotDeplace(int date , String message , Robot robot) {
+	public EventRobotDeplace(int date , String message , Robot robot, NatureTerrain nouvelleNature) {
 		super(date);
 		this.message = message ;
 		this.robot = robot;
+		this.nouvelleNature = nouvelleNature;
 	}
 	public void execute () {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
@@ -25,6 +27,7 @@ public class EventRobotDeplace extends Evenement {
 		else{
 			nouvellePosition = new Case(position.getLigne(), position.getColonne() + 1);
 		}
+		nouvellePosition.setNature(nouvelleNature);
 		this.robot.setPosition(nouvellePosition);
 	}
 }

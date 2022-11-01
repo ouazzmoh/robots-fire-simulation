@@ -36,34 +36,26 @@ public class testCarte {
 			*/
 			
 			/* scenario 1*/
+			NatureTerrain nature = NatureTerrain.EAU;
 			Robot robotsTodeplace = robots[1];
 			int i = 2;
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "nord", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "nord", robotsTodeplace, nature));
 			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace, nature));
 			simulateur.ajouteEvenement(new EventRobotcharge(i, robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace, nature));
 			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));
 			robotsTodeplace = robots[2];
 			i = 3;
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace, nature));
 			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotcharge(i, robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));
+
 			/*
 			for (int i = 2 ; i <= 10 ; i += 2) {
 				simulateur.ajouteEvenement (new EventMessage (i , " [ PING ]") ) ;
