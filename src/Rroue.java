@@ -40,8 +40,11 @@ public class Rroue extends Robot {
 	/**
 	 * méthode qui remplit le reservoir du robot à roues au maximum.
 	 */
-	public void remplirReservoir() {
+	public void remplirEau() {
 		reservoir = 5000;
+	}
+	public double getReservoir() {
+		return reservoir;
 	}
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {

@@ -45,9 +45,11 @@ public class Rchenille extends Robot {
 	@Override
 	public void deverserEau(int vol) {
 		reservoir -= vol;
-
 	}
-	public void remplirReservoir() {
+	public double getReservoir() {
+		return reservoir;
+	}
+	public void remplirEau() {
 		reservoir = 2000;
 	}
 

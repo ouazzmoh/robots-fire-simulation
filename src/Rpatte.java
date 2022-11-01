@@ -33,7 +33,12 @@ public class Rpatte extends Robot {
 	void deverserEau(int vol) {
 		return;
 	}
-
+	void remplirEau() {
+		return;
+	}
+	public double getReservoir() {
+		return Double.POSITIVE_INFINITY;
+	}
 	@Override
 	boolean has_accessto(NatureTerrain nature) {
 		switch(nature) {

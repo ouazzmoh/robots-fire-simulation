@@ -44,7 +44,7 @@ public class Drone extends Robot {
 	public void deverserEau(int vol) {
 		reservoir -= vol;
 	}
-	public void remplirReservoir() {
+	public void remplirEau() {
 		reservoir = 10000;
 	}
 	@Override

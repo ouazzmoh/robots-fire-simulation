@@ -39,7 +39,15 @@ public class testCarte {
 			Robot robotsTodeplace = robots[1];
 			int i = 2;
 			simulateur.ajouteEvenement(new EventRobotDeplace(i, "nord", robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));			
+			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotcharge(i, robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
 			/*
 			for (int i = 2 ; i <= 10 ; i += 2) {
 				simulateur.ajouteEvenement (new EventMessage (i , " [ PING ]") ) ;

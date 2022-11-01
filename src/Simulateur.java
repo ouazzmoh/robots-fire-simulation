@@ -117,7 +117,7 @@ public class Simulateur implements Simulable {
 			double intensite = incendieTableau[i].getIntensite();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
-			if (incendieTableau[i].etat == 1) {
+			if (incendieTableau[i].getIntensite() != 0) {
 				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
 			}
 		}

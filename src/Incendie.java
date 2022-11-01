@@ -7,7 +7,6 @@ public class Incendie {
 	 */
 	private Case position;
 	private double intensite;
-	int etat;
 	/**
 	 * Constructeur public, qui crée une nouvelle incendie 
 	 * @param position case dans laquelle l'incendie se situe dans la carte
@@ -16,7 +15,6 @@ public class Incendie {
 	public Incendie(Case position, double intensite) {
 		this.position = position;
 		this.intensite = intensite;
-		this.etat = 1;
 	}
 	public String toString() {
 		return " l'incendie se trouve dans la case " + position.toString() + " et a besoin de " + intensite 

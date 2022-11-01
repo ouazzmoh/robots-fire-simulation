@@ -18,7 +18,22 @@ public class EventRobotFire extends Evenement {
 			caseCourante = this.incendieTableau[j].getPosition();
 			j++;
 		}
-		this.incendieTableau[j-1].etat = 0;
+		System.out.println("intensite initiale" + this.incendieTableau[j-1].getIntensite());
+		double reservoir = robot.getReservoir();
+		System.out.println("reservoir initial "+reservoir);
+		if (this.incendieTableau[j-1].getIntensite() - reservoir > 0) {
+			this.incendieTableau[j-1].setIntensite(this.incendieTableau[j-1].getIntensite() - reservoir);
+			robot.deverserEau((int) reservoir);
+		}
+		else {
+			robot.deverserEau((int) this.incendieTableau[j-1].getIntensite());
+			this.incendieTableau[j-1].setIntensite(0);
+		}
+		System.out.println("intensite finale" + this.incendieTableau[j-1].getIntensite());
+		System.out.println("reservoir restant" + robot.getReservoir());
+	}
+		
+
 		/*
         for (int i = 0; i < this.incendieTableau.length-1; i++) {
             if(this.incendieTableau[i] == this.incendieTableau[j-1]){
@@ -36,5 +51,4 @@ public class EventRobotFire extends Evenement {
         System.out.println(this.incendieTableau[4]) ;
         */
         
-	}
 }

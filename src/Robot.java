@@ -42,6 +42,15 @@ public abstract class Robot {
 	 * @param vol volume d'eau à derveser
 	 */
 	abstract  void deverserEau(int vol);
+	
+	/**
+	 * Méthode qui permet de remplir le reservoir
+	 */
+	abstract  void remplirEau();
+	/**
+	 * Méthode qui permet de retourner le reservoir
+	 */
+	abstract double getReservoir();
 	/**
 	 * Méthode qui nous permet de connaitre si le robot peut acceder à une case ou non
 	 * @param nature nature du terrain de la case 
