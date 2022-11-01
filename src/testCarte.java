@@ -19,7 +19,7 @@ public class testCarte {
 			int nbCol = carteToDraw.getNBColonnes();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees, 25, incendieTableau);
+			Simulateur simulateur = new Simulateur(gui, donnees, 40, incendieTableau);
 			Robot[] robots = donnees.getrobot();
 			
 			 /* scenario 0*/
@@ -47,7 +47,23 @@ public class testCarte {
 			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
 			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
 			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));
+			robotsTodeplace = robots[2];
+			i = 3;
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "sud", robotsTodeplace));
 			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "ouest", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotcharge(i, robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(i, "est", robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));
 			/*
 			for (int i = 2 ; i <= 10 ; i += 2) {
 				simulateur.ajouteEvenement (new EventMessage (i , " [ PING ]") ) ;

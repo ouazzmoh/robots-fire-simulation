@@ -22,13 +22,13 @@ public abstract class Robot {
 		this.position = position;
 	}
 	public String toString() {
-		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + position.toString();
+		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
 	}
 	public Case getPosition() {
 		return position;
 	}
 	public  void setPosition(Case new_case) {
-		position = new_case;
+		this.position = new_case;
 	}
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain

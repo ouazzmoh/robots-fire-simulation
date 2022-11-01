@@ -12,7 +12,6 @@ public class EventRobotDeplace extends Evenement {
 	public void execute () {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
 		Case position = this.robot.getPosition();
-		double vitesse = robot.getVitesse(position.getNature());
 		Case nouvellePosition;
 		if (this.message == "nord") {
 			nouvellePosition = new Case(position.getLigne() - 1, position.getColonne());
