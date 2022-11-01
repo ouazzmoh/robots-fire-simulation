@@ -1,9 +1,11 @@
 import gui.Simulable;
+import gui.Text;
 import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
 import gui.Text;
 import gui.ImageElement;
+import java.util.*;
 
 /**Classe qui implement simulable
  * Le but c'est de visualiser les donnees recu par NewLecteurDonnees
@@ -11,22 +13,58 @@ import gui.ImageElement;
  * Output: visualisation de tout les elements de la simulation**/
 public class Simulateur implements Simulable {
 	
+//	private static final boolean TRUE = false;
+
 	/** Interface graphique */
 	private GUISimulator gui;
 	
 	/** Donnees a visualiser */
 	private DonneesSimulation donnees;
 	
+	/** entier qui permet de suivre l'execution des evenements */
+	private long dateSimualtion;
+	
+	/** Liste evenement*/
+//	Evenement[] Evenements;
+	SortedMap<Integer, LinkedList<Evenement>> evenements; // Evenements  {date: event1->event2,...}
+	
 	/** Constructeur, et association a la gui*/
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
 		this.donnees = donnees;
+		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.evenements = new TreeMap<Integer, LinkedList<Evenement>> ();
 		gui.setSimulable(this);
 		draw();
 		
 	}
 	
+	public void  incrementeDate() {
+		this.dateSimualtion += 1;
+	}
+	
+	/**
+	 * Partie planification, ajouter les evenements dans leurs dates correspondantes
+	 * @param e
+	 */
+	public void ajouteEvenement(Evenement e) {
+		//TODO: Fix the structure list, because at the same date there could be multiple events
+		int date = (int)e.getDate();
+		if (evenements.containsKey(date)) {
+			evenements.get(date).add(e);
+		}
+		else {
+			evenements.put(date, new LinkedList<Evenement> ());
+			evenements.get(date).add(e);
+		}
+		
+	}
+	
+	public boolean simulationTerminee() {
+		return (this.dateSimualtion == evenements.length);
+	}
+
 	
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
@@ -90,11 +128,19 @@ public class Simulateur implements Simulable {
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 		}
 	}
-	
 
 	@Override
 	public void next() {
 		// TODO Auto-generated method stub
+		if (!(simulationTerminee())) {
+			System.out.println("Next... Current date :" + this.dateSimualtion);
+			if (Evenements[(int) this.dateSimualtion] != null) {
+				Evenements[(int) this.dateSimualtion].execute();
+			}
+			draw();
+			incrementeDate();
+					
+		}
 		
 	}
 

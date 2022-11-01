@@ -29,3 +29,4 @@ public class EventRobot extends Evenement {
 		this.robot.setPosition(nouvellePosition);
 	}
 }
+
