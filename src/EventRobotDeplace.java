@@ -1,10 +1,10 @@
 import gui.ImageElement;
 
-public class EventRobot extends Evenement {
+public class EventRobotDeplace extends Evenement {
 	private String message ;
 	Robot robot;
 	
-	public EventRobot(int date , String message , Robot robot) {
+	public EventRobotDeplace(int date , String message , Robot robot) {
 		super(date);
 		this.message = message ;
 		this.robot = robot;

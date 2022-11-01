@@ -26,13 +26,17 @@ public class Simulateur implements Simulable {
 	/** Liste evenement*/
 	Evenement[] Evenements;
 	
+	/** liste incendie */
+	Incendie[] incendie;
+	
 	/** Constructeur, et association a la gui*/
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
 		this.gui = gui;
 		this.donnees = donnees;
 		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
 		this.Evenements = new Evenement[(int) nbEvenements];
+		this.incendie = incendie;
 		gui.setSimulable(this);
 		draw();
 		
@@ -74,7 +78,7 @@ public class Simulateur implements Simulable {
 		 * Variables utiles
 		 * */
 		Carte carteToDraw = donnees.getCarte();
-		Incendie[] incendieTableau = donnees.getIncendie();
+		Incendie[] incendieTableau = this.incendie;
 		Robot[]	robotTableau = donnees.getrobot();
 		
 		int nbLig = carteToDraw.getNbLignes();
@@ -113,7 +117,9 @@ public class Simulateur implements Simulable {
 			double intensite = incendieTableau[i].getIntensite();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
-			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+			if (incendieTableau[i].etat == 1) {
+				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+			}
 		}
 		
 		/**
@@ -136,16 +142,6 @@ public class Simulateur implements Simulable {
 			if (Evenements[(int) this.dateSimualtion] != null) {
 				Evenements[(int) this.dateSimualtion].execute();
 			}
-			/*
-			EventRobot event = (EventRobot) Evenements[(int) this.dateSimualtion];
-			double temps = event.robot.getVitesse(event.robot.getPosition().getNature()) * 100;
-			
-			try {
-				Thread.sleep(temps);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 			draw();
 			incrementeDate();
 					
