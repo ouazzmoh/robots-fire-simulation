@@ -136,6 +136,17 @@ public class Simulateur implements Simulable {
 			if (Evenements[(int) this.dateSimualtion] != null) {
 				Evenements[(int) this.dateSimualtion].execute();
 			}
+			/*
+			EventRobot event = (EventRobot) Evenements[(int) this.dateSimualtion];
+			double temps = event.robot.getVitesse(event.robot.getPosition().getNature()) * 100;
+			
+			try {
+				Thread.sleep(temps);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			draw();
 			incrementeDate();
 					
 		}
