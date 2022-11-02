@@ -23,6 +23,9 @@ public class Simulateur implements Simulable {
 	/** entier qui permet de suivre l'execution des evenements */
 	private long dateSimualtion;
 	
+	/** entier Date du dernier evenement inséré */
+	int Date;
+	
 	/** Liste evenement*/
 	Evenement[] Evenements;
 	
@@ -34,7 +37,8 @@ public class Simulateur implements Simulable {
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
 		this.gui = gui;
 		this.donnees = donnees;
-		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.dateSimualtion = 1;/** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.Date = 0;
 		this.Evenements = new Evenement[(int) nbEvenements];
 		this.incendie = incendie;
 		gui.setSimulable(this);
@@ -52,6 +56,7 @@ public class Simulateur implements Simulable {
 			count += 1;
 		}
 		this.Evenements[count] = e;
+		this.Date = count;
 	}
 	
 	public boolean simulationTerminee() {

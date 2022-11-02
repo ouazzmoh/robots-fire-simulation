@@ -6,6 +6,7 @@ public abstract class Robot {
 	 */
 	protected double vitesse;
 	protected Case position;
+	
 	/**
 	 * Constructeur public,
 	 * @param position case dans laquelle le robot se trouve
@@ -31,6 +32,33 @@ public abstract class Robot {
 	public  void setPosition(Case new_case) {
 		this.position = new_case;
 	}
+	/**
+	 * Méthode qui nous permet de connaitre le temps de deplacement 
+	 * @param caseArrivee caseArrivee
+	 * @param carte map 
+	 * @param simulateur simulateur principal
+	 * @return la Date specifique : double
+	 */
+	public double tempsDeplacement(Case caseArrivee, Carte carte) {
+		// supposant caseArrivee est une case voisine 
+		// si on ajoute l algo de chemin on peut effectuer ce calcul sur n'importe quelle case
+		// on verifie deja si la case est accessible
+		double vitesse1 = this.getVitesse(caseArrivee.getNature());
+		double vitesse2 = this.getVitesse(this.position.getNature());
+		double tailleCase = carte.getTailleCases();
+		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
+	}
+	public void deplacerEffectivement(Direction dir, Carte carte, Simulateur simulateur) {
+		Case caseArrivee = carte.getVoisin(position, dir);
+		if (this.has_accessto(caseArrivee.getNature())) {
+			double temps = tempsDeplacement(caseArrivee, carte);
+			int Date = (int) (temps/100) ;
+			int DateCourante = simulateur.Date; // l indice du dernier evenement insere
+			System.out.println(">>>>>>>>>>>>>>>>>>>><<" + Date);
+			simulateur.ajouteEvenement(new EventRobotDeplace(Date + DateCourante, dir, this, caseArrivee.getNature()));
+		}
+	}
+	
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain
 	 * sur lequel il se trouve
