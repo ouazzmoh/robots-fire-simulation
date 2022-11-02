@@ -1,4 +1,5 @@
 
+
 public class Rpatte extends Robot {
 	/**
 	 * la classe Rpatte, une classe fille de la classe Robot, les robots à pattes n'ont pas de reservoir
@@ -33,7 +34,12 @@ public class Rpatte extends Robot {
 	void deverserEau(int vol) {
 		return;
 	}
-
+	void remplirEau() {
+		return;
+	}
+	public double getReservoir() {
+		return Double.POSITIVE_INFINITY;
+	}
 	@Override
 	boolean has_accessto(NatureTerrain nature) {
 		switch(nature) {

@@ -1,4 +1,3 @@
-
 public class Incendie {
 	/**
 	 * Classe Incendie, une classe qui nous donne toutes les informations d'une incendie:
