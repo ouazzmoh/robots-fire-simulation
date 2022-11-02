@@ -7,7 +7,7 @@ import java.util.zip.DataFormatException;
 import gui.GUISimulator;
 import gui.ImageElement;
 
-public class TestCarte {
+public class testCarte {
 
 	public static void main(String[] args) {
 		try {
