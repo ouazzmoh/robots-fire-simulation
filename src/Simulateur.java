@@ -22,33 +22,29 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donnees;
 	
 	/** entier qui permet de suivre l'execution des evenements */
-	private long dateSimualtion;
+	private long dateSimulation;
 	
 	/** Liste evenement*/
-
-//	Evenement[] Evenements;
-	SortedMap<Integer, LinkedList<Evenement>> evenements; // Evenements  {date: event1->event2,...}
-//=======
-//	Evenement[] Evenements;
-//	
-//	/** liste incendie */
-//	Incendie[] incendie;
-//>>>>>>> origin/main
+	SortedMap<Long, LinkedList<Evenement>> evenements; // Evenements  {date: event1->event2,...}
+	
+	/** Liste incendies */
+	Incendie[] incendie;
 	
 	/** Constructeur, et association a la gui*/
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
 		this.gui = gui;
 		this.donnees = donnees;
-		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
-		this.evenements = new TreeMap<Integer, LinkedList<Evenement>> ();
+		this.dateSimulation = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
+		this.incendie = incendie;
 		gui.setSimulable(this);
 		draw();
 		
 	}
 	
 	public void  incrementeDate() {
-		this.dateSimualtion += 1;
+		this.dateSimulation += 1;
 	}
 	
 	/**
@@ -57,7 +53,7 @@ public class Simulateur implements Simulable {
 	 */
 	public void ajouteEvenement(Evenement e) {
 		//TODO: Fix the structure list, because at the same date there could be multiple events
-		int date = (int)e.getDate();
+		Long date = e.getDate();
 		if (evenements.containsKey(date)) {
 			evenements.get(date).add(e);
 		}
@@ -69,7 +65,7 @@ public class Simulateur implements Simulable {
 	}
 	
 	public boolean simulationTerminee() {
-		return (this.dateSimualtion == evenements.length);
+		return (this.dateSimulation == evenements.keySet().size()+1);
 	}
 
 	/**
@@ -137,19 +133,31 @@ public class Simulateur implements Simulable {
 		}
 	}
 
+	
 	@Override
 	public void next() {
 		// TODO Auto-generated method stub
 		if (!(simulationTerminee())) {
-			System.out.println("Next... Current date :" + this.dateSimualtion);
-			if (Evenements[(int) this.dateSimualtion] != null) {
-				Evenements[(int) this.dateSimualtion].execute();
+			System.out.println("Next... Current date :" + this.dateSimulation);
+			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
+			
+			System.out.println(currListEvents);
+			if (currListEvents != null) {
+				for (Evenement e : currListEvents) {
+					e.execute();
+				}
+				draw();
+				incrementeDate();
 			}
-			draw();
-			incrementeDate();
-					
+			else {
+				incrementeDate();
+				System.out.println("*Il n y'a pas d'evenements a faire dans cette date, on incremente la date*");
+			}
 		}
-		
+		else {
+			System.out.println("***La simulation est terminée***");
+		}
+	
 	}
 
 

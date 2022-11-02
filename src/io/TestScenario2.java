@@ -5,7 +5,7 @@ import java.util.zip.DataFormatException;
 import gui.GUISimulator;
 import gui.ImageElement;
 
-public class TestScenario1 {
+public class TestScenario2 {
 
 	public static void main(String[] args) {
 		try {

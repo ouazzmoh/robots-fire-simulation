@@ -11,7 +11,7 @@ public class TestCarte {
 
 	public static void main(String[] args) {
 		try {
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/DesertOfDeath-20x20.map");
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
