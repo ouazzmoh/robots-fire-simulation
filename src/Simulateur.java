@@ -1,4 +1,5 @@
 import gui.Simulable;
+import gui.Text;
 import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
@@ -56,6 +57,17 @@ public class Simulateur implements Simulable {
 	public boolean simulationTerminee() {
 		return (this.dateSimualtion == Evenements.length);
 	}
+	/*
+	public void executeEvenement() {
+		while (!(simulationTerminee())) {
+			System.out.println("Next... Current date :" + this.dateSimualtion);
+			if (Evenements[(int) this.dateSimualtion] != null) {
+				Evenements[(int) this.dateSimualtion].execute();
+			}
+			incrementeDate();
+					
+		}
+	}*/
 	
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
