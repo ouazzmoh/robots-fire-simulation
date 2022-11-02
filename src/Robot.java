@@ -59,7 +59,7 @@ public abstract class Robot {
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long Date = (long) (temps) / 30 ;
+			long Date = (long) (temps) / 100 ;
 			long DateCourante = simulateur.Date; // l indice du dernier evenement insere
 			simulateur.ajouteEvenement(new EventRobotDeplace(Date + DateCourante, dir, this, caseArrivee.getNature()));
 		}
