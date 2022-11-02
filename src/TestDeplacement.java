@@ -21,15 +21,15 @@ public class TestDeplacement {
 			Robot robotsTodeplace = robots[1];
 			
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date, robotsTodeplace, incendieTableau));	
+			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.Date, robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.Date + 1, robotsTodeplace));
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date, robotsTodeplace, incendieTableau));	
+			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
 
 
 

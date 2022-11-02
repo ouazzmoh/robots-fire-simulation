@@ -1,12 +1,9 @@
-import gui.ImageElement;
-
-
-public class EventRobotDeplace extends Evenement {
-	private Direction message ;
+public class EventRobotPositionner extends Evenement {
+	private String message ;
 	Robot robot;
 	NatureTerrain nouvelleNature;
 	
-	public EventRobotDeplace(long date , Direction message , Robot robot, NatureTerrain nouvelleNature) {
+	public EventRobotPositionner(int date , String message , Robot robot, NatureTerrain nouvelleNature) {
 		super(date);
 		this.message = message ;
 		this.robot = robot;
@@ -16,13 +13,13 @@ public class EventRobotDeplace extends Evenement {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
 		Case position = this.robot.getPosition();
 		Case nouvellePosition;
-		if (this.message == Direction.NORD) {
+		if (this.message == "nord") {
 			nouvellePosition = new Case(position.getLigne() - 1, position.getColonne());
 		}
-		else if (this.message == Direction.SUD) {
+		else if (this.message == "sud") {
 			nouvellePosition = new Case(position.getLigne() + 1, position.getColonne());
 		}
-		else if (this.message == Direction.OUEST) {
+		else if (this.message == "ouest") {
 			nouvellePosition = new Case(position.getLigne(), position.getColonne()-1);
 		}
 		else{

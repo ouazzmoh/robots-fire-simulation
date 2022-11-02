@@ -36,8 +36,7 @@ public abstract class Robot {
 	 * Méthode qui nous permet de connaitre le temps de deplacement 
 	 * @param caseArrivee caseArrivee
 	 * @param carte map 
-	 * @param simulateur simulateur principal
-	 * @return la Date specifique : double
+	 * @return le temps de deplacement : double
 	 */
 	public double tempsDeplacement(Case caseArrivee, Carte carte) {
 		// supposant caseArrivee est une case voisine 
@@ -48,13 +47,20 @@ public abstract class Robot {
 		double tailleCase = carte.getTailleCases();
 		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
 	}
+	/**
+	 * Méthode qui nous permet de ajouter l evenement effectif dans la liste des
+	 * evenements qui sera executé dans une date calculée
+	 * @param dir Direction (NORD, SUD, OUEST, EST)
+	 * @param carte map 
+	 * @param simulateur simulateur du jeu
+	 */
 	public void deplacerEffectivement(Direction dir, Carte carte, Simulateur simulateur) {
 		Case caseArrivee = carte.getVoisin(position, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
-			int Date = (int) (temps/100) ;
-			int DateCourante = simulateur.Date; // l indice du dernier evenement insere
-			System.out.println(">>>>>>>>>>>>>>>>>>>><<" + Date);
+			System.out.println(temps);
+			long Date = (long) (temps) / 30 ;
+			long DateCourante = simulateur.Date; // l indice du dernier evenement insere
 			simulateur.ajouteEvenement(new EventRobotDeplace(Date + DateCourante, dir, this, caseArrivee.getNature()));
 		}
 	}

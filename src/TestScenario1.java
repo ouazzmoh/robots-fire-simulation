@@ -26,23 +26,25 @@ public class TestScenario1 {
 			/* scenario 1*/
 			NatureTerrain nature = NatureTerrain.EAU;
 			Robot robotsTodeplace = robots[1];
-			int i = 2;
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.NORD, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.OUEST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.OUEST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.OUEST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotCharge(i, robotsTodeplace));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.EST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.EST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.EST, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));
+			
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date, Direction.NORD, robotsTodeplace, nature));
+
+			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.OUEST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.OUEST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.OUEST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.Date + 1, robotsTodeplace));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.EST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.EST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.EST, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));
 			robotsTodeplace = robots[2];
-			i = 3;
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.SUD, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.SUD, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotDeplace(i, Direction.SUD, robotsTodeplace, nature));
-			simulateur.ajouteEvenement(new EventRobotFire(i, robotsTodeplace, incendieTableau));	
+			
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.SUD, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.SUD, robotsTodeplace, nature));
+			simulateur.ajouteEvenement(new EventRobotDeplace(simulateur.Date + 1, Direction.SUD, robotsTodeplace, nature));
+
+			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
 
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");

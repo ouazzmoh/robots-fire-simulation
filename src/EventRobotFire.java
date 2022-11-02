@@ -4,7 +4,7 @@ public class EventRobotFire extends Evenement {
 	Robot robot;
 	Incendie[] incendieTableau;
 	
-	public EventRobotFire(int date , Robot robot, Incendie[] incendieTableau) {
+	public EventRobotFire(long date , Robot robot, Incendie[] incendieTableau) {
 		super(date);
 		this.robot = robot;
 		this.incendieTableau = incendieTableau;
