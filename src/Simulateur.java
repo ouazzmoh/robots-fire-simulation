@@ -11,22 +11,51 @@ import gui.ImageElement;
  * Output: visualisation de tout les elements de la simulation**/
 public class Simulateur implements Simulable {
 	
+	private static final boolean TRUE = false;
+
 	/** Interface graphique */
 	private GUISimulator gui;
 	
 	/** Donnees a visualiser */
 	private DonneesSimulation donnees;
 	
+	/** entier qui permet de suivre l'execution des evenements */
+	private long dateSimualtion;
+	
+	/** Liste evenement*/
+	Evenement[] Evenements;
+	
+	/** liste incendie */
+	Incendie[] incendie;
+	
 	/** Constructeur, et association a la gui*/
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
 		this.gui = gui;
 		this.donnees = donnees;
+		this.dateSimualtion = 1;  /** se renetialise a 0 au debut des evenements : on n'a executer aucun evenement */
+		this.Evenements = new Evenement[(int) nbEvenements];
+		this.incendie = incendie;
 		gui.setSimulable(this);
 		draw();
 		
 	}
 	
+	public void  incrementeDate() {
+		this.dateSimualtion += 1;
+	}
+	
+	public void ajouteEvenement(Evenement e) {
+		int count = (int) e.getDate();
+		while (Evenements[count] != null) {
+			count += 1;
+		}
+		this.Evenements[count] = e;
+	}
+	
+	public boolean simulationTerminee() {
+		return (this.dateSimualtion == Evenements.length);
+	}
 	
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
@@ -37,7 +66,7 @@ public class Simulateur implements Simulable {
 		 * Variables utiles
 		 * */
 		Carte carteToDraw = donnees.getCarte();
-		Incendie[] incendieTableau = donnees.getIncendie();
+		Incendie[] incendieTableau = this.incendie;
 		Robot[]	robotTableau = donnees.getrobot();
 		
 		int nbLig = carteToDraw.getNbLignes();
@@ -76,7 +105,9 @@ public class Simulateur implements Simulable {
 			double intensite = incendieTableau[i].getIntensite();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
-			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+			if (incendieTableau[i].getIntensite() != 0) {
+				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+			}
 		}
 		
 		/**
@@ -90,11 +121,19 @@ public class Simulateur implements Simulable {
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 		}
 	}
-	
 
 	@Override
 	public void next() {
 		// TODO Auto-generated method stub
+		if (!(simulationTerminee())) {
+			System.out.println("Next... Current date :" + this.dateSimualtion);
+			if (Evenements[(int) this.dateSimualtion] != null) {
+				Evenements[(int) this.dateSimualtion].execute();
+			}
+			draw();
+			incrementeDate();
+					
+		}
 		
 	}
 
@@ -106,3 +145,4 @@ public class Simulateur implements Simulable {
 	}
 	
 }
+

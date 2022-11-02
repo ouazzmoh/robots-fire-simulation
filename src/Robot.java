@@ -1,4 +1,5 @@
 
+
 public abstract class Robot {
 	/**
 	 * Classe Robot, une classe abstraite des Robots, qui vont éteindre les incendies
@@ -22,13 +23,13 @@ public abstract class Robot {
 		this.position = position;
 	}
 	public String toString() {
-		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + position.toString();
+		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
 	}
 	public Case getPosition() {
 		return position;
 	}
 	public  void setPosition(Case new_case) {
-		position = new_case;
+		this.position = new_case;
 	}
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain
@@ -42,6 +43,15 @@ public abstract class Robot {
 	 * @param vol volume d'eau à derveser
 	 */
 	abstract  void deverserEau(int vol);
+	
+	/**
+	 * Méthode qui permet de remplir le reservoir
+	 */
+	abstract  void remplirEau();
+	/**
+	 * Méthode qui permet de retourner le reservoir
+	 */
+	abstract double getReservoir();
 	/**
 	 * Méthode qui nous permet de connaitre si le robot peut acceder à une case ou non
 	 * @param nature nature du terrain de la case 

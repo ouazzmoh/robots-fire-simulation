@@ -1,4 +1,5 @@
 
+
 public class Rchenille extends Robot {
 	/**
 	 * Classe Rchenille, une classe fille de la classe Robot, qui caractérise un nouveau type de robots:
@@ -45,9 +46,11 @@ public class Rchenille extends Robot {
 	@Override
 	public void deverserEau(int vol) {
 		reservoir -= vol;
-
 	}
-	public void remplirReservoir() {
+	public double getReservoir() {
+		return reservoir;
+	}
+	public void remplirEau() {
 		reservoir = 2000;
 	}
 

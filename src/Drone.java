@@ -1,4 +1,5 @@
 
+
 public class Drone extends Robot {
 	/**
 	 * La classe Drone, une classe fille de la classe robot, qui caractérise un nouveau type de robots:
@@ -44,7 +45,7 @@ public class Drone extends Robot {
 	public void deverserEau(int vol) {
 		reservoir -= vol;
 	}
-	public void remplirReservoir() {
+	public void remplirEau() {
 		reservoir = 10000;
 	}
 	@Override
