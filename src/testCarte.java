@@ -11,7 +11,8 @@ public class testCarte {
 
 	public static void main(String[] args) {
 		try {
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/MushroomOfHell-20x20.map");
+
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/DesertOfDeath-20x20.map");
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
@@ -21,6 +22,7 @@ public class testCarte {
 			int nbCol = carteToDraw.getNBColonnes();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
+
 			Simulateur simulateur = new Simulateur(gui, donnees, 40, incendieTableau);
 
 		}catch (FileNotFoundException e) {

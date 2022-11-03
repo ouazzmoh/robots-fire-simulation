@@ -1,4 +1,7 @@
 import gui.ImageElement;
+
+import java.util.Objects;
+
 import gui.GUISimulator;
 
 public class Case {
@@ -10,6 +13,19 @@ public class Case {
 	private int ligne;
 	private int colonne;
 	private NatureTerrain nature;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Case other = (Case) obj;
+		return colonne == other.colonne && ligne == other.ligne;
+	}
+	
 	/**
 	 * Constructeur public qui crée un case sans connaitre la  nature de terrain
 	 * @param ligne ligne où elle se triuve dans la carte
@@ -52,15 +68,4 @@ public class Case {
 		this.nature = nature;
 	}
 	
-//	/**
-//	 * Méthode pour dessiner la case selon sa nature
-//	 * @param imageName
-//	 * @param x,y
-//	 * @param caseWidth, caseHeight
-//	 * @param GUISimulator gui
-//	 */
-//	
-//	public void draw(String imageName, int x, int y, int caseWidth, int caseHeight, GUISimulator gui) {
-//		gui.addGraphicalElement(new ImageElement(x, y, imageName, caseWidth, caseHeight, null));
-//	}
 }
