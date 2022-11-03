@@ -6,6 +6,8 @@ public class Incendie {
 	 */
 	private Case position;
 	private double intensite;
+	
+	
 	/**
 	 * Constructeur public, qui crée une nouvelle incendie 
 	 * @param position case dans laquelle l'incendie se situe dans la carte
@@ -15,6 +17,9 @@ public class Incendie {
 		this.position = position;
 		this.intensite = intensite;
 	}
+	
+	
+	
 	public String toString() {
 		return " l'incendie se trouve dans la case " + position.toString() + " et a besoin de " + intensite 
 				+ " litres d'eau pour s'eteindre";
@@ -25,6 +30,8 @@ public class Incendie {
 	public double getIntensite() {
 		return intensite;
 	}
+	
+	
 	/**
 	 * Méthode qui réduit l'intensité d'une incendie grâce à l'aide d'un robot
 	 * @param vol volume déversé
@@ -32,12 +39,17 @@ public class Incendie {
 	public void eaudeversee(double vol) {
 		intensite -= vol;
 	}
+	
+	
+	
 	public void setPosition(Case new_position) {
 		position = new_position;
 	}
 	public void setIntensite(double intensite) {
 		this.intensite = intensite;
 	}
+	
+	
 	/**
 	 * Méthode qui met à jour l'intensité de l'incendie,
 	 * @param vol volume qu'il faut deverser en plus

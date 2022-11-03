@@ -21,19 +21,16 @@ public class TestDeplacement {
 			Robot robotsTodeplace = robots[1];
 			
 			//Deplacer le robot in the current date of simulateur
-			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, simulateur.getDateSimulation() ,simulateur);
-			//
-//			simulateur.ajouteEvenement(new EventRobotFire(simulateur.getDateSimulation() + 1, robotsTodeplace, incendieTableau));
-			
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+1 ,simulateur);
-			System.out.println(simulateur.getDateSimulation());
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+2 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+3 ,simulateur);
-//			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.getDateSimulation()  + 1, robotsTodeplace));
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+4 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+5 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+6 ,simulateur);
-//			simulateur.ajouteEvenement(new EventRobotFire(simulateur.getDateSimulation()  + 1, robotsTodeplace, incendieTableau));	
+			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 1, simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 2 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 3 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 4 ,simulateur);
+			robotsTodeplace.remplirReservoir(4, simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 5 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur);
 
 
 

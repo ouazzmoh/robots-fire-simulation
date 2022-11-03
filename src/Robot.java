@@ -8,7 +8,9 @@ public abstract class Robot {
 	protected double vitesse;
 	protected Case position;
 	
-	protected long dateArrive; // = 0 si le robot ne bouge pasm sinon = le nombre d'etapes pour qu'il arrive
+	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
+	protected long dateExtinction;
+	protected long dateRemplissage;
 	
 	
 	/**
@@ -18,6 +20,8 @@ public abstract class Robot {
 	public Robot(Case position) {
 		this.position = position;
 		this.dateArrive  = (long) 0;
+		this.dateExtinction = (long) 0;
+		this.dateRemplissage = (long) 0;
 	}
 	
 	
@@ -41,6 +45,8 @@ public abstract class Robot {
 	}
 	
 	
+	
+	/**********Les methodes pour le deplacement************/
 	/**
 	 * Méthode qui nous permet de connaitre le temps de deplacement 
 	 * @param caseArrivee caseArrivee
@@ -71,12 +77,45 @@ public abstract class Robot {
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long dateToAdd = (long) (temps) / 100 ;
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive, dir, this, caseArrivee.getNature()));
+			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
 			//Le robot va etre alors on mouvement et il arrive dans ...
 			dateArrive = dateToAdd +  dateArrive;
 		}
 	}
+	
+	
+	/**********Les methodes pour les incendies************/
+	
+	/**
+	 * Fonction pour eteindre les incendies
+	 * @param incendieTableau
+	 * @param dateCourante
+	 * @param simulateur
+	 */
+	public void eteindreIncendie(Incendie[] incendieTableau, long dateCourante, Simulateur simulateur) {
+		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
+		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
+		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.incendie));
+		dateExtinction = dateToAdd;
+		
+	}
+	
+	
+	/*********Les methodes pour le remplissage d'eau*********/
+	/**
+	 * Fonction pour remplir le reservoir du robot
+	 * @param dateCourante
+	 * @param simulateur
+	 */
+	public void remplirReservoir(long dateCourante, Simulateur simulateur) {
+		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
+		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
+		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
+		dateRemplissage = dateToAdd;
+	}
+	
+	
 	
 	
 	/**

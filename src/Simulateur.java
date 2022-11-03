@@ -23,10 +23,7 @@ public class Simulateur implements Simulable {
 	
 	/** entier qui permet de suivre l'execution des evenements */
 	private long dateSimulation;
-	
-//	/** entier Date du dernier evenement inséré */
-//	long Date;
-	
+
 	/** Liste evenement*/
 	SortedMap<Long, LinkedList<Evenement>> evenements; // Evenements  {date: event1->event2,...}
 	
@@ -38,8 +35,7 @@ public class Simulateur implements Simulable {
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
 		this.gui = gui;
 		this.donnees = donnees;
-//		this.Date = 1;
-		this.dateSimulation = 1;  /** se renetialise a 1 au debut des evenements : on n'a executer aucun evenement */
+		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
 		
 		//The structure where we store events
 		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
@@ -84,6 +80,7 @@ public class Simulateur implements Simulable {
 	}
 	
 	public boolean simulationTerminee() {
+		//La simulation termine si la SortedMap des evenements est vide ou si la datecourante est la derniere 
 		return (this.dateSimulation == evenements.lastKey() + 1 || evenements.isEmpty());
 	}
 	
@@ -159,11 +156,9 @@ public class Simulateur implements Simulable {
 	
 	@Override
 	public void next() {
-		// TODO Auto-generated method stub
 		if (!(simulationTerminee())) {
 			System.out.println("Next... Current date :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
-			
 			System.out.println(currListEvents);
 			if (!(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {

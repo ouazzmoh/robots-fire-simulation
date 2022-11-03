@@ -10,40 +10,30 @@ public class EventRobotFire extends Evenement {
 		this.incendieTableau = incendieTableau;
 	}
 	public void execute () {
-		System.out.println(this.getDate() + " robot is shuting down fire " ) ;
-		int j = 1;
-		Case caseCourante = this.incendieTableau[0].getPosition();
-		while ((caseCourante.getLigne() != this.robot.position.getLigne()) || ((caseCourante.getColonne() != this.robot.position.getColonne()))) {
-			caseCourante = this.incendieTableau[j].getPosition();
-			j++;
+		//Chercher l'incendi a eteidndre
+		Incendie fireToKill = incendieTableau[0];
+		
+		for (Incendie incendie : incendieTableau) {
+			if (incendie.getPosition().equals(this.robot.position)) {
+				fireToKill = incendie;
+				break; //kill the first fire
+				
+			}
 		}
+		
+			
+		
 		double reservoir = robot.getReservoir();
-		if (this.incendieTableau[j-1].getIntensite() - reservoir > 0) {
-			this.incendieTableau[j-1].setIntensite(this.incendieTableau[j-1].getIntensite() - reservoir);
+		if (fireToKill.getIntensite() - reservoir > 0) {
+			fireToKill.setIntensite(fireToKill.getIntensite() - reservoir);
+			System.out.println("Il reste " + fireToKill.getIntensite() + " pour l'éteindre");
 			robot.deverserEau((int) reservoir);
 		}
 		else {
-			robot.deverserEau((int) this.incendieTableau[j-1].getIntensite());
-			this.incendieTableau[j-1].setIntensite(0);
+			robot.deverserEau((int) fireToKill.getIntensite());
+			System.out.println("Incendie éteinte GG");
+			fireToKill.setIntensite(0);
 		}
 	}
 		
-
-		/*
-        for (int i = 0; i < this.incendieTableau.length-1; i++) {
-            if(this.incendieTableau[i] == this.incendieTableau[j-1]){
-                for(int index = 0; index < i; index++){
-                    newArr[index] = this.incendieTableau[index];
-                }
-                for(int k = i; k < this.incendieTableau.length - 1; k++){
-                    newArr[k] = this.incendieTableau[k+1];
-                }
-                break;
-            }
-        }
-        this.incendieTableau = newArr;
-        incendieTableau = newArr;
-        System.out.println(this.incendieTableau[4]) ;
-        */
-        
 }
