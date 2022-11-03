@@ -60,7 +60,6 @@ public class Simulateur implements Simulable {
 	 * @param e
 	 */
 	public void ajouteEvenement(Evenement e) {
-		//TODO: Fix the structure list, because at the same date there could be multiple events
 		long dateEvent = e.getDate();
 		long dateCourante = this.dateSimulation;
 		if (evenements.containsKey(dateEvent)) {
