@@ -20,16 +20,20 @@ public class TestDeplacement {
 			Robot[] robots = donnees.getrobot();
 			Robot robotsTodeplace = robots[1];
 			
-			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.Date + 1, robotsTodeplace));
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
-			simulateur.ajouteEvenement(new EventRobotFire(simulateur.Date + 1, robotsTodeplace, incendieTableau));	
+			//Deplacer le robot in the current date of simulateur
+			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, simulateur.getDateSimulation() ,simulateur);
+			//
+//			simulateur.ajouteEvenement(new EventRobotFire(simulateur.getDateSimulation() + 1, robotsTodeplace, incendieTableau));
+			
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+1 ,simulateur);
+			System.out.println(simulateur.getDateSimulation());
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+2 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur.getDateSimulation()+3 ,simulateur);
+//			simulateur.ajouteEvenement(new EventRobotCharge(simulateur.getDateSimulation()  + 1, robotsTodeplace));
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+4 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+5 ,simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur.getDateSimulation()+6 ,simulateur);
+//			simulateur.ajouteEvenement(new EventRobotFire(simulateur.getDateSimulation()  + 1, robotsTodeplace, incendieTableau));	
 
 
 

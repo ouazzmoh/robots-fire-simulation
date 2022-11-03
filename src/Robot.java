@@ -1,11 +1,15 @@
 
-
 public abstract class Robot {
+	
+	
 	/**
 	 * Classe Robot, une classe abstraite des Robots, qui vont éteindre les incendies
 	 */
 	protected double vitesse;
 	protected Case position;
+	
+	protected long dateArrive; // = 0 si le robot ne bouge pasm sinon = le nombre d'etapes pour qu'il arrive
+	
 	
 	/**
 	 * Constructeur public,
@@ -13,7 +17,10 @@ public abstract class Robot {
 	 */
 	public Robot(Case position) {
 		this.position = position;
+		this.dateArrive  = (long) 0;
 	}
+	
+	
 	/**
 	 * Constructeur public
 	 * @param vitesse vitesse du robot
@@ -32,6 +39,8 @@ public abstract class Robot {
 	public  void setPosition(Case new_case) {
 		this.position = new_case;
 	}
+	
+	
 	/**
 	 * Méthode qui nous permet de connaitre le temps de deplacement 
 	 * @param caseArrivee caseArrivee
@@ -47,6 +56,9 @@ public abstract class Robot {
 		double tailleCase = carte.getTailleCases();
 		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
 	}
+	
+	
+
 	/**
 	 * Méthode qui nous permet de ajouter l evenement effectif dans la liste des
 	 * evenements qui sera executé dans une date calculée
@@ -54,16 +66,18 @@ public abstract class Robot {
 	 * @param carte map 
 	 * @param simulateur simulateur du jeu
 	 */
-	public void deplacerEffectivement(Direction dir, Carte carte, Simulateur simulateur) {
+	public void deplacerEffectivement(Direction dir, Carte carte, long dateCourante, Simulateur simulateur) {
 		Case caseArrivee = carte.getVoisin(position, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long Date = (long) (temps) / 100 ;
-			long DateCourante = simulateur.Date; // l indice du dernier evenement insere
-			simulateur.ajouteEvenement(new EventRobotDeplace(Date + DateCourante, dir, this, caseArrivee.getNature()));
+			long dateToAdd = (long) (temps) / 100 ;
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive, dir, this, caseArrivee.getNature()));
+			//Le robot va etre alors on mouvement et il arrive dans ...
+			dateArrive = dateToAdd +  dateArrive;
 		}
 	}
+	
 	
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain
@@ -72,20 +86,28 @@ public abstract class Robot {
 	 * @return vitesse : double
 	 */
 	abstract double getVitesse(NatureTerrain nature);
+	
+	
+	
 	/**
 	 * Méthode qui permet de deverser l'eau 
 	 * @param vol volume d'eau à derveser
 	 */
 	abstract  void deverserEau(int vol);
 	
+	
 	/**
 	 * Méthode qui permet de remplir le reservoir
 	 */
 	abstract  void remplirEau();
+	
+	
 	/**
 	 * Méthode qui permet de retourner le reservoir
 	 */
 	abstract double getReservoir();
+	
+	
 	/**
 	 * Méthode qui nous permet de connaitre si le robot peut acceder à une case ou non
 	 * @param nature nature du terrain de la case 
