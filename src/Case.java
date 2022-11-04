@@ -5,6 +5,13 @@ import java.util.Objects;
 import gui.GUISimulator;
 
 public class Case {
+	public void setLigne(int ligne) {
+		this.ligne = ligne;
+	}
+
+	public void setColonne(int colonne) {
+		this.colonne = colonne;
+	}
 	/**
 	 * classe case, qui nous permet de caractériser une case par :
 	 * la ligne et la colonne  où elle se trouve
@@ -13,7 +20,26 @@ public class Case {
 	private int ligne;
 	private int colonne;
 	private NatureTerrain nature;
+	//Les deux attributs suivants nous permettent de faire le redessin optimale
+	private Robot currentRobot; //Make it an array cuz multiple robots in same position
+	private Incendie currentIncendie;
 	
+	public Robot getCurrentRobot() {
+		return currentRobot;
+	}
+
+	public void setCurrentRobot(Robot currentRobot) {
+		this.currentRobot = currentRobot;
+	}
+
+	public Incendie getCurrentIncendie() {
+		return currentIncendie;
+	}
+
+	public void setCurrentIncendie(Incendie currentIncendie) {
+		this.currentIncendie = currentIncendie;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -35,6 +61,7 @@ public class Case {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.nature = null;
+		this.currentIncendie = null;
 	}
 	/**
 	 * Constructeur public qui crée une case avec tous ses attributs 
@@ -46,7 +73,10 @@ public class Case {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.nature = nature;
+		this.currentRobot = null;
 	}
+	
+	
 	public String toString() {
 		return " la case de nature " + nature + " se situe dans la ligne " + ligne + " et la colonne " + colonne;
 	}

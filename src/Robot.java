@@ -1,3 +1,5 @@
+import gui.GUISimulator;
+import gui.ImageElement;
 
 public abstract class Robot {
 	
@@ -7,6 +9,9 @@ public abstract class Robot {
 	 */
 	protected double vitesse;
 	protected Case position;
+	protected GUISimulator gui;
+	protected Carte carte;
+
 	
 	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	protected long dateExtinction;
@@ -25,15 +30,27 @@ public abstract class Robot {
 	}
 	
 	
+	public void setGui(GUISimulator gui) {
+		this.gui = gui;
+	}
+
+
+	public void setCarte(Carte carte) {
+		this.carte = carte;
+	}
+
+
 	/**
 	 * Constructeur public
 	 * @param vitesse vitesse du robot
 	 * @param position cose dans laquelle le robot se trouve
 	 */
-	public Robot(double vitesse, Case position) {
+	public Robot(double vitesse, Case position, Carte carte) {
 		this.vitesse = vitesse;
 		this.position = position;
+		this.carte = carte;
 	}
+
 	public String toString() {
 		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
 	}
@@ -78,7 +95,7 @@ public abstract class Robot {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
 			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this));
 			//Le robot va etre alors on mouvement et il arrive dans ...
 			dateArrive = dateToAdd +  dateArrive;
 		}
@@ -116,8 +133,37 @@ public abstract class Robot {
 	}
 	
 	
+	/********Les methodes pour le dessin***********/
+	/**
+	 * Fonction pour dessiner les robots
+	 * @param xCoord
+	 * @param yCoord
+	 * @param width
+	 * @param height
+	 */
+	abstract void draw();
 	
-	
+	public void updateCase() {
+		int nbLig = carte.getNbLignes();
+		int nbCol = carte.getNBColonnes();
+        int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		//Dessiner le terrain
+		gui.addGraphicalElement(new ImageElement(position.getColonne()*tailleCases_width, position.getLigne()*tailleCases_length, "./images/" + position.getNature() +".png", tailleCases_width, tailleCases_length, null));
+		//Dessiner les instances qui existe deja sur la place
+		if (position.getCurrentIncendie() != null) {
+			position.getCurrentIncendie().draw("FIRE1");
+		if (position.getCurrentRobot() != null) {
+			position.getCurrentRobot().draw();
+		}
+		}
+	}
+
+		
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain
 	 * sur lequel il se trouve

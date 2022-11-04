@@ -111,10 +111,6 @@ public class Simulateur implements Simulable {
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
 		
-		int yMin = tailleCases_length /2;
-		int xMin = tailleCases_width /2;
-	
-		
 		/** Partie du dessin */
 		
 		/**
@@ -130,25 +126,40 @@ public class Simulateur implements Simulable {
 		/**
 		 * Faire l'incendie
 		 */
-		for (int i = 0; i < incendieTableau.length; i++) {
-			Case positionCase = incendieTableau[i].getPosition();
-			double intensite = incendieTableau[i].getIntensite();
-			int x = positionCase.getColonne();
-			int y = positionCase.getLigne();
-			if (incendieTableau[i].getIntensite() != 0) {
-				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
-			}
-		}
+		drawIncendies("FIRE1");
 		
 		/**
 		 * Deployer les robots
 		 */
-		for (int i = 0; i < robotTableau.length; i++) {
-			Case positionCase = robotTableau[i].getPosition();
-//			double vitesse = robotTableau[i].getVitesse();
-			int x = positionCase.getColonne();
-			int y = positionCase.getLigne();
-			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
+		for (Robot r : robotTableau) {
+			r.setGui(gui);
+			r.getPosition().setCurrentRobot(r);
+			r.draw();
+		}
+	}
+	
+	
+	
+	public void drawIncendies(String fireType) {
+		for	(Incendie incendie: this.incendie) {
+			incendie.setGui(gui);
+			incendie.getPosition().setCurrentIncendie(incendie);
+			if (incendie.getIntensite() != 0) {
+				incendie.draw(fireType);
+			}
+		}
+	}
+	
+	public void alternateFireType(long date) {
+		if (date%2 == 0) {
+			for (Incendie incendie : this.incendie) {
+				incendie.updateCase("FIRE1");
+			}
+		}
+		else {
+			for (Incendie incendie : this.incendie) {
+				incendie.updateCase("FIRE2");
+			}
 		}
 	}
 
@@ -157,13 +168,13 @@ public class Simulateur implements Simulable {
 	public void next() {
 		if (!(simulationTerminee())) {
 			System.out.println("Next... Current date :" + this.dateSimulation);
+			alternateFireType(dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
 			System.out.println(currListEvents);
 			if (!(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
 					e.execute();
 				}
-				draw();
 				incrementeDate();
 			}
 			else {

@@ -1,7 +1,8 @@
 public class EventRobotDeplace extends Evenement {
 	private Direction message ;
 	Robot robot;
-	NatureTerrain nouvelleNature;
+//	NatureTerrain nouvelleNature;
+//	Case caseArrive;
 	
 	/**
 	 * Constructeur de l'evenement du deplacement du robot
@@ -10,11 +11,12 @@ public class EventRobotDeplace extends Evenement {
 	 * @param robot
 	 * @param nouvelleNature
 	 */
-	public EventRobotDeplace(long date , Direction message , Robot robot, NatureTerrain nouvelleNature) {
+	public EventRobotDeplace(long date , Direction message , Robot robot) {
 		super(date);
 		this.message = message ;
 		this.robot = robot;
-		this.nouvelleNature = nouvelleNature;
+//		this.nouvelleNature = nouvelleNature;
+//		this.caseArrive = caseArrive;
 	}
 	
 	
@@ -23,22 +25,33 @@ public class EventRobotDeplace extends Evenement {
 	 */
 	public void execute () {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
+		
+		robot.updateCase(); //updates current position - before moving
+		
 		Case position = this.robot.getPosition();
-		Case nouvellePosition;
+		int newX;
+		int newY;
 		if (this.message == Direction.NORD) {
-			nouvellePosition = new Case(position.getLigne() - 1, position.getColonne());
+			newY = position.getLigne() - 1;
+			newX = position.getColonne();
 		}
 		else if (this.message == Direction.SUD) {
-			nouvellePosition = new Case(position.getLigne() + 1, position.getColonne());
+			newY = position.getLigne() + 1;
+			newX = position.getColonne();
 		}
 		else if (this.message == Direction.OUEST) {
-			nouvellePosition = new Case(position.getLigne(), position.getColonne()-1);
+			newY = position.getLigne();
+			newX = position.getColonne() - 1;
 		}
 		else{
-			nouvellePosition = new Case(position.getLigne(), position.getColonne() + 1);
+			newY = position.getLigne();
+			newX = position.getColonne() + 1;
 		}
-		nouvellePosition.setNature(nouvelleNature);
-//		this.robot.dateArrive = 0;
-		this.robot.setPosition(nouvellePosition);
+		Case newPosition = robot.carte.getCase(newY, newX);
+		robot.setPosition(newPosition);
+		newPosition.setCurrentRobot(robot);
+		//Updating
+		robot.draw(); //new position
+		
 	}
 }

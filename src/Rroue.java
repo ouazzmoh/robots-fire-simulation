@@ -1,4 +1,4 @@
-
+import gui.ImageElement;
 
 public class Rroue extends Robot {
 	/**
@@ -11,8 +11,8 @@ public class Rroue extends Robot {
 	 * @param position case dans laquelle le robot se trouve.
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues.
 	 */
-	public Rroue(Case position, double reservoir) {
-		super(80, position);
+	public Rroue(Case position, double reservoir, Carte carte) {
+		super(80, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -21,8 +21,8 @@ public class Rroue extends Robot {
 	 * @param position case dans laquelle le robot se trouve.
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues
 	 */
-	public Rroue(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Rroue(double vitesse, Case position, double reservoir, Carte carte) {
+		super(vitesse, position, carte);
 		this.reservoir = reservoir;
 	}
 	@Override
@@ -57,5 +57,21 @@ public class Rroue extends Robot {
 			default:
 				return false;
 		}
+	}
+	
+	@Override
+	public void draw() {
+		
+		int nbLig = carte.getNbLignes();
+		int nbCol = carte.getNBColonnes();
+		int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 	}
 }

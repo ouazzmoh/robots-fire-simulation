@@ -1,4 +1,4 @@
-
+import gui.ImageElement;
 
 public class Drone extends Robot {
 	/**
@@ -12,8 +12,8 @@ public class Drone extends Robot {
 	 * @param position case dans laquelle le drone se trouve dans la carte
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
-	public Drone(Case position, double reservoir) {
-		super(100, position);
+	public Drone(Case position, double reservoir, Carte carte) {
+		super(100, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -22,8 +22,8 @@ public class Drone extends Robot {
 	 * @param position case dans laquelle le drone se trouve dans la carte
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
-	public Drone(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Drone(double vitesse, Case position, double reservoir, Carte carte) {
+		super(vitesse, position, carte);
 		if (this.vitesse > 150) {
 			this.vitesse = 150;
 		}
@@ -51,6 +51,22 @@ public class Drone extends Robot {
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {
 		return true;
+	}
+	
+	@Override
+	public void draw() {
+		
+		int nbLig = carte.getNbLignes();
+		int nbCol = carte.getNBColonnes();
+		int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 	}
 	
 }

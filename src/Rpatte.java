@@ -1,4 +1,4 @@
-
+import gui.ImageElement;
 
 public class Rpatte extends Robot {
 	/**
@@ -9,16 +9,16 @@ public class Rpatte extends Robot {
 	 * Constructeur public, qui crée un nouveau Robot à pattes avec la vitesse par défaut 30 km/h
 	 * @param position case dans laquelle le robot se trouve
 	 */
-	public Rpatte(Case position) {
-		super(30, position);
+	public Rpatte(Case position, Carte carte) {
+		super(30, position, carte);
 	}
 	/**
 	 * Constructeur public, crée un nouveau Robot à pattes avec une vitesse donnée 
 	 * @param vitesse vitesse du robot à pattes
 	 * @param position position dans laquelle le robot se trouve
 	 */
-	public Rpatte(double vitesse, Case position) {
-		super(vitesse, position);
+	public Rpatte(double vitesse, Case position, Carte carte) {
+		super(vitesse, position, carte);
 	}
 	@Override
 	public double getVitesse(NatureTerrain nature) {
@@ -48,6 +48,22 @@ public class Rpatte extends Robot {
 			default : 
 				return true;
 		}
+	}
+	
+	@Override
+	public void draw() {
+		
+		int nbLig = carte.getNbLignes();
+		int nbCol = carte.getNBColonnes();
+		int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 	}
 
 }

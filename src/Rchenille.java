@@ -1,4 +1,4 @@
-
+import gui.ImageElement;
 
 public class Rchenille extends Robot {
 	/**
@@ -12,8 +12,8 @@ public class Rchenille extends Robot {
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans son reservoir.
 	 */
-	public Rchenille(Case position, double reservoir) {
-		super(60, position);
+	public Rchenille(Case position, double reservoir, Carte carte) {
+		super(60, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -22,8 +22,8 @@ public class Rchenille extends Robot {
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans le reservoir du robot à chenilles
 	 */
-	public Rchenille(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Rchenille(double vitesse, Case position, double reservoir, Carte carte) {
+		super(vitesse, position, carte);
 		if (vitesse > 80) {
 			this.vitesse = 80;
 		}
@@ -64,6 +64,22 @@ public class Rchenille extends Robot {
 			default:
 				return true;
 		}
+	}
+	
+	@Override
+	public void draw() {
+		
+		int nbLig = carte.getNbLignes();
+		int nbCol = carte.getNBColonnes();
+		int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        
+		int tailleCases_length = (yMax)/nbLig;
+		int tailleCases_width = (xMax)/nbCol;
+		
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
 	}
 
 }
