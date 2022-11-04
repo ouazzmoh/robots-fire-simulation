@@ -11,18 +11,16 @@ public class EventRobotFire extends Evenement {
 	}
 	public void execute () {
 		//Chercher l'incendi a eteidndre
-		Incendie fireToKill = incendieTableau[0];
+		Incendie fireToKill = null;
 		
 		for (Incendie incendie : incendieTableau) {
 			if (incendie.getPosition().equals(this.robot.position)) {
 				fireToKill = incendie;
-				break; //kill the first fire
-				
+				break; //kill the first fire	
 			}
 		}
 		
-			
-		
+		try {
 		double reservoir = robot.getReservoir();
 		if (fireToKill.getIntensite() - reservoir > 0) {
 			fireToKill.setIntensite(fireToKill.getIntensite() - reservoir);
@@ -33,6 +31,9 @@ public class EventRobotFire extends Evenement {
 			robot.deverserEau((int) fireToKill.getIntensite());
 			System.out.println("Incendie éteinte GG");
 			fireToKill.setIntensite(0);
+		}
+		}catch(NullPointerException e) {
+			System.out.println("La case n'a pas d'incendie");
 		}
 	}
 		

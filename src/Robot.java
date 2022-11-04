@@ -97,7 +97,7 @@ public abstract class Robot {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
 		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.incendie));
-		dateExtinction = dateToAdd;
+		dateExtinction = dateToAdd + dateExtinction;
 		
 	}
 	
@@ -112,7 +112,7 @@ public abstract class Robot {
 		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
-		dateRemplissage = dateToAdd;
+		dateRemplissage = dateToAdd + dateRemplissage;
 	}
 	
 	

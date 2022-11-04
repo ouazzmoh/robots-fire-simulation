@@ -38,7 +38,7 @@ public class EventRobotDeplace extends Evenement {
 			nouvellePosition = new Case(position.getLigne(), position.getColonne() + 1);
 		}
 		nouvellePosition.setNature(nouvelleNature);
-		this.robot.dateArrive = 0;
+//		this.robot.dateArrive = 0;
 		this.robot.setPosition(nouvellePosition);
 	}
 }

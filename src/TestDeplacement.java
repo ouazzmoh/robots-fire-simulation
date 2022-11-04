@@ -31,6 +31,9 @@ public class TestDeplacement {
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
 			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 8 ,simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur);
+			System.out.println("TEST");
 
 
 
