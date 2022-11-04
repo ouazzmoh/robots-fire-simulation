@@ -9,14 +9,11 @@ public class EventRobotDeplace extends Evenement {
 	 * @param date
 	 * @param message
 	 * @param robot
-	 * @param nouvelleNature
 	 */
 	public EventRobotDeplace(long date , Direction message , Robot robot) {
 		super(date);
 		this.message = message ;
 		this.robot = robot;
-//		this.nouvelleNature = nouvelleNature;
-//		this.caseArrive = caseArrive;
 	}
 	
 	
@@ -26,9 +23,9 @@ public class EventRobotDeplace extends Evenement {
 	public void execute () {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
 		
-		robot.updateCase(); //updates current position - before moving
 		Case position = this.robot.getPosition();
-		position.setCurrentRobot(null);
+		position.setCurrentRobot(null); //Removes robot from position
+		robot.updateCase(); //updates current position - before moving
 		int newX;
 		int newY;
 		if (this.message == Direction.NORD) {

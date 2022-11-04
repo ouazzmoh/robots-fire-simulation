@@ -66,6 +66,7 @@ public class Rchenille extends Robot {
 		}
 	}
 	
+	
 	@Override
 	public void draw() {
 		

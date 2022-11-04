@@ -94,30 +94,4 @@ public class Incendie {
 			position.getCurrentIncendie().draw(fireType);
 		}
 	}
-
-
-	
-	
-	public void update_case() {
-		if (intensite != 0) {
-			return;
-		}
-		
-		int nbLig = carte.getNbLignes();
-		int nbCol = carte.getNBColonnes();
-	
-		//Anchor = centre for rectangles and text, topleft for image
-		
-		
-        int xMax = gui.getWidth();
-        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
-        int yMax = gui.getHeight();
-        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
-        
-		int tailleCases_length = (yMax)/nbLig;
-		int tailleCases_width = (xMax)/nbCol;
-		int x = position.getColonne();
-		int y = position.getLigne();
-		gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/" + position.getNature() +".png", tailleCases_width, tailleCases_length, null));
-	}
 }
