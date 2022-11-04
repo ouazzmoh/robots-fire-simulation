@@ -63,7 +63,7 @@ public class Rpatte extends Robot {
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
 		
-		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/RPATTE.png", tailleCases_width, tailleCases_length, null));
 	}
 
 }

@@ -66,7 +66,26 @@ public class Drone extends Robot {
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
 		
-		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
+		double currentWaterPercentage = (reservoir/10000)*100; 
+		int waterBar;
+		if (currentWaterPercentage < 25) {
+			waterBar = 0;
+		}
+		else if (currentWaterPercentage < 50 && currentWaterPercentage >= 25) {
+			waterBar = 25;
+		}
+		else if (currentWaterPercentage < 75 && currentWaterPercentage >= 50) {
+			waterBar = 50;
+		}
+		else if (currentWaterPercentage < 100 && currentWaterPercentage >= 75) {
+			waterBar = 75;
+		}
+		else {
+			waterBar = 100;
+		}
+		
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length - 50, "./images/WATERBAR"+ waterBar +".png", tailleCases_width, tailleCases_length, null));
+		gui.addGraphicalElement(new ImageElement(position.getColonne() * tailleCases_width, position.getLigne() *tailleCases_length, "./images/DRONE.png", tailleCases_width, tailleCases_length, null));
 	}
 	
 }

@@ -14,7 +14,7 @@ public class TestDeplacement {
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
-			GUISimulator gui = new GUISimulator(800, 600, Color.RED);
+			GUISimulator gui = new GUISimulator(1920, 1080, Color.RED);
 			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
 			
 			Robot[] robots = donnees.getrobot();
