@@ -14,7 +14,7 @@ public class TestDeplacement {
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
-			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
+			GUISimulator gui = new GUISimulator(800, 600, Color.RED);
 			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
 			
 			Robot[] robots = donnees.getrobot();
@@ -30,9 +30,9 @@ public class TestDeplacement {
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 5 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 8, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 9 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 10, simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur);
+			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 8 ,simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur);
 
 
 

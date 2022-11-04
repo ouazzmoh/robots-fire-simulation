@@ -27,8 +27,8 @@ public class EventRobotDeplace extends Evenement {
 		System.out.println(this.getDate() + " robot is deplaced vers le "+ this.message ) ;
 		
 		robot.updateCase(); //updates current position - before moving
-		
 		Case position = this.robot.getPosition();
+		position.setCurrentRobot(null);
 		int newX;
 		int newY;
 		if (this.message == Direction.NORD) {
