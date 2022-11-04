@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class Robot {
 	
@@ -11,6 +13,8 @@ public abstract class Robot {
 	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	protected long dateExtinction;
 	protected long dateRemplissage;
+	int indiceTest = 0;
+	
 	
 	
 	/**
@@ -74,14 +78,14 @@ public abstract class Robot {
 	 */
 	public void deplacerEffectivement(Direction dir, Carte carte, long dateCourante, Simulateur simulateur) {
 		Case caseArrivee = carte.getVoisin(position, dir);
-		if (this.has_accessto(caseArrivee.getNature())) {
-			double temps = tempsDeplacement(caseArrivee, carte);
-			System.out.println(temps);
-			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
-			//Le robot va etre alors on mouvement et il arrive dans ...
-			dateArrive = dateToAdd +  dateArrive;
-		}
+		//if (this.has_accessto(caseArrivee.getNature())) {
+		double temps = tempsDeplacement(caseArrivee, carte);
+		System.out.println(temps);
+		long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
+		simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
+		//Le robot va etre alors on mouvement et il arrive dans ...
+		dateArrive = dateToAdd +  dateArrive;
+		//}
 	}
 	
 	
@@ -114,7 +118,111 @@ public abstract class Robot {
 		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
 		dateRemplissage = dateToAdd + dateRemplissage;
 	}
+	public Direction checkdirection(int distance) {
+		Direction dir = null;
+		if (distance > 0) {
+			dir = Direction.EST;
+		}
+		else if (distance < 0) {
+			dir = Direction.OUEST;
+		}
+		return dir;
+	}
+	public Direction checkdirection2(int distance) {
+		Direction dir = null;
+		if (distance > 0) {
+			dir = Direction.SUD;
+		}
+		else if (distance < 0) {
+			dir = Direction.NORD;
+		}
+		return dir;
+	}
 	
+	public Direction[] choixdir(Case caseArrivee, Case caseCourante) {
+		Direction[] dir = new Direction[2];
+		int distCol = caseArrivee.getColonne() - caseCourante.getColonne();
+		int distLigne = caseArrivee.getLigne() - caseCourante.getLigne();
+		Direction dirHoriz = checkdirection(distCol);
+		Direction dirVert = checkdirection2(distLigne);
+		if ((dirHoriz != null) && ((dirVert != null))) {
+			dir[0] = dirHoriz;
+			dir[1] = dirVert;
+		}
+		else if (dirVert != null) {
+			dir[0] = dirVert ;
+			dir[1] = null;
+		}
+		else if (dirHoriz != null) {
+			dir[0] = dirHoriz ;
+			dir[1] = null;
+		}
+		else {
+			System.out.println(">>>>>>>>>>>>>< rectification");
+		}
+		return dir;
+		}
+	
+	
+	public LinkedList<Direction> Chemin(Case caseArrivee, Carte carte){
+		LinkedList<Direction> dirAlter = new LinkedList<Direction>();
+		LinkedList<Direction> ddir = new LinkedList<Direction>();
+		LinkedList<Case> chemin = new LinkedList<Case>();
+		Case caseCourante = this.position;
+		Direction choix = null;
+		while (!(caseCourante.equals(caseArrivee))) {
+			Direction[] dirChoisie = new Direction[2];
+			if (choix == null) {
+				dirChoisie = choixdir(caseArrivee,caseCourante);
+			}
+			else {	
+				dirChoisie[0]= choix;
+				dirChoisie[1] = null;
+ 			}
+			Case caseArrivee2 = carte.getVoisin(caseCourante, dirChoisie[0]);
+			if (this.has_accessto(caseArrivee2.getNature())) {
+				caseCourante = caseArrivee2;
+				dirAlter.add(dirChoisie[1]);
+				ddir.add(dirChoisie[0]);
+				chemin.add(caseArrivee2);
+				this.indiceTest += 1;
+				choix = null;
+			}
+			else {
+				if (dirChoisie[1] != null) {
+					choix = dirChoisie[1];
+				}
+				else {
+					if (this.indiceTest != 1) {
+						Direction previousdir = dirAlter.get(indiceTest-1);
+						while (previousdir == null) {
+							ddir.remove(indiceTest-1);
+							dirAlter.remove(indiceTest-1);
+							chemin.remove(indiceTest-1);
+							caseCourante = chemin.get(indiceTest-2);
+							this.indiceTest -= 1;
+							if (indiceTest == 2) {
+								System.out.println("pas de chemin");
+								return null;
+							}
+						}
+						choix = previousdir;
+						ddir.remove(indiceTest-1);
+						dirAlter.remove(indiceTest-1);
+						chemin.remove(indiceTest-1);
+						caseCourante = chemin.get(indiceTest-2);
+						this.indiceTest -= 1;
+					}
+					else {
+						System.out.println("pas de chemin");
+						return null;
+					}
+				}
+			}
+		}
+		return ddir;
+		
+	}
 	
 	
 	

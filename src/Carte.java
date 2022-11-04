@@ -91,23 +91,26 @@ public class Carte {
 	 * @return le voisin s'il existe
 	 */
 	public Case getVoisin(Case src, Direction dir) {
-		int new_lig = src.getLigne();
-		int new_col = src.getColonne();
+		/*int new_lig = src.getLigne();
+		int new_col = src.getColonne();*/
 		if (voisinExiste(src, dir)) {
 			switch(dir) {
 			case NORD:
-				new_lig -= 1;
+				return getCase(src.getLigne() - 1,src.getColonne());
 			case SUD:
-				new_lig += 1;
+				return getCase(src.getLigne() + 1, src.getColonne());
 			case OUEST:
-				new_col -= 1;
+				return getCase(src.getLigne(), src.getColonne()-1);
 			case EST:
-				new_col += 1;
+				return getCase(src.getLigne(), src.getColonne() + 1);
+			default : 
+				return src;
 		}
-		return carte[new_lig][new_col];
+		//return carte[new_lig][new_col];
 		}
 		else {
 			throw new IllegalArgumentException("ce voisin n'existe pas!!!");
 		}
 	}
+
 }
