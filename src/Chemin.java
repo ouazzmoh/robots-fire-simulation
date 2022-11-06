@@ -221,7 +221,7 @@ public class Chemin {
 						cout[caseFille.getLigne()][caseFille.getColonne()] = coutTemp;
 						//cout.put(caseFille, coutTemp);
 						queue.add(caseFille);
-						/*
+						
 						if(pathH.size() == i + 1) {
 							pathH.remove(i);
 							pathH.add(carte.getDirection(caseCourante, caseFille));
@@ -230,7 +230,7 @@ public class Chemin {
 						else {
 							pathH.add(carte.getDirection(caseCourante, caseFille));
 							i++;
-						}*/
+						}
 						chemin.put(caseFille, caseCourante);
 						}
 					}
