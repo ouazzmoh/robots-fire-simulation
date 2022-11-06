@@ -91,23 +91,47 @@ public class Carte {
 	 * @return le voisin s'il existe
 	 */
 	public Case getVoisin(Case src, Direction dir) {
-		int new_lig = src.getLigne();
-		int new_col = src.getColonne();
 		if (voisinExiste(src, dir)) {
 			switch(dir) {
 			case NORD:
-				new_lig -= 1;
+				return getCase(src.getLigne() - 1,src.getColonne());
 			case SUD:
-				new_lig += 1;
+				return getCase(src.getLigne() + 1, src.getColonne());
 			case OUEST:
-				new_col -= 1;
+				return getCase(src.getLigne(), src.getColonne()-1);
 			case EST:
-				new_col += 1;
-		}
-		return carte[new_lig][new_col];
+				return getCase(src.getLigne(), src.getColonne() + 1);
+			default : 
+				return src;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("ce voisin n'existe pas!!!");
 		}
 	}
+	/**
+	 * Méthode qui nous donne la direction dans laquelle on va se déplacer 
+	 * @param src
+	 * @param dest
+	 * @return direction 
+	 */
+	public Direction getDirection(Case src, Case dest) {
+		int distance_lignes = dest.getLigne() - src.getLigne();
+		int distance_colonnes = dest.getColonne() - src.getColonne();
+		if (distance_lignes < 0) {
+			return Direction.NORD;
+		}
+		else if (distance_lignes > 0) {
+			return Direction.SUD;
+		}
+		else {
+			if (distance_colonnes < 0) {
+				return Direction.OUEST;
+			}
+			else {
+				return Direction.EST;
+			}
+		}
+	}
+
 }
