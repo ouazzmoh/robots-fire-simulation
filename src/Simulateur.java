@@ -163,6 +163,7 @@ public class Simulateur implements Simulable {
 				for (Evenement e : currListEvents) {
 					e.execute();
 				}
+				gui.reset();
 				draw();
 				incrementeDate();
 			}
