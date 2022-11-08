@@ -22,7 +22,7 @@ public class TestDeplacement {
 			
 			//Deplacer le robot in the current date of simulateur
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 1, simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 1, simulateur, incendieTableau[4]);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 2 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 3 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 4 ,simulateur);
@@ -30,9 +30,9 @@ public class TestDeplacement {
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 5 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur,incendieTableau[4]);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 8 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur,incendieTableau[4]);
 			System.out.println("TEST");
 
 

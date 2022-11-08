@@ -6,6 +6,7 @@ public class Incendie {
 	 */
 	private Case position;
 	private double intensite;
+	private double intensiteCourante;
 	
 	
 	/**
@@ -16,6 +17,7 @@ public class Incendie {
 	public Incendie(Case position, double intensite) {
 		this.position = position;
 		this.intensite = intensite;
+		this.intensiteCourante = intensite;
 	}
 	
 	
@@ -29,6 +31,9 @@ public class Incendie {
 	}
 	public double getIntensite() {
 		return intensite;
+	}
+	public double getIntensiteCourante() {
+		return intensiteCourante;
 	}
 	
 	
@@ -47,6 +52,9 @@ public class Incendie {
 	}
 	public void setIntensite(double intensite) {
 		this.intensite = intensite;
+	}
+	public void setIntensiteCourante(double intensite) {
+		this.intensiteCourante = intensite;
 	}
 	
 	

@@ -78,9 +78,9 @@ public abstract class Robot {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
 			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateExtinction + dateRemplissage, dir, this, caseArrivee.getNature()));
 			//Le robot va etre alors on mouvement et il arrive dans ...
-			dateArrive = dateToAdd +  dateArrive;
+			dateArrive = dateToAdd +  dateCourante + dateExtinction + dateRemplissage;
 		}
 	}
 	
@@ -93,11 +93,24 @@ public abstract class Robot {
 	 * @param dateCourante
 	 * @param simulateur
 	 */
-	public void eteindreIncendie(Incendie[] incendieTableau, long dateCourante, Simulateur simulateur) {
+	public void eteindreIncendie(Incendie[] incendieTableau, long dateCourante, Simulateur simulateur, Incendie incendie) {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
-		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.incendie));
-		dateExtinction = dateToAdd + dateExtinction;
+		simulateur.ajouteEvenement(new EventRobotFire(dateToAdd + dateArrive, this, simulateur.incendie));
+		try {
+		double reservoir = this.getReservoir();
+		if (incendie.getIntensiteCourante() - reservoir > 0) {
+			incendie.setIntensiteCourante(incendie.getIntensiteCourante() - reservoir);
+			System.out.println("Il reste " + incendie.getIntensiteCourante() + " pour l'éteindre");
+		}
+		else {
+			System.out.println("Incendie éteinte GG");
+			incendie.setIntensiteCourante(0);
+		}
+		}catch(NullPointerException e) {
+			System.out.println("La case n'a pas d'incendie");
+		}
+		dateExtinction += 4;
 		
 	}
 	
@@ -111,8 +124,8 @@ public abstract class Robot {
 	public void remplirReservoir(long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
-		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
-		dateRemplissage = dateToAdd + dateRemplissage;
+		simulateur.ajouteEvenement(new EventRobotCharge(dateToAdd + dateArrive, this));
+		dateRemplissage += 2;
 	}
 	
 	
