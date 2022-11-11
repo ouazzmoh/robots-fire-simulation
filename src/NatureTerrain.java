@@ -7,4 +7,3 @@ public enum NatureTerrain{
 	HABITAT
 	}
 
-//TODO: Use a hash table to link each type to a color

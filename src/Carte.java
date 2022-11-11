@@ -133,6 +133,18 @@ public class Carte {
 			}
 		}
 	}
+	
+	@Override
+	public Carte clone() {
+		Carte carteClone = new Carte(tailleCases, nbLignes, nbColonnes);
+		for (int i =0; i < carte.length; i++) {
+			for (int j = 0; j < carte[i].length; j++) {
+				Case newCase = new Case(i, j, carte[i][j].getNature());
+				carteClone.carte[i][j] = newCase;
+			}
+		}
+		return carteClone;
+	}
 
 
 }

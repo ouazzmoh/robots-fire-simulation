@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class DonneesSimulation {
 	/**
@@ -20,6 +21,31 @@ public class DonneesSimulation {
 		this.carte = carte;
 		this.incendies = incendies;
 		this.robots = robots;
+	}
+	
+	// Copy Constructor
+	public DonneesSimulation(DonneesSimulation donnees) {
+		this.carte = new Carte(carte.getTailleCases(), carte.getNbLignes(), carte.getNBColonnes());
+		Incendie[] incendieCopy = new Incendie[incendies.length];
+		Robot[] robotsCopy = new Robot[robots.length];
+		
+		//Copying incendie
+		for(int i = 0; i < incendies.length; i++) {
+			Case newPosition = new Case(incendies[i].getPosition().getLigne(), incendies[i].getPosition().getColonne(), incendies[i].getPosition().getNature());
+			Incendie newIncendie = new Incendie(newPosition, incendies[i].getIntensite());
+			incendieCopy[i] =newIncendie;
+		}
+		
+		//Copying robots
+		for(int i = 0; i < robots.length; i++) {
+			Case newPosition = new Case(robots[i].getPosition().getLigne(), robots[i].getPosition().getColonne(), robots[i].getPosition().getNature());
+			Robot newRobot = robots[i].deepcopy();
+			robotsCopy[i] =newRobot;
+		}
+		
+		
+		this.robots = robots;
+		
 	}
 	public Carte getCarte() {
 		return carte;
@@ -44,6 +70,16 @@ public class DonneesSimulation {
 	}
 	public Robot getrobot(int i) {
 		return robots[i];
+	}
+	
+	
+	@Override
+	public DonneesSimulation clone() {
+		//
+//		Robot[] robotsCopy = Arrays.copyOf(robots, robots.length);
+		
+		DonneesSimulation donneesClone = new DonneesSimulation(carte, incendies, robots);
+		return donneesClone;
 	}
 	
 }

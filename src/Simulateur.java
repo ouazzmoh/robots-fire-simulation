@@ -21,32 +21,53 @@ public class Simulateur implements Simulable {
 	/** Donnees a visualiser */
 	private DonneesSimulation donnees;
 	
+	/**Stocker les donnees initiaux**/
+	private DonneesSimulation donneesInit;
+	
+	
 	/** entier qui permet de suivre l'execution des evenements */
 	private long dateSimulation;
 
 	/** Liste evenement*/
 	SortedMap<Long, LinkedList<Evenement>> evenements; // Evenements  {date: event1->event2,...}
 	
-	/** Liste incendies */
-	Incendie[] incendie;
 	
-	/** Constructeur, et association a la gui*/
+	
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit) {
+		//L'interface graphique
 		this.gui = gui;
-		this.donnees = donnees;
-		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
 		
-		//The structure where we store events
+		//Les donnees qui changeront au cours de l'execution
+		this.donnees = new DonneesSimulation(donneesInit);
+		
+		//Stocker les donnees initiaux
+		this.donneesInit = donneesInit;
+		
+		//La date courante du simulation, s'incremente avec 1 pour chaque next()
+		this.dateSimulation = 1; 
+		
+		//La structure pour stocker les evenements
 		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
 		this.evenements.put((long)1, new LinkedList<Evenement>());
-		//
-		this.incendie = incendie;
+		
+		//Liaison avec la GUI
 		gui.setSimulable(this);
+		
+		//dessin initial
 		draw();
 		
 	}
 	
+	public void initData() {
+		this.donnees = this.donneesInit.clone();
+		this.dateSimulation = 1;
+	}
+	
+	public DonneesSimulation getDonnees() {
+		return donnees;
+	}
+
 	public long getDateSimulation() {
 		return dateSimulation;
 	}
@@ -92,9 +113,9 @@ public class Simulateur implements Simulable {
 		/**
 		 * Variables utiles
 		 * */
-		Carte carteToDraw = donnees.getCarte();
-		Incendie[] incendieTableau = this.incendie;
-		Robot[]	robotTableau = donnees.getrobot();
+		Carte carteToDraw = this.donnees.getCarte();
+		Incendie[] incendieTableau = this.donnees.getIncendie();
+		Robot[]	robotTableau = this.donnees.getrobot();
 		
 		int nbLig = carteToDraw.getNbLignes();
 		int nbCol = carteToDraw.getNBColonnes();
@@ -181,7 +202,10 @@ public class Simulateur implements Simulable {
 
 	@Override
 	public void restart() {
-		// TODO Auto-generated method stub
+		// TODO Initialize the data to its initial value
+		initData();
+		gui.reset();
+		draw();
 		
 	}
 	

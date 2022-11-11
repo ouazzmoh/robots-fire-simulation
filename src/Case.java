@@ -68,4 +68,5 @@ public class Case {
 		this.nature = nature;
 	}
 	
+	
 }

@@ -58,4 +58,10 @@ public class Rroue extends Robot {
 				return false;
 		}
 	}
+	
+	@Override
+	 public RRoue deepcopy() {
+		Robot newRobot = Rroue(vitesse, )
+	}
+	
 }

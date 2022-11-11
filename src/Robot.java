@@ -96,7 +96,7 @@ public abstract class Robot {
 	public void eteindreIncendie(Incendie[] incendieTableau, long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
-		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.incendie));
+		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.getDonnees().getIncendie()));
 		dateExtinction = dateToAdd + dateExtinction;
 		
 	}
@@ -153,4 +153,9 @@ public abstract class Robot {
 	 * @return boolean : true si le robot peur acceder a ce type de terrain, false sinon.
 	 */
 	abstract boolean has_accessto(NatureTerrain nature);
+	
+	abstract public Robot deepCopy() ;
+	
+	
+
 }

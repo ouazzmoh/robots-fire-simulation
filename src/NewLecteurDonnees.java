@@ -233,12 +233,7 @@ public class NewLecteurDonnees {
             	}
             }
             else if (type.equals("ROUES")) {
-            	if (new_vitesse != 0) {
-            		robot = new Rroue(new_vitesse,carte.getCase(lig, col), 5000);
-            	}
-            	else {
-            		robot = new Rroue(carte.getCase(lig, col), 5000);
-            	}
+        		robot = new Rroue(new_vitesse,carte.getCase(lig, col), 5000);
             }
             else if (type.equals("PATTES")) {
             	if (new_vitesse != 0) {
