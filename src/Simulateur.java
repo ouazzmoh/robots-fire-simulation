@@ -34,15 +34,16 @@ public class Simulateur implements Simulable {
 	
 	
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		//L'interface graphique
 		this.gui = gui;
 		
 		//Les donnees qui changeront au cours de l'execution
-		this.donnees = new DonneesSimulation(donneesInit);
+		this.donnees = donnees;
+		
 		
 		//Stocker les donnees initiaux
-		this.donneesInit = donneesInit;
+		this.donneesInit = new DonneesSimulation(donnees);
 		
 		//La date courante du simulation, s'incremente avec 1 pour chaque next()
 		this.dateSimulation = 1; 
@@ -60,8 +61,9 @@ public class Simulateur implements Simulable {
 	}
 	
 	public void initData() {
-		this.donnees = this.donneesInit.clone();
+		this.donnees = new DonneesSimulation(this.donneesInit);
 		this.dateSimulation = 1;
+		draw();
 	}
 	
 	public DonneesSimulation getDonnees() {
@@ -203,9 +205,8 @@ public class Simulateur implements Simulable {
 	@Override
 	public void restart() {
 		// TODO Initialize the data to its initial value
-		initData();
 		gui.reset();
-		draw();
+		initData();
 		
 	}
 	

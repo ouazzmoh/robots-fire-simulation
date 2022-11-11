@@ -23,7 +23,7 @@ public class testCarte {
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 
-			Simulateur simulateur = new Simulateur(gui, donnees, 40, incendieTableau);
+			Simulateur simulateur = new Simulateur(gui, donnees);
 
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");

@@ -225,31 +225,16 @@ public class NewLecteurDonnees {
             Robot robot;
             
             if (type.equals("DRONE")) {
-            	if (new_vitesse != 0) {
-            		robot = new Drone(new_vitesse,carte.getCase(lig, col), 10000);
-            	}
-            	else {
-            		robot = new Drone(carte.getCase(lig, col), 10000);
-            	}
+            		robot = new Drone(new_vitesse,carte.getCase(lig, col), 10000, carte);
             }
             else if (type.equals("ROUES")) {
-        		robot = new Rroue(new_vitesse,carte.getCase(lig, col), 5000);
+            		robot = new Rroue(new_vitesse,carte.getCase(lig, col), 5000, carte);
             }
             else if (type.equals("PATTES")) {
-            	if (new_vitesse != 0) {
-            		robot = new Rpatte(new_vitesse,carte.getCase(lig, col));
-            	}
-            	else {
-            		robot = new Rpatte(carte.getCase(lig, col));
-            	}
+            		robot = new Rpatte(new_vitesse,carte.getCase(lig, col), carte);
             }
             else{
-            	if (new_vitesse != 0) {
-            		robot = new Rchenille(new_vitesse,carte.getCase(lig, col), 2000);
-            	}
-            	else {
-            		robot = new Rchenille(carte.getCase(lig, col), 2000);
-            	}
+            		robot = new Rchenille(new_vitesse,carte.getCase(lig, col), 2000, carte);
             }
             
             verifieLigneTerminee();

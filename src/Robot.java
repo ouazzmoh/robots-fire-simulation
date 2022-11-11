@@ -7,6 +7,7 @@ public abstract class Robot {
 	 */
 	protected double vitesse;
 	protected Case position;
+	protected Carte carte;
 	
 	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	protected long dateExtinction;
@@ -17,23 +18,31 @@ public abstract class Robot {
 	 * Constructeur public,
 	 * @param position case dans laquelle le robot se trouve
 	 */
-	public Robot(Case position) {
+	public Robot(Case position, Carte carte) {
 		this.position = position;
+		this.carte = carte;
 		this.dateArrive  = (long) 0;
 		this.dateExtinction = (long) 0;
 		this.dateRemplissage = (long) 0;
 	}
 	
 	
+	public Carte getCarte() {
+		return carte;
+	}
+
+
 	/**
 	 * Constructeur public
 	 * @param vitesse vitesse du robot
 	 * @param position cose dans laquelle le robot se trouve
 	 */
-	public Robot(double vitesse, Case position) {
+	public Robot(double vitesse, Case position, Carte carte) {
 		this.vitesse = vitesse;
 		this.position = position;
+		this.carte = carte;
 	}
+	
 	public String toString() {
 		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
 	}
@@ -154,7 +163,7 @@ public abstract class Robot {
 	 */
 	abstract boolean has_accessto(NatureTerrain nature);
 	
-	abstract public Robot deepCopy() ;
+	abstract public Robot deepCopy();
 	
 	
 

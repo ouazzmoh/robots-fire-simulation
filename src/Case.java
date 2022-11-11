@@ -47,6 +47,14 @@ public class Case {
 		this.colonne = colonne;
 		this.nature = nature;
 	}
+	
+	//Copy constructor (Deep)
+	public Case(Case c){
+		this.ligne = c.ligne;
+		this.colonne = c.colonne;
+		this.nature = c.nature;
+	}
+	
 	public String toString() {
 		return " la case de nature " + nature + " se situe dans la ligne " + ligne + " et la colonne " + colonne;
 	}

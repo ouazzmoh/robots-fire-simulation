@@ -21,6 +21,21 @@ public class Carte {
 		this.nbColonnes = nbColonnes;
 		this.carte = new Case[nbLignes][nbColonnes];
 	}
+	//Copy constructor
+	public Carte(Carte carte) {
+		this.tailleCases = carte.tailleCases;
+		this.nbLignes = carte.nbLignes;
+		this.nbColonnes = carte.nbColonnes;
+		Case[][] newCarte = new Case[carte.nbLignes][carte.nbColonnes];
+		
+		for (int i = 0; i < carte.nbLignes; i++) {
+			for (int j=0; j < carte.nbColonnes; j++) {
+				newCarte[i][j] = new Case(carte.carte[i][j]); //Une deepcopy de la case
+			}
+		}
+		this.carte = newCarte;
+	}
+	
 	/**
 	 * Un deuxième constructeur, qui crée une carte dont les cases existent déjà
 	 * @param tailleCases taille des cases en mètres

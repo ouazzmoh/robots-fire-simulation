@@ -25,26 +25,25 @@ public class DonneesSimulation {
 	
 	// Copy Constructor
 	public DonneesSimulation(DonneesSimulation donnees) {
-		this.carte = new Carte(carte.getTailleCases(), carte.getNbLignes(), carte.getNBColonnes());
-		Incendie[] incendieCopy = new Incendie[incendies.length];
-		Robot[] robotsCopy = new Robot[robots.length];
+		this.carte = new Carte(donnees.carte);
+		Incendie[] incendieCopy = new Incendie[donnees.incendies.length];
+		Robot[] robotsCopy = new Robot[donnees.robots.length];
 		
 		//Copying incendie
-		for(int i = 0; i < incendies.length; i++) {
-			Case newPosition = new Case(incendies[i].getPosition().getLigne(), incendies[i].getPosition().getColonne(), incendies[i].getPosition().getNature());
-			Incendie newIncendie = new Incendie(newPosition, incendies[i].getIntensite());
+		for(int i = 0; i < donnees.incendies.length; i++) {
+			Case newPosition = new Case(donnees.incendies[i].getPosition().getLigne(), donnees.incendies[i].getPosition().getColonne(), donnees.incendies[i].getPosition().getNature());
+			Incendie newIncendie = new Incendie(newPosition, donnees.incendies[i].getIntensite());
 			incendieCopy[i] =newIncendie;
 		}
 		
 		//Copying robots
-		for(int i = 0; i < robots.length; i++) {
-			Case newPosition = new Case(robots[i].getPosition().getLigne(), robots[i].getPosition().getColonne(), robots[i].getPosition().getNature());
-			Robot newRobot = robots[i].deepcopy();
-			robotsCopy[i] =newRobot;
+		for(int i = 0; i < donnees.robots.length; i++) {
+			robotsCopy[i] =donnees.robots[i].deepCopy();
 		}
 		
-		
-		this.robots = robots;
+		this.incendies = incendieCopy;
+		this.robots = robotsCopy;
+
 		
 	}
 	public Carte getCarte() {
@@ -73,13 +72,13 @@ public class DonneesSimulation {
 	}
 	
 	
-	@Override
-	public DonneesSimulation clone() {
-		//
-//		Robot[] robotsCopy = Arrays.copyOf(robots, robots.length);
-		
-		DonneesSimulation donneesClone = new DonneesSimulation(carte, incendies, robots);
-		return donneesClone;
-	}
+//	@Override
+//	public DonneesSimulation clone() {
+//		//
+////		Robot[] robotsCopy = Arrays.copyOf(robots, robots.length);
+//		
+//		DonneesSimulation donneesClone = new DonneesSimulation(carte, incendies, robots);
+//		return donneesClone;
+//	}
 	
 }

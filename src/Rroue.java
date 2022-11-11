@@ -6,24 +6,33 @@ public class Rroue extends Robot {
 	 * qui a un reservoir de 5000 L et une vitesse par défaut de 80 km/h
 	 */
 	private double reservoir;
-	/**
-	 * Constructeur public, qui crée un nouveau robot à roues, avec une vitesse par défaut de 80 km/h
-	 * @param position case dans laquelle le robot se trouve.
-	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues.
-	 */
-	public Rroue(Case position, double reservoir) {
-		super(80, position);
-		this.reservoir = reservoir;
-	}
+//	/**
+//	 * Constructeur public, qui crée un nouveau robot à roues, avec une vitesse par défaut de 80 km/h
+//	 * @param position case dans laquelle le robot se trouve.
+//	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues.
+//	 */
+//	public Rroue(Case position, double reservoir) {
+//		super(80, position);
+//		this.reservoir = reservoir;
+//	}
 	/**
 	 * Constructeur public, qui crée un nouveau robot à roue avec une vitesse donnée
 	 * @param vitesse vitesse du robot à roues
 	 * @param position case dans laquelle le robot se trouve.
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues
 	 */
-	public Rroue(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Rroue(double vitesse, Case position, double reservoir, Carte carte) {
+		super(vitesse, position, carte);
+		if (vitesse == 0) {
+			this.vitesse = 80;
+		}
 		this.reservoir = reservoir;
+	}
+	
+	@Override
+	public Robot deepCopy() {
+		Robot newRobot = new Rroue(this.vitesse, new Case(this.position.getLigne(), this.position.getColonne(), this.position.getNature()), reservoir, new Carte(this.carte));
+		return newRobot;
 	}
 	@Override
 	public String toString() {
@@ -57,11 +66,6 @@ public class Rroue extends Robot {
 			default:
 				return false;
 		}
-	}
-	
-	@Override
-	 public RRoue deepcopy() {
-		Robot newRobot = Rroue(vitesse, )
 	}
 	
 }

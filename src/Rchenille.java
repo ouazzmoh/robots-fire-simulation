@@ -12,23 +12,35 @@ public class Rchenille extends Robot {
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans son reservoir.
 	 */
-	public Rchenille(Case position, double reservoir) {
-		super(60, position);
-		this.reservoir = reservoir;
-	}
+//	public Rchenille(Case position, double reservoir) {
+//		super(60, position);
+//		this.reservoir = reservoir;
+//	}
 	/**
 	 * Constructeur public, qui crée un robot à chenilles avec une vitesse donnée (qui ne doit pas dépasser 80 km/h)
 	 * @param vitesse vitesse du robot
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans le reservoir du robot à chenilles
 	 */
-	public Rchenille(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
-		if (vitesse > 80) {
+	public Rchenille(double vitesse, Case position, double reservoir, Carte carte) {
+		super(vitesse, position, carte);
+		if (vitesse == 0) {
+			this.vitesse = 60;
+		}
+		else if (vitesse > 80) {
 			this.vitesse = 80;
 		}
 		this.reservoir = reservoir;
 	}
+	
+	@Override
+	public Robot deepCopy() {
+		Robot newRobot = new Rchenille(this.vitesse, new Case(this.position.getLigne(), this.position.getColonne(), this.position.getNature()), reservoir, new Carte(this.carte));
+		return newRobot;
+	}
+	
+	
+	
 	public String toString() {
 		return " le robot à chenilles a " + reservoir + " litres dans son réservoir et se situe dans la position " + 
 				super.getPosition().toString() + " et se déplace à " + vitesse;
