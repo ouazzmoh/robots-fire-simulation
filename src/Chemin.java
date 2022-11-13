@@ -216,22 +216,10 @@ public class Chemin {
 			}
 			double vitesseSomme = vitesseNord + vitesseSud + vitesseOuest + vitesseEst;
 			for (Direction d : Direction.values()) {
-				double vitesse = 0;
-				switch(d) {
-				case NORD:
-					vitesse += vitesseNord;
-				case SUD:
-					vitesse += vitesseSud;
-				case OUEST:
-					vitesse += vitesseOuest;
-				case EST:
-					vitesse += vitesseEst;
-				}
 				if (carte.voisinExiste(caseCourante, d) && robot.has_accessto(carte.getVoisin(caseCourante, d).getNature())) {
 					Case caseFille  = carte.getVoisin(caseCourante, d);
 					double pasTemp = nbPas[caseCourante.getLigne()][caseCourante.getColonne()] + 1.0;
-					double coutTemp = pasTemp + distanceArray[caseCourante.getLigne()][caseCourante.getColonne()]  - 
-							robot.getVitesse(caseFille.getNature()) / distanceArray[caseCourante.getLigne()][caseCourante.getColonne()] ;
+					double coutTemp = pasTemp + distanceArray[caseFille.getLigne()][caseFille.getColonne()];
 					if ( coutTemp < cout[caseFille.getLigne()][caseFille.getColonne()]) {
 						nbPas[caseFille.getLigne()][caseFille.getColonne()] = pasTemp;
 						cout[caseFille.getLigne()][caseFille.getColonne()] = coutTemp;
