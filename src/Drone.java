@@ -13,7 +13,7 @@ public class Drone extends Robot {
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
 	public Drone(Case position, double reservoir, Carte carte) {
-		super(100, position, carte);
+		super(100 * 1000 / 3600, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -24,8 +24,8 @@ public class Drone extends Robot {
 	 */
 	public Drone(double vitesse, Case position, double reservoir, Carte carte) {
 		super(vitesse, position, carte);
-		if (this.vitesse > 150) {
-			this.vitesse = 150;
+		if (this.vitesse > 150 * 1000 / 3600) {
+			this.vitesse = 150 * 1000 / 3600;
 		}
 		this.reservoir = reservoir;
 	}

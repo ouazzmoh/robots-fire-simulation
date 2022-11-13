@@ -10,7 +10,7 @@ public class Rpatte extends Robot {
 	 * @param position case dans laquelle le robot se trouve
 	 */
 	public Rpatte(Case position, Carte carte) {
-		super(30, position, carte);
+		super(30 * 1000 / 3600, position, carte);
 	}
 	/**
 	 * Constructeur public, crée un nouveau Robot à pattes avec une vitesse donnée 
@@ -24,7 +24,7 @@ public class Rpatte extends Robot {
 	public double getVitesse(NatureTerrain nature) {
 		switch(nature) {
 			case ROCHE:
-				return 10;
+				return 10 * 1000 / 3600;
 			default :
 				return vitesse;
 		}

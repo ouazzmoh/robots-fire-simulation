@@ -12,7 +12,7 @@ public class Rroue extends Robot {
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues.
 	 */
 	public Rroue(Case position, double reservoir, Carte carte) {
-		super(80, position, carte);
+		super(80 * 1000 / 3600, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**

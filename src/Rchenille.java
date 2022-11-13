@@ -13,7 +13,7 @@ public class Rchenille extends Robot {
 	 * @param reservoir volume d'eau dans son reservoir.
 	 */
 	public Rchenille(Case position, double reservoir, Carte carte) {
-		super(60, position, carte);
+		super(60 * 1000 / 3600, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -24,8 +24,8 @@ public class Rchenille extends Robot {
 	 */
 	public Rchenille(double vitesse, Case position, double reservoir, Carte carte) {
 		super(vitesse, position, carte);
-		if (vitesse > 80) {
-			this.vitesse = 80;
+		if (vitesse > 80 * 1000 / 3600) {
+			this.vitesse = 80 * 1000 / 3600;
 		}
 		this.reservoir = reservoir;
 	}

@@ -218,7 +218,7 @@ public class NewLecteurDonnees {
                 System.out.print("valeur par defaut");
             } else {
                 int vitesse = Integer.parseInt(s);
-                new_vitesse = vitesse;
+                new_vitesse = vitesse * 1000 / 3600;
                 System.out.print(vitesse);
             }
             Robot robot;

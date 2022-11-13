@@ -42,12 +42,13 @@ public class Chemin {
 	 * se déplacer diagonalement.
 	 * @return distance de Manhattan
 	 */
-	public int distance() {
-		return Math.abs(source.getColonne()-destination.getColonne()) + 
+	public double distance() {
+		return (double)Math.abs(source.getColonne() - destination.getColonne()) + 
 				Math.abs(source.getLigne() - destination.getLigne());
 	}
-	public int distance(Case caseCourante) {
-		return Math.abs(caseCourante.getColonne()-destination.getColonne()) + 
+
+	public double distance(Case caseCourante) {
+		return (double)Math.abs(caseCourante.getColonne() - destination.getColonne()) + 
 				Math.abs(caseCourante.getLigne() - destination.getLigne());
 	}
 	/**
@@ -55,34 +56,50 @@ public class Chemin {
 	 * la distance pour les cases non accessibles par le robot est l'entier le plus grand (qu'on supposera comme l'infini)
 	 * @return tableau des distances
 	 */
-	public int[][] distanceArray(){
-		int[][] distance_carte = new int[carte.getNbLignes()][carte.getNBColonnes()]; 
+	public double[][] distanceArray(){
+		double[][] distance_carte = new double[carte.getNbLignes()][carte.getNBColonnes()]; 
 		for (Case[] ca : carte.getCarte()) {
 			for(Case c : ca) {
 				if(robot.has_accessto(c.getNature())) {
 					distance_carte[c.getLigne()][c.getColonne()] = distance(c);
 				}
 				else {
-					distance_carte[c.getLigne()][c.getColonne()] = Integer.MAX_VALUE;
+					distance_carte[c.getLigne()][c.getColonne()] = Double.POSITIVE_INFINITY;
 				}
 				
 			}
 		}
 		return distance_carte;
 	}
+	public double[][] tempsHeuristicArray(){
+		double[][] heuristicsArray = new double[carte.getNbLignes()][carte.getNBColonnes()];
+		double[][] distance_carte = distanceArray();
+		for(Case[] ca : carte.getCarte()) {
+			for(Case c : ca) {
+				if(robot.has_accessto(c.getNature())) {
+					heuristicsArray[c.getLigne()][c.getColonne()] = (distance_carte[c.getLigne()][c.getColonne()] *
+																	carte.getTailleCases()) / robot.getVitesse(c.getNature());
+				}
+				else {
+					heuristicsArray[c.getLigne()][c.getColonne()] = Double.POSITIVE_INFINITY;
+				}
+			}
+		}
+		return heuristicsArray;
+	}
 	/**
-	 * Méthode qui crée un tableau des nombres de cases traversées, (on le remplira après)
+	 * Méthode qui crée un tableau des nombres de cases traversées, (on le remplira après en cherchant le plus court chemin)
 	 * @return tableau de nombre de pas
 	 */
-	public int[][] nbPasArray(){
-		int[][] nbPasArray = new int[carte.getNbLignes()][carte.getNBColonnes()]; 
+	public double[][] nbPasArray(){
+		double[][] nbPasArray = new double[carte.getNbLignes()][carte.getNBColonnes()]; 
 		for (Case[] ca : carte.getCarte()) {
 			for(Case c : ca) {
 				if (c.equals(source)) {
-					nbPasArray[c.getLigne()][c.getColonne()] = 0;
+					nbPasArray[c.getLigne()][c.getColonne()] = 0.0;
 				}
 				else{
-					nbPasArray[c.getLigne()][c.getColonne()] = Integer.MAX_VALUE;
+					nbPasArray[c.getLigne()][c.getColonne()] = Double.POSITIVE_INFINITY;
 				}
 				
 			}
@@ -94,15 +111,15 @@ public class Chemin {
 	 * (on le remplira dans la méthode aStar)
 	 * @return tableau des coûts
 	 */
-	int[][] coutArray(){
-		int[][] cout = new int[carte.getNbLignes()][carte.getNBColonnes()];
+	double[][] coutArray(){
+		double[][] cout = new double[carte.getNbLignes()][carte.getNBColonnes()];
 		for (Case[] ca : carte.getCarte()) {
 			for(Case c : ca) {
 				if (c.equals(source)) {
 					cout[c.getLigne()][c.getColonne()] = distance();
 				}
 				else {
-					cout[c.getLigne()][c.getColonne()] = Integer.MAX_VALUE;
+					cout[c.getLigne()][c.getColonne()] = Double.POSITIVE_INFINITY;
 				}
 			}
 		}
@@ -162,14 +179,14 @@ public class Chemin {
 	 * @return LinkedList<Direction> path chemin a suivre pour aller de source à destination
 	 */
 	public LinkedList<Direction> aStar(){
-		int[][] nbPas = nbPasArray();
-		int[][] distanceArray = distanceArray();
+		double[][] nbPas = nbPasArray();
+		double[][] distanceArray = distanceArray();
 		LinkedList<Direction> path = new LinkedList<Direction>();
 		LinkedList<Direction> pathH = new LinkedList<Direction>();
 		HashMap<Case, Case> chemin = new HashMap<Case, Case>();
 		HashMap<Case, Case> pathMap = new HashMap<Case, Case>();
-		int[][] cout = coutArray();
-		Direction[] directions = {Direction.NORD, Direction.SUD, Direction.EST, Direction.OUEST};
+		double[][] cout = coutArray();
+		//Direction[] directions = {Direction.NORD, Direction.SUD, Direction.EST, Direction.OUEST};
 		Queue<Case> queue = new LinkedList<Case>();
 		queue.add(source);
 		while(queue.size() > 0) {
@@ -177,14 +194,14 @@ public class Chemin {
 			if (caseCourante.equals(destination)) {
 				break;
 			}
-			for (Direction d : directions) {
+			for (Direction d : Direction.values()) {
 				if (carte.voisinExiste(caseCourante, d) && robot.has_accessto(carte.getVoisin(caseCourante, d).getNature()) ) {
 					Case caseFille  = carte.getVoisin(caseCourante, d);
-					int pasTemp = nbPas[caseCourante.getLigne()][caseCourante.getColonne()] + 1;
-					int coutTemp = pasTemp + distanceArray[caseCourante.getLigne()][caseCourante.getColonne()];
+					double pasTemp = nbPas[caseCourante.getLigne()][caseCourante.getColonne()] + 1.0;
+					double coutTemp = pasTemp + distanceArray[caseCourante.getLigne()][caseCourante.getColonne()] * 
+							(double)carte.getTailleCases() / robot.getVitesse(caseFille.getNature());
 					if (coutTemp < cout[caseFille.getLigne()][caseFille.getColonne()]) {
 						nbPas[caseFille.getLigne()][caseFille.getColonne()] = pasTemp;
-
 						cout[caseFille.getLigne()][caseFille.getColonne()] = coutTemp;
 						queue.add(caseFille);
 						chemin.put(caseFille, caseCourante);
@@ -204,6 +221,8 @@ public class Chemin {
 			path.add(carte.getDirection(next, pathMap.get(next)));
 			next = pathMap.get(next);
 		}
+		System.out.println(path);
+		System.out.println("akram");
 		return path;
 		}
 	}
