@@ -36,10 +36,10 @@ public class Rchenille extends Robot {
 	@Override
 	public double getVitesse(NatureTerrain nature) {
 		switch(nature) {
-			case FORET:
-				return vitesse / 2;
-			default :
-				return vitesse;
+		case FORET:
+			return vitesse / 2;
+		default :
+			return vitesse;
 		}
 	}
 
