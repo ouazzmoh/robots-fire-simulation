@@ -14,7 +14,7 @@ public class testChemin {
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
+			Simulateur simulateur = new Simulateur(gui, donnees);
 			
 			Robot[] robots = donnees.getrobot();
 			Robot robotsTodeplace = robots[1];

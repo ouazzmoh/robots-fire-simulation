@@ -12,17 +12,16 @@ public class TestDeplacement {
 
 			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
 			Carte carteToDraw = donnees.getCarte();
-			Incendie[] incendieTableau = donnees.getIncendie();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
+			Simulateur simulateur = new Simulateur(gui, donnees);
 			
 			Robot[] robots = donnees.getrobot();
 			Robot robotsTodeplace = robots[1];
 			
 			//Deplacer le robot in the current date of simulateur
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 1, simulateur);
+			robotsTodeplace.eteindreIncendie(1, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 2 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 3 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 4 ,simulateur);
@@ -30,9 +29,9 @@ public class TestDeplacement {
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 5 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 7, simulateur);
+			robotsTodeplace.eteindreIncendie(7, simulateur);
 			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 8 ,simulateur);
-			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur);
+			robotsTodeplace.eteindreIncendie(9, simulateur);
 			System.out.println("TEST");
 
 

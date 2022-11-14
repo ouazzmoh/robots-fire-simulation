@@ -11,8 +11,8 @@ public class Rroue extends Robot {
 	 * @param position case dans laquelle le robot se trouve.
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues.
 	 */
-	public Rroue(Case position, double reservoir) {
-		super(80, position);
+	public Rroue(Case position, Carte carte, double reservoir) {
+		super(80, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -21,8 +21,8 @@ public class Rroue extends Robot {
 	 * @param position case dans laquelle le robot se trouve.
 	 * @param reservoir volume d'eau contenu dans le reservoir du robot à roues
 	 */
-	public Rroue(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Rroue(double vitesse, Case position, Carte carte, double reservoir) {
+		super(vitesse, position, carte);
 		this.reservoir = reservoir;
 	}
 	@Override

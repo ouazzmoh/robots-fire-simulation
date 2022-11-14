@@ -1,3 +1,4 @@
+import java.util.*;
 
 public abstract class Robot {
 	
@@ -7,21 +8,27 @@ public abstract class Robot {
 	 */
 	protected double vitesse;
 	protected Case position;
+	protected Carte carte;
 	
-	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
-	protected long dateExtinction;
-	protected long dateRemplissage;
+	protected long dateArrive = (long)0; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
+	
+	protected boolean occupeDeplace = false;
+	protected boolean occupeIncendie = false;
+	protected boolean occupeCharge = false;
 	
 	
+	public long getDateArrive() {
+		return dateArrive;
+	}
+
+
 	/**
 	 * Constructeur public,
 	 * @param position case dans laquelle le robot se trouve
 	 */
-	public Robot(Case position) {
+	public Robot(Case position, Carte carte) {
 		this.position = position;
-		this.dateArrive  = (long) 0;
-		this.dateExtinction = (long) 0;
-		this.dateRemplissage = (long) 0;
+		this.carte = carte;
 	}
 	
 	
@@ -30,9 +37,10 @@ public abstract class Robot {
 	 * @param vitesse vitesse du robot
 	 * @param position cose dans laquelle le robot se trouve
 	 */
-	public Robot(double vitesse, Case position) {
+	public Robot(double vitesse, Case position, Carte carte) {
 		this.vitesse = vitesse;
 		this.position = position;
+		this.carte = carte;
 	}
 	public String toString() {
 		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
@@ -63,6 +71,12 @@ public abstract class Robot {
 		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
 	}
 	
+	public long max(long a, long b) {
+		if (a < b) {
+			return b;
+		}
+		return a;
+	}
 	
 
 	/**
@@ -77,29 +91,37 @@ public abstract class Robot {
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateArrive + dateExtinction, dir, this, caseArrivee.getNature()));
-			//Le robot va etre alors on mouvement et il arrive dans ...
-			dateArrive = dateToAdd +  dateArrive;
+			long dateToAdd = max((long) 1,(long) (temps) / 100) ; //temps d'attente pour le deplacement
+			dateArrive += dateToAdd;
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateArrive, dir, this, caseArrivee.getNature()));
+			
 		}
 	}
-	
+
 	
 	/**********Les methodes pour les incendies************/
 	
 	/**
 	 * Fonction pour eteindre les incendies
+	 * On suppose que le robot est deja sur une case avec incendie
 	 * @param incendieTableau
 	 * @param dateCourante
 	 * @param simulateur
 	 */
-	public void eteindreIncendie(Incendie[] incendieTableau, long dateCourante, Simulateur simulateur) {
+	public void eteindreIncendie(long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
-		simulateur.ajouteEvenement(new EventRobotFire(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this, simulateur.incendie));
-		dateExtinction = dateToAdd + dateExtinction;
+		dateArrive += dateToAdd;
+		simulateur.ajouteEvenement(new EventRobotFire(dateArrive, this, simulateur.incendie));
+		
 		
 	}
+	
+	
+//	public void eteindreIncendieChemin(Incendie incendie, long dateCourante, Simulateur simulateur) {
+//		long dateToAdd = (long) 4;
+//		
+//	}
 	
 	
 	/*********Les methodes pour le remplissage d'eau*********/
@@ -111,9 +133,44 @@ public abstract class Robot {
 	public void remplirReservoir(long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
-		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
-		dateRemplissage = dateToAdd + dateRemplissage;
+		dateArrive += dateToAdd;
+		simulateur.ajouteEvenement(new EventRobotCharge(dateArrive, this));
+		
 	}
+	
+	
+	
+	
+	/*********Les methodes pour implementer les strategies*********/
+	
+	/**
+	 * Fonction pour que le robot calcule son chemin
+	 * On n'appelle la fonction que si le robot peut s'y rendre a destination
+	 * @param destination
+	 * @return chemin (LinkedList)
+	 */
+	public LinkedList<Direction> calculeChemin(Case destination){
+		Chemin cheminRobot = new Chemin(this, carte, position, destination);
+		return cheminRobot.getChemin();
+	}
+	
+	
+	/**
+	 * Programmen le deplacement du robot vers la destination ou il existe du feu
+	 * @param destination  (La destination est la fin du chemin, on suppose que ca contient un incendie)
+	 * @param simulateur
+	 */
+	public void programmeEvents(Case destination, Simulateur simulateur) {
+		Iterator<Direction> it = calculeChemin(destination).iterator();
+		int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
+		while(it.hasNext()) {
+			this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
+			dateWhereToAdd++;
+		}
+		//On suppose ici qu'on arrive a une incendie
+		this.eteindreIncendie(dateWhereToAdd, simulateur);
+	}
+	
 	
 	
 	

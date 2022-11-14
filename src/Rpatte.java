@@ -9,16 +9,16 @@ public class Rpatte extends Robot {
 	 * Constructeur public, qui crée un nouveau Robot à pattes avec la vitesse par défaut 30 km/h
 	 * @param position case dans laquelle le robot se trouve
 	 */
-	public Rpatte(Case position) {
-		super(30, position);
+	public Rpatte(Case position, Carte carte) {
+		super(30, position, carte);
 	}
 	/**
 	 * Constructeur public, crée un nouveau Robot à pattes avec une vitesse donnée 
 	 * @param vitesse vitesse du robot à pattes
 	 * @param position position dans laquelle le robot se trouve
 	 */
-	public Rpatte(double vitesse, Case position) {
-		super(vitesse, position);
+	public Rpatte(double vitesse, Case position, Carte carte) {
+		super(vitesse, position, carte);
 	}
 	@Override
 	public double getVitesse(NatureTerrain nature) {

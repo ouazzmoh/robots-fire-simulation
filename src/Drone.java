@@ -12,8 +12,8 @@ public class Drone extends Robot {
 	 * @param position case dans laquelle le drone se trouve dans la carte
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
-	public Drone(Case position, double reservoir) {
-		super(100, position);
+	public Drone(Case position, Carte carte, double reservoir) {
+		super(100, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -22,8 +22,8 @@ public class Drone extends Robot {
 	 * @param position case dans laquelle le drone se trouve dans la carte
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
-	public Drone(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Drone(double vitesse, Case position, Carte carte, double reservoir) {
+		super(vitesse, position, carte);
 		if (this.vitesse > 150) {
 			this.vitesse = 150;
 		}

@@ -226,34 +226,34 @@ public class NewLecteurDonnees {
             
             if (type.equals("DRONE")) {
             	if (new_vitesse != 0) {
-            		robot = new Drone(new_vitesse,carte.getCase(lig, col), 10000);
+            		robot = new Drone(new_vitesse,carte.getCase(lig, col), carte, 10000);
             	}
             	else {
-            		robot = new Drone(carte.getCase(lig, col), 10000);
+            		robot = new Drone(carte.getCase(lig, col), carte, 10000);
             	}
             }
             else if (type.equals("ROUES")) {
             	if (new_vitesse != 0) {
-            		robot = new Rroue(new_vitesse,carte.getCase(lig, col), 5000);
+            		robot = new Rroue(new_vitesse, carte.getCase(lig, col), carte, 5000);
             	}
             	else {
-            		robot = new Rroue(carte.getCase(lig, col), 5000);
+            		robot = new Rroue(carte.getCase(lig, col), carte, 5000);
             	}
             }
             else if (type.equals("PATTES")) {
             	if (new_vitesse != 0) {
-            		robot = new Rpatte(new_vitesse,carte.getCase(lig, col));
+            		robot = new Rpatte(new_vitesse, carte.getCase(lig, col), carte);
             	}
             	else {
-            		robot = new Rpatte(carte.getCase(lig, col));
+            		robot = new Rpatte(carte.getCase(lig, col), carte);
             	}
             }
             else{
             	if (new_vitesse != 0) {
-            		robot = new Rchenille(new_vitesse,carte.getCase(lig, col), 2000);
+            		robot = new Rchenille(new_vitesse,carte.getCase(lig, col), carte, 2000);
             	}
             	else {
-            		robot = new Rchenille(carte.getCase(lig, col), 2000);
+            		robot = new Rchenille(carte.getCase(lig, col), carte, 2000);
             	}
             }
             

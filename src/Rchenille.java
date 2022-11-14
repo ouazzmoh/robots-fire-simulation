@@ -12,8 +12,8 @@ public class Rchenille extends Robot {
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans son reservoir.
 	 */
-	public Rchenille(Case position, double reservoir) {
-		super(60, position);
+	public Rchenille(Case position, Carte carte, double reservoir) {
+		super(60, position, carte);
 		this.reservoir = reservoir;
 	}
 	/**
@@ -22,8 +22,8 @@ public class Rchenille extends Robot {
 	 * @param position case dans laquelle le robot à chenilles se trouve
 	 * @param reservoir volume d'eau dans le reservoir du robot à chenilles
 	 */
-	public Rchenille(double vitesse, Case position, double reservoir) {
-		super(vitesse, position);
+	public Rchenille(double vitesse, Case position, Carte carte, double reservoir) {
+		super(vitesse, position, carte);
 		if (vitesse > 80) {
 			this.vitesse = 80;
 		}

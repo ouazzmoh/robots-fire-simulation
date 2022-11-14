@@ -6,6 +6,7 @@ public class Incendie {
 	 */
 	private Case position;
 	private double intensite;
+	private boolean affecte;
 	
 	
 	/**
@@ -16,10 +17,23 @@ public class Incendie {
 	public Incendie(Case position, double intensite) {
 		this.position = position;
 		this.intensite = intensite;
+		this.affecte = false;
 	}
 	
 	
 	
+	public boolean isAffecte() {
+		return affecte;
+	}
+
+
+
+	public void setAffecte(boolean affecte) {
+		this.affecte = affecte;
+	}
+
+
+
 	public String toString() {
 		return " l'incendie se trouve dans la case " + position.toString() + " et a besoin de " + intensite 
 				+ " litres d'eau pour s'eteindre";

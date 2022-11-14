@@ -30,9 +30,12 @@ public class Simulateur implements Simulable {
 	/** Liste incendies */
 	Incendie[] incendie;
 	
+	/**ChefPompier**/
+	ChefPompier chef;
+	
 	/** Constructeur, et association a la gui*/
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees, long nbEvenements, Incendie[] incendie) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donnees, ChefPompier chef) {
 		this.gui = gui;
 		this.donnees = donnees;
 		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
@@ -41,7 +44,9 @@ public class Simulateur implements Simulable {
 		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
 		this.evenements.put((long)1, new LinkedList<Evenement>());
 		//
-		this.incendie = incendie;
+		this.chef = chef;
+		
+		this.incendie = donnees.getIncendie();
 		gui.setSimulable(this);
 		draw();
 		
@@ -156,9 +161,15 @@ public class Simulateur implements Simulable {
 	@Override
 	public void next() {
 		if (!(simulationTerminee())) {
+			if (this.dateSimulation % 15 == 0 || this.dateSimulation == 1) {
+				chef.strategie(this);
+			}
 			System.out.println("Next... Current date :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
 			System.out.println(currListEvents);
+			
+			//TODO : Strategize each n steps 
+			
 			if (!(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
 					e.execute();
