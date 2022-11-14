@@ -160,10 +160,10 @@ public class Simulateur implements Simulable {
 	
 	@Override
 	public void next() {
+		Incendie[] incendieTab = donnees.getIncendie();
+		Robot[] robotTab = donnees.getrobot();
 		if (!(simulationTerminee())) {
-			if (this.dateSimulation % 15 == 0 || this.dateSimulation == 1) {
-				chef.strategie(this);
-			}
+			chef.strategie(this, robotTab, incendieTab);
 			System.out.println("Next... Current date :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
 			System.out.println(currListEvents);

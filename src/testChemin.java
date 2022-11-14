@@ -9,17 +9,17 @@ public class testChemin {
 		// TODO Auto-generated method stub
 		try {
 
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/mushroomOfHell-20x20.map");
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees);
+			Simulateur simulateur = new Simulateur(gui, donnees, null);
 			
 			Robot[] robots = donnees.getrobot();
 			Robot robotsTodeplace = robots[1];
 			Case source = robotsTodeplace.getPosition();
-			Case destination = carteToDraw.getCase(0, 49);
+			Case destination = carteToDraw.getCase(9, 16);
 			Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
 			Iterator<Direction> it = chemin.getChemin().iterator();
 			int i = 1;
@@ -27,6 +27,16 @@ public class testChemin {
 				robotsTodeplace.deplacerEffectivement(it.next(), carteToDraw, i,simulateur);
 				i++;
 			}
+			robotsTodeplace.eteindreIncendie(i, simulateur);
+			/*
+			Case destination2 = carteToDraw.getCase(5, 5);
+			Chemin chemin2 = new Chemin(robotsTodeplace, carteToDraw, destination, destination2);
+			Iterator<Direction> it2 = chemin2.getChemin().iterator();
+			int j = 1;
+			while(it2.hasNext()) {
+				robotsTodeplace.deplacerEffectivement(it2.next(), carteToDraw, i,simulateur);
+				j++;
+			}*/
 			//Deplacer le robot in the current date of simulateur
 			/*
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);

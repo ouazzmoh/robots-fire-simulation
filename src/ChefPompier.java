@@ -46,17 +46,16 @@ public class ChefPompier {
 		return true;
 	}
 	
-	public void strategie(Simulateur simulateur) {
-		Incendie[] incendieTab = donnees.getIncendie();
-		Robot[] robotTab = donnees.getrobot();
-		
+	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
+
 		for (Robot robot : robotTab) {
 			if (canGoElementaire(robot, simulateur)) {
 				for (Incendie incendie : incendieTab) {
-					if (robot.has_accessto(incendie.getPosition().getNature()) && !(incendie.isAffecte())) {
+					if (!(incendie.isAffecte()) && robot.access(incendie.getPosition())) {
 						robot.programmeEvents(incendie.getPosition(), simulateur);
 						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);
+						incendie.setIntensite(0); // juste pour voir les cases visites a enlever
 						break;
 					}
 				}

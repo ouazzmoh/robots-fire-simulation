@@ -10,16 +10,10 @@ public abstract class Robot {
 	protected Case position;
 	protected Carte carte;
 	
-	protected long dateArrive = (long)0; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
+	long dateArrive;// = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	
-	protected boolean occupeDeplace = false;
-	protected boolean occupeIncendie = false;
-	protected boolean occupeCharge = false;
-	
-	
-	public long getDateArrive() {
-		return dateArrive;
-	}
+	Case positionCourante;
+		
 
 
 	/**
@@ -29,7 +23,13 @@ public abstract class Robot {
 	public Robot(Case position, Carte carte) {
 		this.position = position;
 		this.carte = carte;
+		this.positionCourante = position;
+		}
+	
+	public long getDateArrive() {
+		return this.dateArrive + 1;
 	}
+
 	
 	
 	/**
@@ -41,6 +41,8 @@ public abstract class Robot {
 		this.vitesse = vitesse;
 		this.position = position;
 		this.carte = carte;
+		this.dateArrive = (long) 0;
+		this.positionCourante = position;
 	}
 	public String toString() {
 		return " le robot a se déplace avec une vitesse de " + vitesse + " km/h et est dans la case " + this.position.toString();
@@ -78,6 +80,19 @@ public abstract class Robot {
 		return a;
 	}
 	
+	public long min(long a, long b) {
+		if (a < b) {
+			if (a == 0) {
+				return b;
+			}
+			return a;
+		}
+		if (b == 0) {
+			return a;
+		}
+		return b;
+	}
+	
 
 	/**
 	 * Méthode qui nous permet de ajouter l evenement effectif dans la liste des
@@ -87,14 +102,14 @@ public abstract class Robot {
 	 * @param simulateur simulateur du jeu
 	 */
 	public void deplacerEffectivement(Direction dir, Carte carte, long dateCourante, Simulateur simulateur) {
-		Case caseArrivee = carte.getVoisin(position, dir);
+		Case caseArrivee = carte.getVoisin(positionCourante, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
 			long dateToAdd = max((long) 1,(long) (temps) / 100) ; //temps d'attente pour le deplacement
-			dateArrive += dateToAdd;
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateArrive, dir, this, caseArrivee.getNature()));
-			
+			this.dateArrive = this.dateArrive + dateToAdd;
+			simulateur.ajouteEvenement(new EventRobotDeplace(this.dateArrive, dir, this, caseArrivee.getNature()));	
+			this.positionCourante = caseArrivee;
 		}
 	}
 
@@ -111,8 +126,8 @@ public abstract class Robot {
 	public void eteindreIncendie(long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
-		dateArrive += dateToAdd;
-		simulateur.ajouteEvenement(new EventRobotFire(dateArrive, this, simulateur.incendie));
+		this.dateArrive =this.dateArrive + dateToAdd;
+		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
 		
 		
 	}
@@ -133,9 +148,13 @@ public abstract class Robot {
 	public void remplirReservoir(long dateCourante, Simulateur simulateur) {
 		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
-		dateArrive += dateToAdd;
-		simulateur.ajouteEvenement(new EventRobotCharge(dateArrive, this));
+		this.dateArrive = this.dateArrive+ dateToAdd;
+		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
 		
+	}
+	
+	public void setDat() {
+		this.dateArrive = dateArrive;
 	}
 	
 	
@@ -149,10 +168,12 @@ public abstract class Robot {
 	 * @param destination
 	 * @return chemin (LinkedList)
 	 */
-	public LinkedList<Direction> calculeChemin(Case destination){
+	public Chemin calculeChemin(Case destination){
 		Chemin cheminRobot = new Chemin(this, carte, position, destination);
-		return cheminRobot.getChemin();
+		return cheminRobot;
 	}
+	
+
 	
 	
 	/**
@@ -161,17 +182,25 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void programmeEvents(Case destination, Simulateur simulateur) {
-		Iterator<Direction> it = calculeChemin(destination).iterator();
+		Chemin chemin = calculeChemin(destination);
+		Iterator<Direction> it = chemin.getChemin().iterator();
 		int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
 		while(it.hasNext()) {
 			this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
 			dateWhereToAdd++;
 		}
 		//On suppose ici qu'on arrive a une incendie
-		this.eteindreIncendie(dateWhereToAdd, simulateur);
+		}
+	
+	
+	public boolean access(Case destination) {
+		if (this.has_accessto(destination.getNature())) {
+			if (calculeChemin(destination) != null) {
+				return true;
+			}
+		}
+		return false;
 	}
-	
-	
 	
 	
 	

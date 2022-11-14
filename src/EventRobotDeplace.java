@@ -22,10 +22,8 @@ public class EventRobotDeplace extends Evenement {
 	 * Fonction d'execution, change la position du robot
 	 */
 	public void execute () {
-		System.out.println(this.getDate() + " robot est deplacé vers le "+ this.message ) ;
+		System.out.println(this.getDate() + this.robot.vitesse + " robot est deplacé vers le "+ this.message ) ;
 		Case nouvellePosition = robot.carte.getVoisin(robot.getPosition(), message);
 		this.robot.setPosition(nouvellePosition);
-		this.robot.dateArrive = 0;
-
 	}
 }
