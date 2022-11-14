@@ -1,4 +1,4 @@
-
+import java.util.LinkedList;
 public abstract class Robot {
 	
 	
@@ -11,6 +11,7 @@ public abstract class Robot {
 	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	protected long dateExtinction;
 	protected long dateRemplissage;
+	protected boolean isAvailable;
 	
 	
 	/**
@@ -115,6 +116,9 @@ public abstract class Robot {
 		dateRemplissage = dateToAdd + dateRemplissage;
 	}
 	
+	public boolean isAvailable() {
+		return isAvailable;
+	}
 	
 	
 	
@@ -153,4 +157,15 @@ public abstract class Robot {
 	 * @return boolean : true si le robot peur acceder a ce type de terrain, false sinon.
 	 */
 	abstract boolean has_accessto(NatureTerrain nature);
+	/**
+	 * Méthode qui trouve le plus court chemin entre la position du robot et la destination.
+	 * @param destination
+	 * @return LinkedList<Direction> 
+	 */
+	//abstract LinkedList<Direction> findWayTo(Case destination);
+	
+	/*public void goTo(Case destination) {
+		LinkedList<Direction> path = findWayTo(destination);
+		//TODO
+	}*/
 }

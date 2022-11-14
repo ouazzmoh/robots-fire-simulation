@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 public class Carte {
 	/**
 	 * classe Carte, caracterisée par la taille de ses cases (en mètres, et pas la taille de tracé en pixels) , son nombre de lignes
@@ -9,6 +9,8 @@ public class Carte {
 	private int nbLignes;
 	private int nbColonnes;
 	private Case[][] carte;
+	private ArrayList<Case> sourcesEau;
+	
 	/**
 	 * un premier constructeur, qui crée un carte vide
 	 * @param tailleCases taille des cases en mètres
@@ -33,6 +35,8 @@ public class Carte {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.carte = carte;
+		this.sourcesEau = new ArrayList<Case>();
+		setSourcesEau();
 	}
 	public int getNbLignes() {
 		return nbLignes;
@@ -51,6 +55,18 @@ public class Carte {
 	}
 	public void setCase(int lig, int col, Case new_case) {
 		carte[lig][col] = new_case;
+	}
+	public void setSourcesEau() {
+		for (Case[] ca : carte) {
+			for(Case c : ca) {
+				switch(c.getNature()) {
+					case EAU:
+						sourcesEau.add(c);
+					default:
+						continue;
+			}
+		}
+	}
 	}
 	/**
 	 * Méthode qui vérifie l'existence d'une case voisine dans la direction donnée

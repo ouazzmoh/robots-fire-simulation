@@ -1,4 +1,4 @@
-import java.util.Map.Entry;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -43,7 +43,7 @@ public class Path {
 		for (Case[] ca : carte.getCarte()) {
 			for (Case c : ca) {
 				if (robot.has_accessto(c.getNature())) {
-					heuristicArray[c.getLigne()][c.getColonne()] = heuristic(c) *
+					heuristicArray[c.getLigne()][c.getColonne()] = heuristic(c)  *
 							carte.getTailleCases() / robot.getVitesse(c.getNature());
 				}
 				else {
@@ -58,7 +58,7 @@ public class Path {
 		for(Case[] ca : carte.getCarte()) {
 			for(Case c : ca) {
 				if (c.equals(source)) {
-					nbPas[c.getLigne()][c.getColonne()] = 0;
+					nbPas[c.getLigne()][c.getColonne()] = 0.0;
 				}
 				else {
 					nbPas[c.getLigne()][c.getColonne()] = Double.POSITIVE_INFINITY;

@@ -1,4 +1,4 @@
-
+import java.util.LinkedList;
 
 public class Drone extends Robot {
 	/**
@@ -52,5 +52,9 @@ public class Drone extends Robot {
 	public boolean has_accessto(NatureTerrain nature) {
 		return true;
 	}
+	//@Override
+	//public LinkedList<Direction> findWayTo(Case destination){
+		//return new LinkedList<Direction>();
+	//}
 	
 }
