@@ -34,18 +34,18 @@ public class testChemin {
 			Iterator<Direction> it5 = chemin5.getChemin().iterator();
 
 			while(it5.hasNext()) {
-				robotsTodeplace2.deplacerEffectivement(it5.next(), carteToDraw, j,simulateur);
+				robotsTodeplace2.deplacerEffectivement(it5.next(), carteToDraw, 2,simulateur);
 				j++;
 			}
-			robotsTodeplace2.eteindreIncendie(incendieTableau, j, simulateur,incendieTableau[1]);
+			robotsTodeplace2.eteindreIncendie(incendieTableau, 0, simulateur,incendieTableau[1]);
 
 			
 			int i = 1;
 			while(it.hasNext()) {
-				robotsTodeplace.deplacerEffectivement(it.next(), carteToDraw, i,simulateur);
+				robotsTodeplace.deplacerEffectivement(it.next(), carteToDraw, 0,simulateur);
 				i++;
 			}
-			robotsTodeplace.eteindreIncendie(incendieTableau, i, simulateur,incendieTableau[5]);
+			robotsTodeplace.eteindreIncendie(incendieTableau, 1, simulateur,incendieTableau[5]);
 			i++;
 			Case dest2 = carteToDraw.getCase(12, 35);
 			Chemin chemin2 = new Chemin(robotsTodeplace, carteToDraw, destination, dest2);

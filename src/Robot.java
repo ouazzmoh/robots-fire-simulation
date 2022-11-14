@@ -63,6 +63,12 @@ public abstract class Robot {
 		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
 	}
 	
+	public long max(long a, long b) {
+		if (a < b) {
+			return b;
+		}
+		return a;
+	}
 	
 
 	/**
@@ -77,10 +83,10 @@ public abstract class Robot {
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long dateToAdd = (long) (temps) / 100 ; //temps d'attente pour le deplacement
-			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd + dateCourante + dateExtinction + dateRemplissage, dir, this, caseArrivee.getNature()));
+			long dateToAdd = max((long) 1,(long) (temps) / 100) ; //temps d'attente pour le deplacement
+			simulateur.ajouteEvenement(new EventRobotDeplace(dateToAdd+dateArrive, dir, this, caseArrivee.getNature()));
 			//Le robot va etre alors on mouvement et il arrive dans ...
-			dateArrive = dateToAdd +  dateCourante + dateExtinction + dateRemplissage;
+			dateArrive += dateToAdd;
 		}
 	}
 	
@@ -110,7 +116,7 @@ public abstract class Robot {
 		}catch(NullPointerException e) {
 			System.out.println("La case n'a pas d'incendie");
 		}
-		dateExtinction += 4;
+		dateArrive += 4;
 		
 	}
 	
@@ -125,7 +131,7 @@ public abstract class Robot {
 		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		simulateur.ajouteEvenement(new EventRobotCharge(dateToAdd + dateArrive, this));
-		dateRemplissage += 2;
+		dateArrive += 2;
 	}
 	
 	
