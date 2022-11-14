@@ -72,7 +72,7 @@ public class Simulateur implements Simulable {
 		}
 		else {
 			//If the event happens after a while, we add intermediate dates
-			for (long i = dateCourante+1; i < dateEvent+1; i++) {
+			for (long i = dateCourante; i < dateEvent+1; i++) {
 				//Create it if it doesn't exist
 				if (!(evenements.containsKey(i))) {
 					evenements.put(i, new LinkedList<Evenement>());
@@ -85,7 +85,7 @@ public class Simulateur implements Simulable {
 	
 	public boolean simulationTerminee() {
 		//La simulation termine si la SortedMap des evenements est vide ou si la datecourante est la derniere 
-		return (this.dateSimulation == evenements.lastKey() + 1 || evenements.isEmpty());
+		return (this.dateSimulation == evenements.lastKey() + 2 || evenements.isEmpty());
 	}
 	
 
@@ -158,6 +158,7 @@ public class Simulateur implements Simulable {
 	}
 
 	
+	@SuppressWarnings("null")
 	@Override
 	public void next() {
 		Incendie[] incendieTab = donnees.getIncendie();
@@ -165,12 +166,10 @@ public class Simulateur implements Simulable {
 		if (!(simulationTerminee())) {
 			chef.strategie(this, robotTab, incendieTab);
 			System.out.println("Next... Current date :" + this.dateSimulation);
-			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);
-			System.out.println(currListEvents);
-			
+			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);			
 			//TODO : Strategize each n steps 
 			
-			if (!(currListEvents.isEmpty())) {
+			if ((currListEvents != null) && !(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
 					e.execute();
 				}
