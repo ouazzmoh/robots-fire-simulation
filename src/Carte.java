@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 public class Carte {
 	/**
 	 * classe Carte, caracterisée par la taille de ses cases (en mètres, et pas la taille de tracé en pixels) , son nombre de lignes
@@ -9,6 +9,7 @@ public class Carte {
 	private int nbLignes;
 	private int nbColonnes;
 	private Case[][] carte;
+	private ArrayList<Case> sourcesEau;
 	/**
 	 * un premier constructeur, qui crée un carte vide
 	 * @param tailleCases taille des cases en mètres
@@ -20,6 +21,7 @@ public class Carte {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.carte = new Case[nbLignes][nbColonnes];
+		this.sourcesEau = new ArrayList<Case>();
 	}
 	/**
 	 * Un deuxième constructeur, qui crée une carte dont les cases existent déjà
@@ -33,7 +35,12 @@ public class Carte {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.carte = carte;
+		this.sourcesEau = new ArrayList<Case>();
 	}
+	public ArrayList<Case> getSourcesEau(){
+		return sourcesEau;
+	}
+
 	public int getNbLignes() {
 		return nbLignes;
 	}

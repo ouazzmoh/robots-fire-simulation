@@ -166,7 +166,7 @@ public class Simulateur implements Simulable {
 		if (!(simulationTerminee())) {
 			chef.strategie(this, robotTab, incendieTab);
 			System.out.println("Next... Current date :" + this.dateSimulation);
-			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);			
+			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);	
 			//TODO : Strategize each n steps 
 			
 			if ((currListEvents != null) && !(currListEvents.isEmpty())) {
