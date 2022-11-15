@@ -27,7 +27,7 @@ public abstract class Robot {
 		}
 	
 	public long getDateArrive() {
-		return this.dateArrive + 1;
+		return this.dateArrive;
 	}
 
 	
@@ -217,6 +217,10 @@ public abstract class Robot {
 	}
 	
 	
+	
+	abstract public String returnType();
+	
+	abstract public double waterBar();
 	
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain

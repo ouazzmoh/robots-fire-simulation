@@ -49,5 +49,13 @@ public class Rpatte extends Robot {
 				return true;
 		}
 	}
+	
+	public double waterBar() {
+		return 0;
+	}
+	
+	public String returnType() {
+		return "RPATTE";
+	}
 
 }

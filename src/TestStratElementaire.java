@@ -10,14 +10,15 @@ public class TestStratElementaire {
 		try {
 
 			//mushroomOfHell-20x20
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
-			Carte carteToDraw = donnees.getCarte();
+			String fichierName = "cartes/mushroomOfHell-20x20.map";
+			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
+			Carte carteToDraw = donneesInit.getCarte();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 			
 			
-			ChefPompier chefElem = new ChefPompier(carteToDraw, donnees);
-			Simulateur simulateur = new Simulateur(gui, donnees, chefElem);
+			ChefPompier chefElem = new ChefPompier(carteToDraw, donneesInit);
+			Simulateur simulateur = new Simulateur(gui, donneesInit, chefElem, fichierName);
 
 
 		}catch (FileNotFoundException e) {
