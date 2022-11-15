@@ -49,12 +49,14 @@ public class Path {
 	public Case closestWaterSource(){
 		ArrayList<Case> sourcesEau = carte.getSourcesEau();
 		Iterator<Case> it = sourcesEau.iterator();
-		Case caseProche = it.next();
-		Double min = distance(caseProche, source);
+		Case caseProche = null;
+		Case caseTemp = null;
+		Double min = Double.POSITIVE_INFINITY;
 		while(it.hasNext()) {
-			Case caseTemp = it.next();
-			if (distance(caseTemp, source) < min){
+			caseTemp = it.next();
+			if (heuristicEau(caseTemp) < min){
 				caseProche = caseTemp;
+				min = heuristicEau(caseTemp);
 			}
 		}
 		return caseProche;
@@ -63,6 +65,11 @@ public class Path {
 	public double distance(Case source, Case destination) {
 		return Math.abs(source.getColonne() - destination.getColonne()) + 
 				Math.abs(source.getLigne() - destination.getLigne());
+	}
+	public double heuristicEau(Case caseCourante) {
+		double heuristic = Math.abs(caseCourante.getColonne() - source.getColonne()) + 
+				Math.abs(caseCourante.getLigne() - source.getLigne());
+		return heuristic;
 	}
 	public double heuristic(Case caseCourante) {
 		double heuristic = Math.abs(caseCourante.getColonne() - destination.getColonne()) + 
