@@ -9,7 +9,8 @@ public class TestStratElementaire {
 		// TODO Auto-generated method stub
 		try {
 
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
+			//mushroomOfHell-20x20
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
 			Carte carteToDraw = donnees.getCarte();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);

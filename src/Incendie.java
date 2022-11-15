@@ -8,6 +8,8 @@ public class Incendie {
 	private double intensite;
 	private boolean affecte;
 	
+	double intensiteCourante;
+	
 	
 	/**
 	 * Constructeur public, qui crée une nouvelle incendie 
@@ -18,6 +20,7 @@ public class Incendie {
 		this.position = position;
 		this.intensite = intensite;
 		this.affecte = false;
+		this.intensiteCourante = intensite;
 	}
 	
 	

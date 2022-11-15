@@ -25,10 +25,10 @@ public class EventRobotFire extends Evenement {
 		if (fireToKill.getIntensite() - reservoir > 0) {
 			fireToKill.setIntensite(fireToKill.getIntensite() - reservoir);
 			System.out.println("Il reste " + fireToKill.getIntensite() + " pour l'éteindre");
-			robot.deverserEau((int) reservoir);
+			//robot.deverserEau((int) reservoir);
 		}
 		else {
-			robot.deverserEau((int) fireToKill.getIntensite());
+			//robot.deverserEau((int) fireToKill.getIntensite());
 			System.out.println("Incendie éteinte GG");
 			fireToKill.setIntensite(0);
 		}
