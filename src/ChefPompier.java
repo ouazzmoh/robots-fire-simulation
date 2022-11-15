@@ -55,7 +55,14 @@ public class ChefPompier {
 						robot.programmeEvents(incendie.getPosition(), simulateur);
 						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);
-						incendie.setIntensite(0); // juste pour voir les cases visites a enlever
+						//incendie.setIntensite(0); // juste pour voir les cases visites a enlever
+						robot.eteindreIncendie(0, simulateur, incendie);
+						robot.remplirEau();
+						while (incendie.intensiteCourante != 0) {
+							robot.eteindreIncendie(0, simulateur, incendie);
+							robot.remplirEau();
+						}
+						
 						break;
 					}
 				}

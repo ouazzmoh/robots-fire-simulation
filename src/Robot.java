@@ -123,11 +123,25 @@ public abstract class Robot {
 	 * @param dateCourante
 	 * @param simulateur
 	 */
-	public void eteindreIncendie(long dateCourante, Simulateur simulateur) {
+	public void eteindreIncendie(long dateCourante, Simulateur simulateur, Incendie incendie) {
 		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
 		this.dateArrive =this.dateArrive + dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
+		try {
+		double reservoir = this.getReservoir();
+		if (incendie.intensiteCourante - reservoir > 0) {
+			incendie.intensiteCourante = (incendie.intensiteCourante - reservoir);
+			System.out.println("Il reste " + incendie.intensiteCourante + " pour l'éteindre");
+		}
+		else {
+			System.out.println("c bon");
+			incendie.intensiteCourante = 0;
+		}
+		}catch(NullPointerException e) {
+			System.out.println("La case n'a pas d'incendie");
+		}
+
 		
 		
 	}
