@@ -17,9 +17,9 @@ public class testChemin {
 			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
 			
 			Robot[] robots = donnees.getrobot();
-			Robot robotsTodeplace = robots[1];
+			Robot robotsTodeplace = robots[0];
 			Case source = robotsTodeplace.getPosition();
-			Case destination = carteToDraw.getCase(0, 49);
+			Case destination = carteToDraw.getCase(0, 20);
 			Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
 			Path path = new Path(robotsTodeplace, carteToDraw, source, destination);
 			Iterator<Direction> it = chemin.getChemin().iterator();
@@ -27,6 +27,12 @@ public class testChemin {
 			int i = 1;
 			while(it2.hasNext()) {
 				robotsTodeplace.deplacerEffectivement(it2.next(), carteToDraw, i,simulateur);
+				i++;
+			}
+			Path path2 = new Path(robotsTodeplace, carteToDraw);
+			Iterator<Direction> it3 = path2.getPath().iterator();
+			while(it3.hasNext()) {
+				robotsTodeplace.deplacerEffectivement(it3.next(), carteToDraw, i,simulateur);
 				i++;
 			}
 			//Deplacer le robot in the current date of simulateur

@@ -22,6 +22,7 @@ public class Carte {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.carte = new Case[nbLignes][nbColonnes];
+		this.sourcesEau = new ArrayList<Case>();
 	}
 	/**
 	 * Un deuxième constructeur, qui crée une carte dont les cases existent déjà
@@ -36,7 +37,6 @@ public class Carte {
 		this.nbColonnes = nbColonnes;
 		this.carte = carte;
 		this.sourcesEau = new ArrayList<Case>();
-		setSourcesEau();
 	}
 	public int getNbLignes() {
 		return nbLignes;
@@ -55,6 +55,9 @@ public class Carte {
 	}
 	public void setCase(int lig, int col, Case new_case) {
 		carte[lig][col] = new_case;
+	}
+	public ArrayList<Case> getSourcesEau(){
+		return sourcesEau;
 	}
 	public void setSourcesEau() {
 		for (Case[] ca : carte) {

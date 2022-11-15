@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.zip.DataFormatException;
-
+import java.util.ArrayList;
 
 
 public class NewLecteurDonnees {
@@ -52,12 +52,17 @@ public class NewLecteurDonnees {
             Carte carte = new Carte(tailleCases, nbLignes, nbColonnes);
             System.out.println("Carte " + nbLignes + "x" + nbColonnes
                     + "; taille des cases = " + tailleCases);
-
+            ArrayList<Case> sourcesEau = carte.getSourcesEau();
             for (int lig = 0; lig < nbLignes; lig++) {
                 for (int col = 0; col < nbColonnes; col++) {
-                    carte.setCase(lig, col, lireCase(lig, col));
+                	Case caseCourante = lireCase(lig, col);
+                    carte.setCase(lig, col, caseCourante);
+                    if (caseCourante.getNature().equals(NatureTerrain.EAU)) {
+                    	sourcesEau.add(caseCourante);
+                    }
                 }
             }
+            System.out.println(sourcesEau);
             return carte;
 
         } catch (NoSuchElementException e) {

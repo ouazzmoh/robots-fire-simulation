@@ -1,5 +1,6 @@
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ArrayList;
@@ -22,10 +23,47 @@ public class Path {
 		this.carte = carte;
 		this.path = cheminDrone();
 	}
+	public Path(Robot robot, Carte carte) {
+		this.robot = robot;
+		this.source = robot.getPosition();
+		this.carte = carte;
+		Case destinationTemp = closestWaterSource();
+		System.out.println(destinationTemp);
+		double min = Double.POSITIVE_INFINITY;
+		Case nouvelleDestination = null;
+		for(Direction d : Direction.values()) {
+			if (carte.voisinExiste(destinationTemp, d) && robot.has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
+				if(distance(carte.getVoisin(destinationTemp, d), source) < min) {
+					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
+				}
+			}
+		}
+		this.destination = nouvelleDestination;
+		this.path = aStar();
+		
+	}
 	public LinkedList<Direction> getPath() {
 		return path;
 	}
-
+	
+	public Case closestWaterSource(){
+		ArrayList<Case> sourcesEau = carte.getSourcesEau();
+		Iterator<Case> it = sourcesEau.iterator();
+		Case caseProche = it.next();
+		Double min = distance(caseProche, source);
+		while(it.hasNext()) {
+			Case caseTemp = it.next();
+			if (distance(caseTemp, source) < min){
+				caseProche = caseTemp;
+			}
+		}
+		return caseProche;
+	}
+	
+	public double distance(Case source, Case destination) {
+		return Math.abs(source.getColonne() - destination.getColonne()) + 
+				Math.abs(source.getLigne() - destination.getLigne());
+	}
 	public double heuristic(Case caseCourante) {
 		double heuristic = Math.abs(caseCourante.getColonne() - destination.getColonne()) + 
 				Math.abs(caseCourante.getLigne() - destination.getLigne());
@@ -37,6 +75,17 @@ public class Path {
 		heuristic += cross * 0.001;
 		return heuristic;
 	}
+	/*public double heuristic(Case caseCourante) {
+		double heuristic = Math.abs(caseCourante.getColonne() - destination.getColonne()) + 
+				Math.abs(caseCourante.getLigne() - destination.getLigne());
+		double x1 = (double)(caseCourante.getLigne() - destination.getLigne());
+		double x2 = (double)(source.getLigne() - destination.getLigne());
+		double y1 = (double)(caseCourante.getColonne() - destination.getColonne());
+		double y2 = (double)(source.getColonne() - destination.getColonne());
+		double cross = Math.abs(x1*y2 - x2*y1);
+		heuristic += cross * 0.001;
+		return heuristic;
+	}*/
 	
 	public double[][] heuristicArray(){
 		double[][] heuristicArray = new double[carte.getNbLignes()][carte.getNBColonnes()];
@@ -139,8 +188,11 @@ public class Path {
 		queue.add(source);
 		int i = 1;
 		while(!(queue.isEmpty())) {
+			i++;
 			Case caseCourante = queue.poll();
-			i--;
+			if (caseCourante.equals(destination)) {
+				break;
+			}
 			double min = Double.POSITIVE_INFINITY;
 			double j = i;
 			for(Direction d : Direction.values()) {
@@ -149,7 +201,7 @@ public class Path {
 					double pasTemp = get(nbPas, caseCourante) + 1.0;
 					double coutTemp = pasTemp + get(heuristicArray, caseFille);
 					if (coutTemp < get(cout, caseFille)) {
-						nbPas[caseFille.getLigne()][caseFille.getColonne()] =pasTemp;
+						nbPas[caseFille.getLigne()][caseFille.getColonne()] = pasTemp;
 						cout[caseFille.getLigne()][caseFille.getColonne()] = coutTemp;
 						if(get(cout, caseFille) < min) {
 							queue.addFirst(caseFille);
