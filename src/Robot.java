@@ -27,7 +27,7 @@ public abstract class Robot {
 		}
 	
 	public long getDateArrive() {
-		return this.dateArrive + 1;
+		return this.dateArrive;
 	}
 
 	
@@ -65,7 +65,7 @@ public abstract class Robot {
 	 */
 	public double tempsDeplacement(Case caseArrivee, Carte carte) {
 		// supposant caseArrivee est une case voisine 
-		// si on ajoute l algo de chemin on peut effectuer ce calcul sur n'importe quelle case
+		// si on ajoute l algo de Path on peut effectuer ce calcul sur n'importe quelle case
 		// on verifie deja si la case est accessible
 		double vitesse1 = this.getVitesse(caseArrivee.getNature());
 		double vitesse2 = this.getVitesse(this.position.getNature());
@@ -147,7 +147,7 @@ public abstract class Robot {
 	}
 	
 	
-//	public void eteindreIncendieChemin(Incendie incendie, long dateCourante, Simulateur simulateur) {
+//	public void eteindreIncendiePath(Incendie incendie, long dateCourante, Simulateur simulateur) {
 //		long dateToAdd = (long) 4;
 //		
 //	}
@@ -177,14 +177,14 @@ public abstract class Robot {
 	/*********Les methodes pour implementer les strategies*********/
 	
 	/**
-	 * Fonction pour que le robot calcule son chemin
+	 * Fonction pour que le robot calcule son Path
 	 * On n'appelle la fonction que si le robot peut s'y rendre a destination
 	 * @param destination
-	 * @return chemin (LinkedList)
+	 * @return Path (LinkedList)
 	 */
-	public Chemin calculeChemin(Case destination){
-		Chemin cheminRobot = new Chemin(this, carte, position, destination);
-		return cheminRobot;
+	public Path calculePath(Case destination){
+		Path PathRobot = new Path(this, carte, this.positionCourante, destination);
+		return PathRobot;
 	}
 	
 
@@ -192,12 +192,12 @@ public abstract class Robot {
 	
 	/**
 	 * Programmen le deplacement du robot vers la destination ou il existe du feu
-	 * @param destination  (La destination est la fin du chemin, on suppose que ca contient un incendie)
+	 * @param destination  (La destination est la fin du Path, on suppose que ca contient un incendie)
 	 * @param simulateur
 	 */
 	public void programmeEvents(Case destination, Simulateur simulateur) {
-		Chemin chemin = calculeChemin(destination);
-		Iterator<Direction> it = chemin.getChemin().iterator();
+		Path Path = calculePath(destination);
+		Iterator<Direction> it = Path.getPath().iterator();
 		int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
 		while(it.hasNext()) {
 			this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
@@ -209,7 +209,7 @@ public abstract class Robot {
 	
 	public boolean access(Case destination) {
 		if (this.has_accessto(destination.getNature())) {
-			if (calculeChemin(destination) != null) {
+			if (calculePath(destination) != null) {
 				return true;
 			}
 		}

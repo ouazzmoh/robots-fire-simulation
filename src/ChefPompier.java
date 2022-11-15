@@ -40,7 +40,7 @@ public class ChefPompier {
 		if (robot.getReservoir() == 0) {
 			return false;
 		}
-		else if (robot.getDateArrive() > simulateur.getDateSimulation()) {
+		else if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
 			return false;
 		}
 		return true;
@@ -57,12 +57,16 @@ public class ChefPompier {
 						incendie.setAffecte(true);
 						//incendie.setIntensite(0); // juste pour voir les cases visites a enlever
 						robot.eteindreIncendie(0, simulateur, incendie);
-						robot.remplirEau();
+						//robot.remplirEau();
 						while (incendie.intensiteCourante != 0) {
+							//robot.remplirEau();
+							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
+							robot.programmeEvents(destination.getDestination(), simulateur);
+							robot.remplirReservoir(0, simulateur);
+							robot.programmeEvents(incendie.getPosition(), simulateur);
 							robot.eteindreIncendie(0, simulateur, incendie);
-							robot.remplirEau();
+							
 						}
-						
 						break;
 					}
 				}

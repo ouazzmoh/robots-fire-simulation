@@ -17,26 +17,26 @@ public class testChemin {
 			Simulateur simulateur = new Simulateur(gui, donnees, null);
 			
 			Robot[] robots = donnees.getrobot();
-			Robot robotsTodeplace = robots[0];
+			Robot robotsTodeplace = robots[1];
 			Case source = robotsTodeplace.getPosition();
 			Case destination = carteToDraw.getCase(0, 49);
 			/*Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
-			Iterator<Direction> it = chemin.getChemin().iterator();
+			Iterator<Direction> it = chemin.getChemin().iterator();*/
 			Path path = new Path(robotsTodeplace, carteToDraw, source, destination);
-			Iterator<Direction> it2 = path.getPath().iterator();*/
+			Iterator<Direction> it2 = path.getPath().iterator();
 			int i = 1;
-			Path path2 = new Path(robotsTodeplace, carteToDraw);
+			/*Path path2 = new Path(robotsTodeplace, carteToDraw);
 			Iterator<Direction> it3 = path2.getPath().iterator();
 			while(it3.hasNext()) {
 				robotsTodeplace.deplacerEffectivement(it3.next(), carteToDraw, i,simulateur);
 				i++;
 			}
-			/*while(it2.hasNext()) {
+			*/
+			while(it2.hasNext()) {
 				robotsTodeplace.deplacerEffectivement(it2.next(), carteToDraw, i,simulateur);
 				i++;
-			}*/
+			}
 
-			
 
 			//robotsTodeplace.eteindreIncendie(i, simulateur);
 			/*

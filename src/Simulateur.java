@@ -189,6 +189,50 @@ public class Simulateur implements Simulable {
 	}
 
 
+	public GUISimulator getGui() {
+		return gui;
+	}
+
+	public void setGui(GUISimulator gui) {
+		this.gui = gui;
+	}
+
+	public DonneesSimulation getDonnees() {
+		return donnees;
+	}
+
+	public void setDonnees(DonneesSimulation donnees) {
+		this.donnees = donnees;
+	}
+
+	public SortedMap<Long, LinkedList<Evenement>> getEvenements() {
+		return evenements;
+	}
+
+	public void setEvenements(SortedMap<Long, LinkedList<Evenement>> evenements) {
+		this.evenements = evenements;
+	}
+
+	public Incendie[] getIncendie() {
+		return incendie;
+	}
+
+	public void setIncendie(Incendie[] incendie) {
+		this.incendie = incendie;
+	}
+
+	public ChefPompier getChef() {
+		return chef;
+	}
+
+	public void setChef(ChefPompier chef) {
+		this.chef = chef;
+	}
+
+	public void setDateSimulation(long dateSimulation) {
+		this.dateSimulation = dateSimulation;
+	}
+
 	@Override
 	public void restart() {
 		// TODO Auto-generated method stub

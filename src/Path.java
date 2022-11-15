@@ -39,8 +39,35 @@ public class Path {
 			}
 		}
 		this.destination = nouvelleDestination;
-		this.path = aStar();
+		//this.path = aStar();
 		
+	}
+	public Case getSource() {
+		return source;
+	}
+	public void setSource(Case source) {
+		this.source = source;
+	}
+	public Case getDestination() {
+		return destination;
+	}
+	public void setDestination(Case destination) {
+		this.destination = destination;
+	}
+	public Robot getRobot() {
+		return robot;
+	}
+	public void setRobot(Robot robot) {
+		this.robot = robot;
+	}
+	public Carte getCarte() {
+		return carte;
+	}
+	public void setCarte(Carte carte) {
+		this.carte = carte;
+	}
+	public void setPath(LinkedList<Direction> path) {
+		this.path = path;
 	}
 	public LinkedList<Direction> getPath() {
 		return path;
@@ -190,9 +217,9 @@ public class Path {
 		while(!(queue.isEmpty())) {
 			i++;
 			Case caseCourante = queue.poll();
-			if (caseCourante.equals(destination)) {
+			/*if (caseCourante.equals(destination)) {
 				break;
-			}
+			}*/
 			double min = Double.POSITIVE_INFINITY;
 			double j = i;
 			for(Direction d : Direction.values()) {
