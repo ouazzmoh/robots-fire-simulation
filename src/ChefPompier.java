@@ -60,9 +60,9 @@ public class ChefPompier {
 						//robot.remplirEau();
 						while (incendie.intensiteCourante != 0) {
 							//robot.remplirEau();
-							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
-							System.out.println(destination.getDestination());
-							robot.programmeEvents(destination.getDestination(), simulateur);
+							//Path destination = new Path(robot, simulateur.getDonnees().getCarte());
+							//System.out.println(destination.getDestination());
+							robot.programmeEvents(robot.closestWaterDestination(), simulateur);
 							robot.remplirReservoir(simulateur);
 							robot.programmeEvents(incendie.getPosition(), simulateur);
 							robot.eteindreIncendie(simulateur, incendie);

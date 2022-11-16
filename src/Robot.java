@@ -218,6 +218,57 @@ public abstract class Robot {
 		return false;
 	}
 	
+	/**
+	 * Méthode heuristicEau, nous renvoie la distance entre le robot et la case caseCourante
+	 * @param caseCourante 
+	 * @return heuristic : double
+	 */
+	public double heuristicEau(Case caseCourante) {
+		double heuristic = Math.abs(caseCourante.getColonne() - positionCourante.getColonne()) + 
+				Math.abs(caseCourante.getLigne() - positionCourante.getLigne());
+		return heuristic;
+	}
+	
+	/**
+	 * Méthode closestWaterSource, qui renvoie la case de nature EAU la plus proche au robot
+	 * @return caseProche
+	 */
+	public Case closestWaterSource() {
+		ArrayList<Case> sourcesEau = carte.getSourcesEau();
+		Iterator<Case> it = sourcesEau.iterator();
+		Case caseProche = null;
+		Case caseTemp = null;
+		Double min = Double.POSITIVE_INFINITY;
+		while(it.hasNext()) {
+			caseTemp = it.next();
+			if (heuristicEau(caseTemp) < min){
+				caseProche = caseTemp;
+				min = heuristicEau(caseTemp);
+			}
+		}
+		return caseProche;
+	}
+	
+	/**
+	 * Méthode closestWaterDestination, qui renvoie la case voisine de la source d'eau la plus proche au robot.
+	 * @return nouvelleDestination
+	 */
+	public Case closestWaterDestination() {
+		Case destinationTemp = closestWaterSource();
+		double min = Double.POSITIVE_INFINITY;
+		Case nouvelleDestination = null;
+		for(Direction d : Direction.values()) {
+			if (carte.voisinExiste(destinationTemp, d) && has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
+				if(heuristicEau(carte.getVoisin(destinationTemp, d)) < min) {
+					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
+					min = heuristicEau(nouvelleDestination);
+				}
+			}
+		}
+		return nouvelleDestination;
+
+	}
+	
 	
 	
 	
