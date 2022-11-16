@@ -61,6 +61,7 @@ public class ChefPompier {
 						while (incendie.intensiteCourante != 0) {
 							//robot.remplirEau();
 							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
+							System.out.println(destination.getDestination());
 							robot.programmeEvents(destination.getDestination(), simulateur);
 							robot.remplirReservoir(0, simulateur);
 							robot.programmeEvents(incendie.getPosition(), simulateur);
@@ -72,6 +73,11 @@ public class ChefPompier {
 				}
 			}
 		}
+		/*for (Incendie incendie : incendieTab) {
+			if (incendie.intensiteCourante != 0 && incendie.isAffecte()) {
+				incendie.setAffecte(false);
+			}
+		}*/
 	}
 		
 	

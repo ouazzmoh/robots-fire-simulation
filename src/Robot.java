@@ -196,15 +196,19 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void programmeEvents(Case destination, Simulateur simulateur) {
-		Path Path = calculePath(destination);
-		Iterator<Direction> it = Path.getPath().iterator();
-		int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
-		while(it.hasNext()) {
-			this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
-			dateWhereToAdd++;
+		if (!(destination.equals(this.positionCourante))) {
+			Path Path = calculePath(destination);
+			if (Path.getPath() != null) {
+				Iterator<Direction> it = Path.getPath().iterator();
+				int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
+				while(it.hasNext()) {
+					this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
+					dateWhereToAdd++;
+				}
+				//On suppose ici qu'on arrive a une incendie
+				}
 		}
-		//On suppose ici qu'on arrive a une incendie
-		}
+	}
 	
 	
 	public boolean access(Case destination) {

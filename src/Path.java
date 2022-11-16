@@ -82,6 +82,7 @@ public class Path {
 			Case caseTemp = it.next();
 			if (distance(caseTemp, source) < min){
 				caseProche = caseTemp;
+				min = distance(caseTemp, source);
 			}
 		}
 		return caseProche;
@@ -217,9 +218,9 @@ public class Path {
 		while(!(queue.isEmpty())) {
 			i++;
 			Case caseCourante = queue.poll();
-			/*if (caseCourante.equals(destination)) {
+			if (caseCourante.equals(destination)) {
 				break;
-			}*/
+			}
 			double min = Double.POSITIVE_INFINITY;
 			double j = i;
 			for(Direction d : Direction.values()) {
@@ -250,6 +251,9 @@ public class Path {
 			}
 		System.out.println("looping");
 		Case next = pathMapReversed.get(source);
+		if (next == null) {
+			return null;
+		}
 		path.add(carte.getDirection(source, next));
 		while (! next.equals(destination)) {
 			path.add(carte.getDirection(next, pathMapReversed.get(next)));

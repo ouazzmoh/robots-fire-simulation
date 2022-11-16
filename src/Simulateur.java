@@ -142,6 +142,7 @@ public class Simulateur implements Simulable {
 			int y = positionCase.getLigne();
 			if (incendieTableau[i].getIntensite() != 0) {
 				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+				//incendieTableau[i].setAffecte(false);
 			}
 		}
 		
