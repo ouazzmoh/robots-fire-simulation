@@ -172,9 +172,7 @@ public class Path {
 		HashMap<Case, Case> pathMapReversed = new HashMap<Case, Case>();
 		LinkedList<Direction> path = new LinkedList<Direction>();
 		queue.add(source);
-		int i = 1;
 		while(!(queue.isEmpty())) {
-			i++;
 			Case caseCourante = queue.poll(); // case prioritaire
 			double min = Double.POSITIVE_INFINITY;
 			for(Direction d : Direction.values()) {
