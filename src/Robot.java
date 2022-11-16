@@ -10,9 +10,9 @@ public abstract class Robot {
 	protected Case position;
 	protected Carte carte;
 	
-	long dateArrive;// = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
+	protected long dateArrive;// = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	
-	Case positionCourante;
+	protected Case positionCourante;
 	
 		
 
@@ -128,7 +128,7 @@ public abstract class Robot {
 		double litresAverser = incendie.getIntensiteCourante()- reservoir;
 		long dateToAdd = 1;
 		if ( litresAverser > 0) {
-			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/10);
+			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/30);
 		}
 		else {
 			dateToAdd = max((long)1,this.tempsEteinte(incendie.getIntensiteCourante())/5);
@@ -161,7 +161,7 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void remplirReservoir(Simulateur simulateur) {
-		long dateToAdd = max((long)1, this.tempsCharge()/20); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
+		long dateToAdd = max((long)1, this.tempsCharge()/50); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
@@ -269,6 +269,9 @@ public abstract class Robot {
 	}
 	
 	
+
+	
+	
 	
 	
 	abstract public String returnType();
@@ -291,6 +294,7 @@ public abstract class Robot {
 	 * @param vol volume d'eau à derveser
 	 */
 	abstract  void deverserEau(int vol);
+
 	
 	
 	/**

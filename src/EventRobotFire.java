@@ -1,8 +1,8 @@
 
 
 public class EventRobotFire extends Evenement {
-	Robot robot;
-	Incendie[] incendieTableau;
+	private Robot robot;
+	private Incendie[] incendieTableau;
 	
 	public EventRobotFire(long date , Robot robot, Incendie[] incendieTableau) {
 		super(date);

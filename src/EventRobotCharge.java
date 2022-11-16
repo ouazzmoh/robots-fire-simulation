@@ -1,5 +1,5 @@
 public class EventRobotCharge extends Evenement {
-	Robot robot;
+	private Robot robot;
 	
 	public EventRobotCharge(long date , Robot robot) {
 		super(date);

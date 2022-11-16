@@ -51,7 +51,7 @@ public class ChefPompier {
 		for (Robot robot : robotTab) {
 			if (canGoElementaire(robot, simulateur)) {
 				for (Incendie incendie : incendieTab) {
-					if (!(incendie.isAffecte()) && robot.access(incendie.getPosition())) {
+					if (incendie.getIntensiteCourante() != 0 && robot.access(incendie.getPosition())) {
 						robot.programmeEvents(incendie.getPosition(), simulateur);
 						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);

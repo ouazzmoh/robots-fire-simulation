@@ -34,7 +34,7 @@ public class Simulateur implements Simulable {
 	Incendie[] incendie;
 	
 	/**ChefPompier**/
-	ChefPompier chef;
+	ChefPompierEvolue chef;
 	
 	
 	/**Fichier de la carte**/
@@ -43,7 +43,7 @@ public class Simulateur implements Simulable {
 	
 	/** Constructeur, et association a la gui*/
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, ChefPompier chef, String cheminMap) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, ChefPompierEvolue chef, String cheminMap) {
 		this.gui = gui;
 		this.donnees = donneesInit;
 		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
@@ -195,15 +195,17 @@ public class Simulateur implements Simulable {
 			}
 			
 			//Fastening
-			boolean makeFast = true;
-			for (int i = 1; i <11; i++) {
-				if (!(evenements.get(this.dateSimulation+i).isEmpty())) {
-					makeFast = false;
-				}
-			}
-			if (makeFast) {
-				dateSimulation += 10;
-			}
+//			boolean makeFast = true;
+//			int skipStep = 10;
+//			for (int i = 1; i <skipStep + 1; i++) {
+//				if (evenements.get(this.dateSimulation+i) != null && !(evenements.get(this.dateSimulation+i).isEmpty())) {
+//					makeFast = false;
+//				}
+//			}
+//			
+//			if (makeFast) {
+//				dateSimulation += skipStep;
+//			}
 		}
 		else {
 			System.out.println("***La simulation est terminée***");
@@ -244,11 +246,11 @@ public class Simulateur implements Simulable {
 		this.incendie = incendie;
 	}
 
-	public ChefPompier getChef() {
+	public ChefPompierEvolue getChef() {
 		return chef;
 	}
 
-	public void setChef(ChefPompier chef) {
+	public void setChef(ChefPompierEvolue chef) {
 		this.chef = chef;
 	}
 
