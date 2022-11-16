@@ -58,10 +58,12 @@ public class Rroue extends Robot {
 				return false;
 		}
 	}
+	@Override
 	public String returnType() {
 		return "RROUE";
 	}
-	
+
+	@Override
 	public double waterBar() {
 		double currentWaterPercentage = (reservoir/5000)*100; 
 		int waterBar;
@@ -83,4 +85,13 @@ public class Rroue extends Robot {
 		
 		return waterBar;
 	}
+	
+	public long tempsCharge() {
+		return (long) (10 * 60); //5min
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (5 * litresAverser)/100; 
+	}
+
 }

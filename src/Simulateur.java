@@ -35,9 +35,10 @@ public class Simulateur implements Simulable {
 	
 	/**ChefPompier**/
 	ChefPompier chef;
-	
+		
 	/**Fichier de la carte**/
 	String cheminMap;
+
 	
 	/** Constructeur, et association a la gui*/
 
@@ -58,6 +59,7 @@ public class Simulateur implements Simulable {
 		draw("FIRE1");
 		
 	}
+
 	
 	public long getDateSimulation() {
 		return dateSimulation;
@@ -159,7 +161,9 @@ public class Simulateur implements Simulable {
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
 			if (incendieTableau[i].getIntensite() != 0) {
-				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/"  + firetype+ ".png", tailleCases_width, tailleCases_length, null));
+
+				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire1.png", tailleCases_width, tailleCases_length, null));
+				//incendieTableau[i].setAffecte(false);
 			}
 		}
 		
@@ -170,7 +174,7 @@ public class Simulateur implements Simulable {
 			Case positionCase = robotTableau[i].getPosition();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
-			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/"+ robotTableau[i].returnType() + (int)robotTableau[i].waterBar() +".png", tailleCases_width, tailleCases_length, null));
+			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length,  "./images/"+ robotTableau[i].returnType() + (int)robotTableau[i].waterBar() +".png", tailleCases_width, tailleCases_length, null));
 		}
 	}
 
@@ -183,7 +187,8 @@ public class Simulateur implements Simulable {
 		if (!(simulationTerminee())) {
 			chef.strategie(this, robotTab, incendieTab);
 			System.out.println("Next... Current date :" + this.dateSimulation);
-			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);			
+			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);	
+			//TODO : Strategize each n steps 
 			if ((currListEvents != null) && !(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
 					e.execute();
@@ -205,6 +210,50 @@ public class Simulateur implements Simulable {
 	
 	}
 
+
+	public GUISimulator getGui() {
+		return gui;
+	}
+
+	public void setGui(GUISimulator gui) {
+		this.gui = gui;
+	}
+
+	public DonneesSimulation getDonnees() {
+		return donnees;
+	}
+
+	public void setDonnees(DonneesSimulation donnees) {
+		this.donnees = donnees;
+	}
+
+	public SortedMap<Long, LinkedList<Evenement>> getEvenements() {
+		return evenements;
+	}
+
+	public void setEvenements(SortedMap<Long, LinkedList<Evenement>> evenements) {
+		this.evenements = evenements;
+	}
+
+	public Incendie[] getIncendie() {
+		return incendie;
+	}
+
+	public void setIncendie(Incendie[] incendie) {
+		this.incendie = incendie;
+	}
+
+	public ChefPompier getChef() {
+		return chef;
+	}
+
+	public void setChef(ChefPompier chef) {
+		this.chef = chef;
+	}
+
+	public void setDateSimulation(long dateSimulation) {
+		this.dateSimulation = dateSimulation;
+	}
 
 	@Override
 	public void restart() {
@@ -234,6 +283,7 @@ public class Simulateur implements Simulable {
 		
 		this.incendie = donnees.getIncendie();
 	}
+
 	
 }
 

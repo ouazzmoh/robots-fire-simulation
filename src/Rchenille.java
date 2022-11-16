@@ -53,10 +53,26 @@ public class Rchenille extends Robot {
 	public void remplirEau() {
 		reservoir = 2000;
 	}
+	
+
+	@Override
+	public boolean has_accessto(NatureTerrain nature) {
+		switch(nature) {
+			case EAU:
+				return false;
+			case ROCHE:
+				return false;
+			default:
+				return true;
+		}
+	}
+	
+	@Override
 	public String returnType() {
 		return "RCHENILLE";
 	}
 	
+	@Override
 	public double waterBar() {
 		double currentWaterPercentage = (reservoir/2000)*100; 
 		int waterBar;
@@ -78,17 +94,14 @@ public class Rchenille extends Robot {
 		
 		return waterBar;
 	}
-
-	@Override
-	public boolean has_accessto(NatureTerrain nature) {
-		switch(nature) {
-			case EAU:
-				return false;
-			case ROCHE:
-				return false;
-			default:
-				return true;
-		}
+	
+	public long tempsCharge() {
+		return (long) (5 * 60); //5min
 	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (8 * litresAverser)/100; 
+	}
+
 
 }

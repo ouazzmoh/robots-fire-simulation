@@ -52,10 +52,12 @@ public class Drone extends Robot {
 	public boolean has_accessto(NatureTerrain nature) {
 		return true;
 	}
+	
+	@Override
 	public String returnType() {
 		return "DRONE";
 	}
-	
+
 	public double waterBar() {
 		double currentWaterPercentage = (reservoir/10000)*100; 
 		int waterBar;
@@ -77,4 +79,13 @@ public class Drone extends Robot {
 		
 		return waterBar;
 	}
+	
+	public long tempsCharge() {
+		return (long) (30 * 60); //30min
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (30 * litresAverser)/10000; 
+	}
+
 }

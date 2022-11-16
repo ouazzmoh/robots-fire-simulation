@@ -50,12 +50,23 @@ public class Rpatte extends Robot {
 		}
 	}
 	
+	@Override
 	public double waterBar() {
 		return 0;
 	}
 	
+	@Override
 	public String returnType() {
 		return "RPATTE";
 	}
+	
+	public long tempsCharge() {
+		return (long)0; //pas besoin
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long)1; 
+	}
+
 
 }

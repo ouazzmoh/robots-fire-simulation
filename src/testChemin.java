@@ -9,7 +9,7 @@ public class testChemin {
 		// TODO Auto-generated method stub
 		try {
 
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/mushroomOfHell-20x20.map");
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
@@ -17,26 +17,37 @@ public class testChemin {
 			Simulateur simulateur = new Simulateur(gui, donnees, null);
 			
 			Robot[] robots = donnees.getrobot();
-			Robot robotsTodeplace = robots[1];
+			Robot robotsTodeplace = robots[2];
 			Case source = robotsTodeplace.getPosition();
-			Case destination = carteToDraw.getCase(9, 16);
-			Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
-			Iterator<Direction> it = chemin.getChemin().iterator();
+			Case destination = carteToDraw.getCase(6, 0);
+			/*Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
+			Iterator<Direction> it = chemin.getChemin().iterator();*/
+			Path path = new Path(robotsTodeplace, carteToDraw, source, destination);
+			Iterator<Direction> it2 = path.getPath().iterator();
 			int i = 1;
-			while(it.hasNext()) {
-				robotsTodeplace.deplacerEffectivement(it.next(), carteToDraw, i,simulateur);
+			/*Path path2 = new Path(robotsTodeplace, carteToDraw);
+			Iterator<Direction> it3 = path2.getPath().iterator();
+			while(it3.hasNext()) {
+				robotsTodeplace.deplacerEffectivement(it3.next(), carteToDraw, i,simulateur);
 				i++;
 			}
-			robotsTodeplace.eteindreIncendie(i, simulateur);
-			/*
-			Case destination2 = carteToDraw.getCase(5, 5);
-			Chemin chemin2 = new Chemin(robotsTodeplace, carteToDraw, destination, destination2);
-			Iterator<Direction> it2 = chemin2.getChemin().iterator();
-			int j = 1;
+			*/
 			while(it2.hasNext()) {
 				robotsTodeplace.deplacerEffectivement(it2.next(), carteToDraw, i,simulateur);
+				i++;
+			}
+
+
+			//robotsTodeplace.eteindreIncendie(i, simulateur);
+			
+			Case destination2 = carteToDraw.getCase(6, 1);
+			Chemin chemin2 = new Chemin(robotsTodeplace, carteToDraw, destination, destination2);
+			Iterator<Direction> it3 = chemin2.getChemin().iterator();
+			int j = 1;
+			while(it3.hasNext()) {
+				robotsTodeplace.deplacerEffectivement(it3.next(), carteToDraw, i,simulateur);
 				j++;
-			}*/
+			}
 			//Deplacer le robot in the current date of simulateur
 			/*
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);

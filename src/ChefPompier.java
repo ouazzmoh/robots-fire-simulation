@@ -56,18 +56,28 @@ public class ChefPompier {
 						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);
 						//incendie.setIntensite(0); // juste pour voir les cases visites a enlever
-						robot.eteindreIncendie(0, simulateur, incendie);
-						robot.remplirEau();
+						robot.eteindreIncendie(simulateur, incendie);
+						//robot.remplirEau();
 						while (incendie.intensiteCourante != 0) {
-							robot.eteindreIncendie(0, simulateur, incendie);
-							robot.remplirEau();
+							//robot.remplirEau();
+							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
+							System.out.println(destination.getDestination());
+							robot.programmeEvents(destination.getDestination(), simulateur);
+							robot.remplirReservoir(simulateur);
+							robot.programmeEvents(incendie.getPosition(), simulateur);
+							robot.eteindreIncendie(simulateur, incendie);
+							
 						}
-						
 						break;
 					}
 				}
 			}
 		}
+		/*for (Incendie incendie : incendieTab) {
+			if (incendie.intensiteCourante != 0 && incendie.isAffecte()) {
+				incendie.setAffecte(false);
+			}
+		}*/
 	}
 			
 		

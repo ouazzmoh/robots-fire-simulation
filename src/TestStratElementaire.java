@@ -20,7 +20,6 @@ public class TestStratElementaire {
 			ChefPompier chefElem = new ChefPompier(carteToDraw, donneesInit);
 			Simulateur simulateur = new Simulateur(gui, donneesInit, chefElem, fichierName);
 
-
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
