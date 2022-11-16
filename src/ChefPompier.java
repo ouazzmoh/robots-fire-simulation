@@ -55,11 +55,8 @@ public class ChefPompier {
 						robot.programmeEvents(incendie.getPosition(), simulateur);
 						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);
-						//incendie.setIntensite(0); // juste pour voir les cases visites a enlever
 						robot.eteindreIncendie(simulateur, incendie);
-						//robot.remplirEau();
-						while (incendie.intensiteCourante != 0) {
-							//robot.remplirEau();
+						while (incendie.getIntensiteCourante() != 0) {
 							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
 							System.out.println(destination.getDestination());
 							robot.programmeEvents(destination.getDestination(), simulateur);

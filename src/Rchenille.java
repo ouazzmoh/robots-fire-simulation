@@ -7,6 +7,7 @@ public class Rchenille extends Robot {
 	 * et qui ne peuvent pas traverser l'eau et les roches.
 	 */
 	private double reservoir;
+//	private double reservoirCourant;
 	/**
 	 * Constructeur public, qui construit un robot à chenille avec une vitesse par défaut 60 km/h
 	 * @param position case dans laquelle le robot à chenilles se trouve
@@ -53,6 +54,7 @@ public class Rchenille extends Robot {
 	public void remplirEau() {
 		reservoir = 2000;
 	}
+
 
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {

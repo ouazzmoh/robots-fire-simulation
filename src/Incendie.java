@@ -8,7 +8,7 @@ public class Incendie {
 	private double intensite;
 	private boolean affecte;
 	
-	double intensiteCourante;
+	private double intensiteCourante;
 	
 	
 	/**
@@ -24,7 +24,16 @@ public class Incendie {
 	}
 	
 	
-	
+	public double getIntensiteCourante() {
+		return intensiteCourante;
+	}
+
+
+	public void setIntensiteCourante(double intensiteCourante) {
+		this.intensiteCourante = intensiteCourante;
+	}
+
+
 	public boolean isAffecte() {
 		return affecte;
 	}

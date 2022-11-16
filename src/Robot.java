@@ -13,7 +13,7 @@ public abstract class Robot {
 	long dateArrive;// = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	
 	Case positionCourante;
-	double reservoirCourant; //pour la strategie
+	
 		
 
 
@@ -126,7 +126,7 @@ public abstract class Robot {
 	 */
 	public void eteindreIncendie(Simulateur simulateur, Incendie incendie) {
 		double reservoir = this.getReservoir();
-		double litresAverser = incendie.intensiteCourante - reservoir;
+		double litresAverser = incendie.getIntensiteCourante()- reservoir;
 		long dateToAdd = 1;
 		if ( litresAverser > 0) {
 			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/5);
@@ -136,12 +136,12 @@ public abstract class Robot {
 		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
 		try {
 		if (litresAverser > 0) {
-			incendie.intensiteCourante = (incendie.intensiteCourante - reservoir);
-			System.out.println("Il reste " + incendie.intensiteCourante + " pour l'éteindre");
+			incendie.setIntensiteCourante(incendie.getIntensiteCourante() - reservoir);
+			System.out.println("Il reste " + incendie.getIntensiteCourante() + " pour l'éteindre");
 		}
 		else {
 			System.out.println("c bon");
-			incendie.intensiteCourante = 0;
+			incendie.setIntensiteCourante(0);
 		}
 		}catch(NullPointerException e) {
 			System.out.println("La case n'a pas d'incendie");
@@ -253,7 +253,6 @@ public abstract class Robot {
 	 * Méthode qui permet de retourner le reservoir
 	 */
 	abstract double getReservoir();
-	
 	
 	/**
 	 * Méthode qui nous permet de connaitre si le robot peut acceder à une case ou non

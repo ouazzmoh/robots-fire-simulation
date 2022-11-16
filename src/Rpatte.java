@@ -40,6 +40,7 @@ public class Rpatte extends Robot {
 	public double getReservoir() {
 		return Double.POSITIVE_INFINITY;
 	}
+	
 	@Override
 	boolean has_accessto(NatureTerrain nature) {
 		switch(nature) {
