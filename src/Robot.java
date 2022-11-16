@@ -13,6 +13,7 @@ public abstract class Robot {
 	long dateArrive;// = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	
 	Case positionCourante;
+	double reservoirCourant; //pour la strategie
 		
 
 
@@ -106,7 +107,7 @@ public abstract class Robot {
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
-			long dateToAdd = max((long) 1,(long) (temps) / 100) ; //temps d'attente pour le deplacement
+			long dateToAdd = max((long) 1,(long) (temps) / 5) ; //temps d'attente pour le deplacement
 			this.dateArrive = this.dateArrive + dateToAdd;
 			simulateur.ajouteEvenement(new EventRobotDeplace(this.dateArrive, dir, this, caseArrivee.getNature()));	
 			this.positionCourante = caseArrivee;
@@ -123,14 +124,18 @@ public abstract class Robot {
 	 * @param dateCourante
 	 * @param simulateur
 	 */
-	public void eteindreIncendie(long dateCourante, Simulateur simulateur, Incendie incendie) {
-		long dateToAdd = (long) 4; //temps d'attente pour l'extinction (4 is a placeholder for later)
+	public void eteindreIncendie(Simulateur simulateur, Incendie incendie) {
+		double reservoir = this.getReservoir();
+		double litresAverser = incendie.intensiteCourante - reservoir;
+		long dateToAdd = 1;
+		if ( litresAverser > 0) {
+			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/5);
+		}
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
 		this.dateArrive =this.dateArrive + dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
 		try {
-		double reservoir = this.getReservoir();
-		if (incendie.intensiteCourante - reservoir > 0) {
+		if (litresAverser > 0) {
 			incendie.intensiteCourante = (incendie.intensiteCourante - reservoir);
 			System.out.println("Il reste " + incendie.intensiteCourante + " pour l'éteindre");
 		}
@@ -140,17 +145,11 @@ public abstract class Robot {
 		}
 		}catch(NullPointerException e) {
 			System.out.println("La case n'a pas d'incendie");
-		}
-
-		
-		
+		}		
 	}
 	
 	
-//	public void eteindreIncendiePath(Incendie incendie, long dateCourante, Simulateur simulateur) {
-//		long dateToAdd = (long) 4;
-//		
-//	}
+	abstract long tempsEteinte(double litresAverser);
 	
 	
 	/*********Les methodes pour le remplissage d'eau*********/
@@ -159,8 +158,8 @@ public abstract class Robot {
 	 * @param dateCourante
 	 * @param simulateur
 	 */
-	public void remplirReservoir(long dateCourante, Simulateur simulateur) {
-		long dateToAdd = (long) 2; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
+	public void remplirReservoir(Simulateur simulateur) {
+		long dateToAdd = this.tempsCharge()/5; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
@@ -171,6 +170,7 @@ public abstract class Robot {
 		this.dateArrive = dateArrive;
 	}
 	
+	abstract long tempsCharge();
 	
 	
 	
@@ -221,6 +221,12 @@ public abstract class Robot {
 	}
 	
 	
+	
+	
+	abstract public String returnType();
+	
+	abstract public double waterBar();
+
 	
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain

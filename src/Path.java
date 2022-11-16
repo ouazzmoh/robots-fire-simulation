@@ -218,9 +218,9 @@ public class Path {
 		while(!(queue.isEmpty())) {
 			i++;
 			Case caseCourante = queue.poll();
-			if (caseCourante.equals(destination)) {
-				break;
-			}
+//			if (caseCourante.equals(destination)) {
+//				break;
+//			}
 			double min = Double.POSITIVE_INFINITY;
 			double j = i;
 			for(Direction d : Direction.values()) {

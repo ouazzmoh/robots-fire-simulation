@@ -58,4 +58,42 @@ public class Rroue extends Robot {
 				return false;
 		}
 	}
+	
+	@Override
+	public String returnType() {
+		return "RROUE";
+	}
+	
+	@Override
+	public double waterBar() {
+		double currentWaterPercentage = (reservoir/5000)*100; 
+		int waterBar;
+		if (currentWaterPercentage < 25) {
+			waterBar = 0;
+		}
+		else if (currentWaterPercentage < 50 && currentWaterPercentage >= 25) {
+			waterBar = 25;
+		}
+		else if (currentWaterPercentage < 75 && currentWaterPercentage >= 50) {
+			waterBar = 50;
+		}
+		else if (currentWaterPercentage < 100 && currentWaterPercentage >= 75) {
+			waterBar = 75;
+		}
+		else {
+			waterBar = 100;
+		}
+		
+		return waterBar;
+	}
+	
+	public long tempsCharge() {
+		return (long) (10 * 60); //5min
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (5 * litresAverser)/100; 
+	}
+
+
 }

@@ -65,5 +65,42 @@ public class Rchenille extends Robot {
 				return true;
 		}
 	}
+	
+	@Override
+	public String returnType() {
+		return "RCHENILLE";
+	}
+	
+	@Override
+	public double waterBar() {
+		double currentWaterPercentage = (reservoir/2000)*100; 
+		int waterBar;
+		if (currentWaterPercentage < 25) {
+			waterBar = 0;
+		}
+		else if (currentWaterPercentage < 50 && currentWaterPercentage >= 25) {
+			waterBar = 25;
+		}
+		else if (currentWaterPercentage < 75 && currentWaterPercentage >= 50) {
+			waterBar = 50;
+		}
+		else if (currentWaterPercentage < 100 && currentWaterPercentage >= 75) {
+			waterBar = 75;
+		}
+		else {
+			waterBar = 100;
+		}
+		
+		return waterBar;
+	}
+	
+	public long tempsCharge() {
+		return (long) (5 * 60); //5min
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (8 * litresAverser)/100; 
+	}
+
 
 }

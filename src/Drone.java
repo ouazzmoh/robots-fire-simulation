@@ -53,4 +53,39 @@ public class Drone extends Robot {
 		return true;
 	}
 	
+	
+	public String returnType() {
+		return "DRONE";
+	}
+	
+	public double waterBar() {
+		double currentWaterPercentage = (reservoir/10000)*100; 
+		int waterBar;
+		if (currentWaterPercentage < 25) {
+			waterBar = 0;
+		}
+		else if (currentWaterPercentage < 50 && currentWaterPercentage >= 25) {
+			waterBar = 25;
+		}
+		else if (currentWaterPercentage < 75 && currentWaterPercentage >= 50) {
+			waterBar = 50;
+		}
+		else if (currentWaterPercentage < 100 && currentWaterPercentage >= 75) {
+			waterBar = 75;
+		}
+		else {
+			waterBar = 100;
+		}
+		
+		return waterBar;
+	}
+	
+	public long tempsCharge() {
+		return (long) (30 * 60); //30min
+	}
+	
+	public long tempsEteinte(double litresAverser) {
+		return (long) (30 * litresAverser)/10000; 
+	}
+
 }

@@ -3,9 +3,12 @@ import gui.Text;
 import gui.GUISimulator;
 import gui.Rectangle;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+
 import gui.Text;
 import gui.ImageElement;
 import java.util.*;
+import java.util.zip.DataFormatException;
 
 /**Classe qui implement simulable
  * Le but c'est de visualiser les donnees recu par NewLecteurDonnees
@@ -33,12 +36,18 @@ public class Simulateur implements Simulable {
 	/**ChefPompier**/
 	ChefPompier chef;
 	
+	
+	/**Fichier de la carte**/
+	String cheminMap;
+
+	
 	/** Constructeur, et association a la gui*/
 
-	public Simulateur(GUISimulator gui, DonneesSimulation donnees, ChefPompier chef) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, ChefPompier chef, String cheminMap) {
 		this.gui = gui;
-		this.donnees = donnees;
+		this.donnees = donneesInit;
 		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
+		this.cheminMap = cheminMap;
 		
 		//The structure where we store events
 		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
@@ -51,6 +60,7 @@ public class Simulateur implements Simulable {
 		draw();
 		
 	}
+
 	
 	public long getDateSimulation() {
 		return dateSimulation;
@@ -141,7 +151,7 @@ public class Simulateur implements Simulable {
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
 			if (incendieTableau[i].getIntensite() != 0) {
-				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire.png", tailleCases_width, tailleCases_length, null));
+				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire1.png", tailleCases_width, tailleCases_length, null));
 				//incendieTableau[i].setAffecte(false);
 			}
 		}
@@ -154,7 +164,7 @@ public class Simulateur implements Simulable {
 //			double vitesse = robotTableau[i].getVitesse();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
-			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/robot.png", tailleCases_width, tailleCases_length, null));
+			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length,  "./images/"+ robotTableau[i].returnType() + (int)robotTableau[i].waterBar() +".png", tailleCases_width, tailleCases_length, null));
 		}
 	}
 
@@ -236,9 +246,33 @@ public class Simulateur implements Simulable {
 
 	@Override
 	public void restart() {
-		// TODO Auto-generated method stub
+		resetData();
+		gui.reset();
+		draw();
 		
 	}
+	
+	public void resetData() {
+		try {
+		this.donnees = NewLecteurDonnees.lire(this.cheminMap);
+		}
+		catch (FileNotFoundException e) {
+            System.out.println("fichier inconnu ou illisible");
+        } catch (DataFormatException e) {
+            System.out.println("\n\t**format du fichier invalide: " + e.getMessage());
+        
+        }
+		
+		this.dateSimulation = 1; 
+		
+		//The structure where we store events
+		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
+		this.evenements.put((long)1, new LinkedList<Evenement>());
+		//
+		
+		this.incendie = donnees.getIncendie();
+	}
+
 	
 }
 
