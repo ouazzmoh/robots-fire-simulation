@@ -81,7 +81,7 @@ public class Path {
 		double y2 = (double)(source.getColonne() - destination.getColonne());
 		double cross = Math.abs(x1*y2 - x2*y1);
 		heuristic += cross * 0.001;
-		return heuristic;
+		return heuristic * carte.getTailleCases() / robot.getVitesse(caseCourante.getNature()) ;
 	}
 	/*public double heuristic(Case caseCourante) {
 		double heuristic = Math.abs(caseCourante.getColonne() - destination.getColonne()) + 
@@ -95,7 +95,7 @@ public class Path {
 		return heuristic;
 	}*/
 	
-	public double[][] heuristicArray(){
+	/*public double[][] heuristicArray(){
 		double[][] heuristicArray = new double[carte.getNbLignes()][carte.getNBColonnes()];
 		for (Case[] ca : carte.getCarte()) {
 			for (Case c : ca) {
@@ -109,7 +109,7 @@ public class Path {
 			}
 		}
 		return heuristicArray;
-	}
+	}*/
 	public double[][] nbPas(){
 		double[][] nbPas = new double[carte.getNbLignes()][carte.getNBColonnes()];
 		for(Case[] ca : carte.getCarte()) {
@@ -141,6 +141,7 @@ public class Path {
 	public double get(double[][] array, Case c) {
 		return array[c.getLigne()][c.getColonne()];
 	}
+	
 	public LinkedList<Direction> cheminDrone(){
 		int distanceLignes = destination.getLigne() - source.getLigne();
 		int distanceColonnes = destination.getColonne() - source.getColonne();
@@ -188,7 +189,7 @@ public class Path {
 	public LinkedList<Direction> aStar() {
 		double[][] nbPas = nbPas();
 		double[][] cout = cout();
-		double[][] heuristicArray = heuristicArray();
+		//double[][] heuristicArray = heuristicArray();
 		HashMap<Case, Case> pathMap = new HashMap<Case, Case>();
 		LinkedList<Case> queue = new LinkedList<Case>();
 		HashMap<Case, Case> pathMapReversed = new HashMap<Case, Case>();
@@ -198,23 +199,22 @@ public class Path {
 		while(!(queue.isEmpty())) {
 			i++;
 			Case caseCourante = queue.poll();
-			if (caseCourante.equals(destination)) {
+			/*if (caseCourante.equals(destination)) {
 				break;
-			}
+			}*/
 			double min = Double.POSITIVE_INFINITY;
 			double j = i;
 			for(Direction d : Direction.values()) {
 				if (carte.voisinExiste(caseCourante, d) && robot.has_accessto(carte.getVoisin(caseCourante, d).getNature())) {
 					Case caseFille = carte.getVoisin(caseCourante, d);
 					double pasTemp = get(nbPas, caseCourante) + 1.0;
-					double coutTemp = pasTemp + get(heuristicArray, caseFille);
+					double coutTemp = pasTemp + heuristic(caseFille);
 					if (coutTemp < get(cout, caseFille)) {
 						nbPas[caseFille.getLigne()][caseFille.getColonne()] = pasTemp;
 						cout[caseFille.getLigne()][caseFille.getColonne()] = coutTemp;
 						if(get(cout, caseFille) < min) {
 							queue.addFirst(caseFille);
 							min = get(cout,caseFille);
-							i++;
 						}
 						else {
 							queue.add(caseFille);
