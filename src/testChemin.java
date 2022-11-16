@@ -25,10 +25,10 @@ public class testChemin {
 			Iterator<Direction> it = chemin.getChemin().iterator();
 			Iterator<Direction> it2 = path.getPath().iterator();
 			int i = 1;
-			while(it2.hasNext()) {
+			/*while(it2.hasNext()) {
 				robotsTodeplace.deplacerEffectivement(it2.next(), carteToDraw, i,simulateur);
 				i++;
-			}
+			}*/
 			Path path2 = new Path(robotsTodeplace, carteToDraw);
 			Iterator<Direction> it3 = path2.getPath().iterator();
 			while(it3.hasNext()) {

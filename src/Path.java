@@ -35,6 +35,7 @@ public class Path {
 			if (carte.voisinExiste(destinationTemp, d) && robot.has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
 				if(distance(carte.getVoisin(destinationTemp, d), source) < min) {
 					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
+					min = distance(nouvelleDestination, source);
 				}
 			}
 		}
