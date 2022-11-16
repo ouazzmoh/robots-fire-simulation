@@ -40,7 +40,7 @@ public class ChefPompier {
 		if (robot.getReservoir() == 0) {
 			return false;
 		}
-		else if (robot.getDateArrive() + 1 > simulateur.getDateSimulation()) {
+		else if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
 			return false;
 		}
 		return true;
@@ -79,7 +79,38 @@ public class ChefPompier {
 			}
 		}*/
 	}
-			
+		
+	
+	
+//	public void strategieElementaire(Simulateur simulateur) {
+//		
+//		int continueAction = 1;
+//		Incendie[] incendieTab = donnees.getIncendie();
+//		Robot[] robotTab = donnees.getrobot();
+//		
+//		while (continueAction == 1) {
+////			continueAction = 0;
+//			for (Incendie incendie : incendieTab) {
+//				//Pour continue la boucle si il existe toujours des incendies actifs
+//				if (continueAction == 0 && incendie.getIntensite()>0) {
+//					continueAction = 1;
+//				}
+//				//Partie principale de la strategie
+//				if (incendie.getIntensite() > 0 && !(incendie.isAffecte())) {
+//					for (Robot robot : robotTab) {
+//						if (canGoElementaire(robot, incendie.getPosition(), simulateur)) {
+//							incendie.setAffecte(true);
+//							robot.programmeEvents(incendie.getPosition(), simulateur);
+//							System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
+//							break;
+//						}
+//					}
+//				}
+//			}
+//			continueAction =0;
+//		}
+		
+		
 		
 		
 		

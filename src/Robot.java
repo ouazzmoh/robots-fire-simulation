@@ -219,10 +219,14 @@ public abstract class Robot {
 		}
 		return false;
 	}
-		
+	
+	
+	
+	
 	abstract public String returnType();
 	
 	abstract public double waterBar();
+
 	
 	/**
 	 * Méthode absrtaite, qui nous permet de connaitre la vitesse du robot sachant la nature du terrain

@@ -9,11 +9,16 @@ public class testChemin {
 		// TODO Auto-generated method stub
 		try {
 
+<<<<<<< HEAD
 			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
+=======
+			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/spiralOfMadness-50x50.map");
+>>>>>>> b38ae022d0f97b8262b2165a45921775b2931313
 			Carte carteToDraw = donnees.getCarte();
 			Incendie[] incendieTableau = donnees.getIncendie();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
+<<<<<<< HEAD
 			Simulateur simulateur = new Simulateur(gui, donnees, null);
 			
 			Robot[] robots = donnees.getrobot();
@@ -48,6 +53,21 @@ public class testChemin {
 				robotsTodeplace.deplacerEffectivement(it3.next(), carteToDraw, i,simulateur);
 				j++;
 			}
+=======
+			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
+			
+			Robot[] robots = donnees.getrobot();
+			Robot robotsTodeplace = robots[1];
+			Case source = robotsTodeplace.getPosition();
+			Case destination = carteToDraw.getCase(0, 49);
+			Chemin chemin = new Chemin(robotsTodeplace, carteToDraw, source, destination);
+			Iterator<Direction> it = chemin.getChemin().iterator();
+			int i = 1;
+			while(it.hasNext()) {
+				robotsTodeplace.deplacerEffectivement(it.next(), carteToDraw, i,simulateur);
+				i++;
+			}
+>>>>>>> b38ae022d0f97b8262b2165a45921775b2931313
 			//Deplacer le robot in the current date of simulateur
 			/*
 			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);

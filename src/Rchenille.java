@@ -53,7 +53,6 @@ public class Rchenille extends Robot {
 	public void remplirEau() {
 		reservoir = 2000;
 	}
-	
 
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {

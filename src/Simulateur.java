@@ -35,7 +35,8 @@ public class Simulateur implements Simulable {
 	
 	/**ChefPompier**/
 	ChefPompier chef;
-		
+	
+	
 	/**Fichier de la carte**/
 	String cheminMap;
 
@@ -56,7 +57,7 @@ public class Simulateur implements Simulable {
 		
 		this.incendie = donnees.getIncendie();
 		gui.setSimulable(this);
-		draw("FIRE1");
+		draw();
 		
 	}
 
@@ -97,22 +98,11 @@ public class Simulateur implements Simulable {
 		return (this.dateSimulation == evenements.lastKey() + 2 || evenements.isEmpty());
 	}
 	
-	
-	
-	private void draw() {
-		if (this.dateSimulation % 2 == 0) {
-			draw("FIRE1");
-		}
-		else {
-			draw("FIRE2");
-		}
-	}
-	
 
 	/**
 	 * Dessiner selon la carte selon la situation de chaque case
 	 * */
-	private void draw(String firetype) {
+	private void draw() {
 		
 		/**
 		 * Variables utiles
@@ -161,7 +151,6 @@ public class Simulateur implements Simulable {
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
 			if (incendieTableau[i].getIntensite() != 0) {
-
 				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire1.png", tailleCases_width, tailleCases_length, null));
 				//incendieTableau[i].setAffecte(false);
 			}
@@ -172,6 +161,7 @@ public class Simulateur implements Simulable {
 		 */
 		for (int i = 0; i < robotTableau.length; i++) {
 			Case positionCase = robotTableau[i].getPosition();
+//			double vitesse = robotTableau[i].getVitesse();
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length,  "./images/"+ robotTableau[i].returnType() + (int)robotTableau[i].waterBar() +".png", tailleCases_width, tailleCases_length, null));
@@ -179,7 +169,7 @@ public class Simulateur implements Simulable {
 	}
 
 	
-//	@SuppressWarnings("null")
+	@SuppressWarnings("null")
 	@Override
 	public void next() {
 		Incendie[] incendieTab = donnees.getIncendie();
@@ -189,6 +179,7 @@ public class Simulateur implements Simulable {
 			System.out.println("Next... Current date :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);	
 			//TODO : Strategize each n steps 
+			
 			if ((currListEvents != null) && !(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
 					e.execute();
@@ -198,8 +189,6 @@ public class Simulateur implements Simulable {
 				incrementeDate();
 			}
 			else {
-				gui.reset();
-				draw();
 				incrementeDate();
 				System.out.println("*Il n y'a pas d'evenements a faire dans cette date, on incremente la date*");
 			}

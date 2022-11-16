@@ -53,11 +53,11 @@ public class Drone extends Robot {
 		return true;
 	}
 	
-	@Override
+	
 	public String returnType() {
 		return "DRONE";
 	}
-
+	
 	public double waterBar() {
 		double currentWaterPercentage = (reservoir/10000)*100; 
 		int waterBar;
