@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 public abstract class Robot {
 	
@@ -7,7 +9,8 @@ public abstract class Robot {
 	 */
 	protected double vitesse;
 	protected Case position;
-	
+	protected Carte carte;
+	protected Case positionCourante;
 	protected long dateArrive; // = 0 si le robot ne bouge pas sinon = le nombre d'etapes pour qu'il arrive
 	protected long dateExtinction;
 	protected long dateRemplissage;
@@ -114,6 +117,26 @@ public abstract class Robot {
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		simulateur.ajouteEvenement(new EventRobotCharge(dateCourante + dateToAdd + dateArrive + dateExtinction + dateRemplissage, this));
 		dateRemplissage = dateToAdd + dateRemplissage;
+	}
+	public double heuristicEau(Case caseCourante) {
+		double heuristic = Math.abs(caseCourante.getColonne() - positionCourante.getColonne()) + 
+				Math.abs(caseCourante.getLigne() - positionCourante.getLigne());
+		return heuristic;
+	}
+	public Case closestWaterSource(){
+		ArrayList<Case> sourcesEau = carte.getSourcesEau();
+		Iterator<Case> it = sourcesEau.iterator();
+		Case caseProche = null;
+		Case caseTemp = null;
+		Double min = Double.POSITIVE_INFINITY;
+		while(it.hasNext()) {
+			caseTemp = it.next();
+			if (heuristicEau(caseTemp) < min){
+				caseProche = caseTemp;
+				min = heuristicEau(caseTemp);
+			}
+		}
+		return caseProche;
 	}
 	
 	public boolean isAvailable() {
