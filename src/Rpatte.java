@@ -38,7 +38,7 @@ public class Rpatte extends Robot {
 		return;
 	}
 	public double getReservoir() {
-		return Double.POSITIVE_INFINITY;
+		return Double.MAX_VALUE;
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public class Rpatte extends Robot {
 	}
 	
 	public long tempsEteinte(double litresAverser) {
-		return (long)1; 
+		return (long) (litresAverser)/10; 
 	}
 
 

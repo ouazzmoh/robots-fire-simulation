@@ -174,11 +174,12 @@ public class Simulateur implements Simulable {
 	public void next() {
 		Incendie[] incendieTab = donnees.getIncendie();
 		Robot[] robotTab = donnees.getrobot();
-		if (!(simulationTerminee())) {
+		if (!(simulationTerminee())) {		
 			chef.strategie(this, robotTab, incendieTab);
-			System.out.println("Next... Current date :" + this.dateSimulation);
+			System.out.println("Date courante :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);	
-			//TODO : Strategize each n steps 
+			
+			
 			
 			if ((currListEvents != null) && !(currListEvents.isEmpty())) {
 				for (Evenement e : currListEvents) {
@@ -191,6 +192,17 @@ public class Simulateur implements Simulable {
 			else {
 				incrementeDate();
 				System.out.println("*Il n y'a pas d'evenements a faire dans cette date, on incremente la date*");
+			}
+			
+			//Fastening
+			boolean makeFast = true;
+			for (int i = 1; i <11; i++) {
+				if (!(evenements.get(this.dateSimulation+i).isEmpty())) {
+					makeFast = false;
+				}
+			}
+			if (makeFast) {
+				dateSimulation += 10;
 			}
 		}
 		else {

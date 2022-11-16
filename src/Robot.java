@@ -106,7 +106,6 @@ public abstract class Robot {
 		Case caseArrivee = carte.getVoisin(positionCourante, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
-			System.out.println(temps);
 			long dateToAdd = max((long) 1,(long) (temps) / 5) ; //temps d'attente pour le deplacement
 			this.dateArrive = this.dateArrive + dateToAdd;
 			simulateur.ajouteEvenement(new EventRobotDeplace(this.dateArrive, dir, this, caseArrivee.getNature()));	
@@ -129,7 +128,10 @@ public abstract class Robot {
 		double litresAverser = incendie.getIntensiteCourante()- reservoir;
 		long dateToAdd = 1;
 		if ( litresAverser > 0) {
-			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/5);
+			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/10);
+		}
+		else {
+			dateToAdd = max((long)1,this.tempsEteinte(incendie.getIntensiteCourante())/5);
 		}
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
 		this.dateArrive =this.dateArrive + dateToAdd;
@@ -159,16 +161,13 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void remplirReservoir(Simulateur simulateur) {
-		long dateToAdd = max((long)1, this.tempsCharge()/5); //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
+		long dateToAdd = max((long)1, this.tempsCharge()/20); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
 		
 	}
 	
-	public void setDat() {
-		this.dateArrive = dateArrive;
-	}
 	
 	abstract long tempsCharge();
 	
@@ -216,6 +215,57 @@ public abstract class Robot {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Méthode heuristicEau, nous renvoie la distance entre le robot et la case caseCourante
+	 * @param caseCourante 
+	 * @return heuristic : double
+	 */
+	public double heuristicEau(Case caseCourante) {
+		double heuristic = Math.abs(caseCourante.getColonne() - positionCourante.getColonne()) + 
+				Math.abs(caseCourante.getLigne() - positionCourante.getLigne());
+		return heuristic;
+	}
+	
+	/**
+	 * Méthode closestWaterSource, qui renvoie la case de nature EAU la plus proche au robot
+	 * @return caseProche
+	 */
+	public Case closestWaterSource() {
+		ArrayList<Case> sourcesEau = carte.getSourcesEau();
+		Iterator<Case> it = sourcesEau.iterator();
+		Case caseProche = null;
+		Case caseTemp = null;
+		Double min = Double.POSITIVE_INFINITY;
+		while(it.hasNext()) {
+			caseTemp = it.next();
+			if (heuristicEau(caseTemp) < min){
+				caseProche = caseTemp;
+				min = heuristicEau(caseTemp);
+			}
+		}
+		return caseProche;
+	}
+	
+	/**
+	 * Méthode closestWaterDestination, qui renvoie la case voisine de la source d'eau la plus proche au robot.
+	 * @return nouvelleDestination
+	 */
+	public Case closestWaterDestination() {
+		Case destinationTemp = closestWaterSource();
+		double min = Double.POSITIVE_INFINITY;
+		Case nouvelleDestination = null;
+		for(Direction d : Direction.values()) {
+			if (carte.voisinExiste(destinationTemp, d) && has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
+				if(heuristicEau(carte.getVoisin(destinationTemp, d)) < min) {
+					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
+					min = heuristicEau(nouvelleDestination);
+				}
+			}
+		}
+		return nouvelleDestination;
+
 	}
 	
 	

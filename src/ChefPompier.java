@@ -57,9 +57,7 @@ public class ChefPompier {
 						incendie.setAffecte(true);
 						robot.eteindreIncendie(simulateur, incendie);
 						while (incendie.getIntensiteCourante() != 0) {
-							Path destination = new Path(robot, simulateur.getDonnees().getCarte());
-							System.out.println(destination.getDestination());
-							robot.programmeEvents(destination.getDestination(), simulateur);
+							robot.programmeEvents(robot.closestWaterDestination(), simulateur);
 							robot.remplirReservoir(simulateur);
 							robot.programmeEvents(incendie.getPosition(), simulateur);
 							robot.eteindreIncendie(simulateur, incendie);
