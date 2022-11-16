@@ -83,22 +83,7 @@ public class NewLecteurDonnees {
 
         try {
             chaineNature = scanner.next();
-            if (chaineNature.equals("EAU")) {
-            	caselue.setNature(NatureTerrain.EAU);
-            }
-            else if (chaineNature.equals("ROCHE")) {
-            	caselue.setNature(NatureTerrain.ROCHE);
-            }
-            else if (chaineNature.equals("FORET")) {
-            	caselue.setNature(NatureTerrain.FORET);
-            }
-            else if (chaineNature.equals("TERRAIN_LIBRE")) {
-            	caselue.setNature(NatureTerrain.TERRAIN_LIBRE);
-            }
-            else if (chaineNature.equals("HABITAT")) {
-            	caselue.setNature(NatureTerrain.HABITAT);
-            }
-            
+            caselue.setNature(NatureTerrain.valueOf(chaineNature));
             // si NatureTerrain est un Enum, vous pouvez recuperer la valeur
             // de l'enum a partir d'une String avec:
             //			NatureTerrain nature = NatureTerrain.valueOf(chaineNature);
