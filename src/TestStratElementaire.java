@@ -10,7 +10,7 @@ public class TestStratElementaire {
 		try {
 
 			//mushroomOfHell-20x20
-			String fichierName = "cartes/mushroomOfHell-20x20.map";
+			String fichierName = "cartes/spiralOfMadness-50x50.map";
 			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
 			Carte carteToDraw = donneesInit.getCarte();
 			

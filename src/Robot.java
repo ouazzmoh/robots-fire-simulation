@@ -102,7 +102,7 @@ public abstract class Robot {
 	 * @param carte map 
 	 * @param simulateur simulateur du jeu
 	 */
-	public void deplacerEffectivement(Direction dir, Carte carte, long dateCourante, Simulateur simulateur) {
+	public void deplacerEffectivement(Direction dir, Carte carte, Simulateur simulateur) {
 		Case caseArrivee = carte.getVoisin(positionCourante, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
@@ -159,7 +159,7 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void remplirReservoir(Simulateur simulateur) {
-		long dateToAdd = this.tempsCharge()/5; //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
+		long dateToAdd = max((long)1, this.tempsCharge()/5); //temps d'attente pour le remplissage du reservoir (2 is a placeholder for later)
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
@@ -200,10 +200,8 @@ public abstract class Robot {
 			Path Path = calculePath(destination);
 			if (Path.getPath() != null) {
 				Iterator<Direction> it = Path.getPath().iterator();
-				int dateWhereToAdd = 1; //La date ou il faut ajouter l'evenement
 				while(it.hasNext()) {
-					this.deplacerEffectivement(it.next(), carte, dateWhereToAdd,simulateur);
-					dateWhereToAdd++;
+					this.deplacerEffectivement(it.next(), carte, simulateur);
 				}
 				//On suppose ici qu'on arrive a une incendie
 				}
