@@ -34,12 +34,10 @@ public class ChefPompierSimple extends ChefPompier{
 			if (canGoElementaire(robot, simulateur)) {
 				for (Incendie incendie : incendieTab) {
 					if (!(incendie.isAffecte()) && robot.access(incendie.getPosition())) {
-						robot.programmeEvents(incendie.getPosition(), simulateur);
-						System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 						incendie.setAffecte(true);
-						robot.eteindreIncendie(simulateur, incendie);
 						while (incendie.getIntensiteCourante() != 0) {
 							robot.programmeEvents(incendie.getPosition(), simulateur);
+							System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 							robot.eteindreIncendie(simulateur, incendie);						
 						}
 						break;

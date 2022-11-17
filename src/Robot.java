@@ -15,8 +15,6 @@ public abstract class Robot {
 	protected Case positionCourante;
 	
 		
-
-
 	/**
 	 * Constructeur public,
 	 * @param position case dans laquelle le robot se trouve
@@ -125,8 +123,8 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void eteindreIncendie(Simulateur simulateur, Incendie incendie) {
-		double reservoir = this.getReservoir();
-		double litresAverser = incendie.getIntensiteCourante()- reservoir;
+		double reservoirCourant = this.getReservoirCourant();
+		double litresAverser = incendie.getIntensiteCourante()- reservoirCourant;
 		long dateToAdd = 1;
 		if ( litresAverser > 0) {
 			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/30);
@@ -139,12 +137,15 @@ public abstract class Robot {
 		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
 		try {
 		if (litresAverser >= 0) {
-			incendie.setIntensiteCourante(incendie.getIntensiteCourante() - reservoir);
+			incendie.setIntensiteCourante(incendie.getIntensiteCourante() - reservoirCourant);
 			System.out.println("Il reste " + incendie.getIntensiteCourante() + " pour l'éteindre");
 			programmeEvents(closestWaterDestination(), simulateur);
 			remplirReservoir(simulateur);
+			this.remplirEauCourant();
+			
 		}
 		else {
+			this.deverserEauCourant((int) litresAverser);
 			System.out.println("c bon");
 			incendie.setIntensiteCourante(0);
 		}
@@ -154,7 +155,7 @@ public abstract class Robot {
 	}
 	
 	
-	abstract long tempsEteinte(double litresAverser);
+	abstract public long tempsEteinte(double litresAverser);
 	
 	
 	/*********Les methodes pour le remplissage d'eau*********/
@@ -164,15 +165,14 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void remplirReservoir(Simulateur simulateur) {
-		long dateToAdd = max((long)1, this.tempsCharge()/100); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
+		long dateToAdd = max((long)1, this.tempsCharge()/50); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
-		
 	}
 	
 	
-	abstract long tempsCharge();
+	abstract public long tempsCharge();
 	
 	
 	
@@ -272,7 +272,6 @@ public abstract class Robot {
 	}
 	
 	
-
 	
 	
 	
@@ -288,7 +287,7 @@ public abstract class Robot {
 	 * @param nature nature du terrain
 	 * @return vitesse : double
 	 */
-	abstract double getVitesse(NatureTerrain nature);
+	abstract public double getVitesse(NatureTerrain nature);
 	
 	
 	
@@ -296,25 +295,28 @@ public abstract class Robot {
 	 * Méthode qui permet de deverser l'eau 
 	 * @param vol volume d'eau à derveser
 	 */
-	abstract  void deverserEau(int vol);
+	abstract public void deverserEau(int vol);
+	abstract public void deverserEauCourant(int vol);
 
 	
 	
 	/**
 	 * Méthode qui permet de remplir le reservoir
 	 */
-	abstract  void remplirEau();
+	abstract public void remplirEau();
+	abstract public void remplirEauCourant();
 	
 	
 	/**
 	 * Méthode qui permet de retourner le reservoir
 	 */
-	abstract double getReservoir();
+	abstract public double getReservoir();
+	abstract public double getReservoirCourant();
 	
 	/**
 	 * Méthode qui nous permet de connaitre si le robot peut acceder à une case ou non
 	 * @param nature nature du terrain de la case 
 	 * @return boolean : true si le robot peur acceder a ce type de terrain, false sinon.
 	 */
-	abstract boolean has_accessto(NatureTerrain nature);
+	abstract public boolean has_accessto(NatureTerrain nature);
 }

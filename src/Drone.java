@@ -7,6 +7,7 @@ public class Drone extends Robot {
 	 * traverser tout type de terrain. 
 	 */
 	private double reservoir;
+	private double reservoirCourant;
 	/**
 	 * Constructeur public, qiu crée un nouveau drone qui a une vitesse par défaut (ie 100 km/h)
 	 * @param position case dans laquelle le drone se trouve dans la carte
@@ -15,6 +16,7 @@ public class Drone extends Robot {
 	public Drone(Case position, Carte carte, double reservoir) {
 		super(100, position, carte);
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	/**
 	 * Constructeur public, qui crée un nouveau drone 
@@ -28,6 +30,7 @@ public class Drone extends Robot {
 			this.vitesse = 150;
 		}
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	@Override
 	public String toString() {
@@ -41,13 +44,23 @@ public class Drone extends Robot {
 	public double getReservoir() {
 		return reservoir;
 	}
+	public double getReservoirCourant() {
+		return reservoirCourant;
+	}
 	@Override
 	public void deverserEau(int vol) {
+		reservoir -= vol;
+	}
+	public void deverserEauCourant(int vol) {
 		reservoir -= vol;
 	}
 	public void remplirEau() {
 		reservoir = 10000;
 	}
+	public void remplirEauCourant() {
+		reservoir = 10000;
+	}
+	
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {
 		return true;
@@ -87,5 +100,5 @@ public class Drone extends Robot {
 	public long tempsEteinte(double litresAverser) {
 		return (long) (30 * litresAverser)/10000; 
 	}
-
+	
 }

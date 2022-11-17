@@ -7,7 +7,7 @@ public class Rchenille extends Robot {
 	 * et qui ne peuvent pas traverser l'eau et les roches.
 	 */
 	private double reservoir;
-//	private double reservoirCourant;
+	private double reservoirCourant;
 	/**
 	 * Constructeur public, qui construit un robot à chenille avec une vitesse par défaut 60 km/h
 	 * @param position case dans laquelle le robot à chenilles se trouve
@@ -16,6 +16,7 @@ public class Rchenille extends Robot {
 	public Rchenille(Case position, Carte carte, double reservoir) {
 		super(60, position, carte);
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	/**
 	 * Constructeur public, qui crée un robot à chenilles avec une vitesse donnée (qui ne doit pas dépasser 80 km/h)
@@ -29,6 +30,7 @@ public class Rchenille extends Robot {
 			this.vitesse = 80;
 		}
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	public String toString() {
 		return " le robot à chenilles a " + reservoir + " litres dans son réservoir et se situe dans la position " + 
@@ -54,8 +56,15 @@ public class Rchenille extends Robot {
 	public void remplirEau() {
 		reservoir = 2000;
 	}
-
-
+	public void remplirEauCourant() {
+		reservoirCourant = 2000;
+	}
+	public double getReservoirCourant() {
+		return reservoirCourant;
+	}
+	public void deverserEauCourant(int vol) {
+		reservoirCourant -= vol;
+	}
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {
 		switch(nature) {

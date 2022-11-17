@@ -10,14 +10,16 @@ public class TestStratElementaire {
 		try {
 
 			//mushroomOfHell-20x20
-			String fichierName = "cartes/spiralOfMadness-50x50.map";
+			//desertOfDeath-20x20
+			//spiralOfMadness-50x50
+			String fichierName = "cartes/desertOfDeath-20x20.map";
 			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
 			Carte carteToDraw = donneesInit.getCarte();
 			
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 			
 			
-			ChefPompier chefElem = new ChefPompierSimple(carteToDraw, donneesInit);
+			ChefPompier chefElem = new ChefPompierEvolue(carteToDraw, donneesInit);
 			Simulateur simulateur = new Simulateur(gui, donneesInit, chefElem, fichierName);
 
 

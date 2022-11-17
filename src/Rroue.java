@@ -6,6 +6,8 @@ public class Rroue extends Robot {
 	 * qui a un reservoir de 5000 L et une vitesse par défaut de 80 km/h
 	 */
 	private double reservoir;
+	private double reservoirCourant;
+
 	/**
 	 * Constructeur public, qui crée un nouveau robot à roues, avec une vitesse par défaut de 80 km/h
 	 * @param position case dans laquelle le robot se trouve.
@@ -38,6 +40,9 @@ public class Rroue extends Robot {
 	public void deverserEau(int vol) {
 		reservoir -= vol;
 	}
+	public void deverserEauCourant(int vol) {
+		reservoirCourant -= vol;
+	}
 	/**
 	 * méthode qui remplit le reservoir du robot à roues au maximum.
 	 */
@@ -46,6 +51,14 @@ public class Rroue extends Robot {
 	}
 	public double getReservoir() {
 		return reservoir;
+	}
+	@Override
+	public double getReservoirCourant() {
+		// TODO Auto-generated method stub
+		return reservoirCourant;
+	}
+	public void remplirEauCourant() {
+		reservoirCourant = 5000;
 	}
 	@Override
 	public boolean has_accessto(NatureTerrain nature) {
@@ -94,6 +107,7 @@ public class Rroue extends Robot {
 	public long tempsEteinte(double litresAverser) {
 		return (long) (5 * litresAverser)/100; 
 	}
+
 
 
 }

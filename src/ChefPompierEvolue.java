@@ -17,12 +17,13 @@ public class ChefPompierEvolue extends ChefPompier{
 	 * @return
 	 */
 	public boolean canGo(Robot robot, Simulateur simulateur) {
+		/*
 		if (robot.getReservoir() == 0) {
 			robot.programmeEvents(robot.closestWaterDestination(), simulateur);
 			robot.remplirReservoir(simulateur);
 			return false;
-		}
-		else if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
+		}*/
+		if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
 			return false;
 		}
 		return true;
@@ -51,9 +52,9 @@ public class ChefPompierEvolue extends ChefPompier{
 		Case caseProche = incendieTableau[0].getPosition();
 		Double min = Double.POSITIVE_INFINITY;
 		for(Incendie incendie : incendieTableau) {
-			if (heuristicIncendie(incendie.getPosition(), positionCourante) < min){
-				min = heuristicIncendie(caseProche, positionCourante);
+			if ( !(incendie.isAffecte()) && heuristicIncendie(incendie.getPosition(), positionCourante) <= min ){
 				caseProche = incendie.getPosition();
+				min = heuristicIncendie(caseProche, positionCourante);
 			}
 		}
 		Incendie incendieProche = null;
@@ -81,13 +82,9 @@ public class ChefPompierEvolue extends ChefPompier{
 					incendie.setAffecte(true);
 					robot.eteindreIncendie(simulateur, incendie);
 					while (incendie.getIntensiteCourante() != 0) {
-						robot.programmeEvents(robot.closestWaterDestination(), simulateur);
-						robot.remplirReservoir(simulateur);
 						robot.programmeEvents(incendie.getPosition(), simulateur);
-						robot.eteindreIncendie(simulateur, incendie);
-							
+						robot.eteindreIncendie(simulateur, incendie);		
 //						}
-						break;
 					}
 				}
 			}

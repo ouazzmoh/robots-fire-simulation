@@ -31,10 +31,16 @@ public class Rpatte extends Robot {
 	}
 
 	@Override
-	void deverserEau(int vol) {
+	public void deverserEau(int vol) {
 		return;
 	}
-	void remplirEau() {
+	public void deverserEauCourant(int vol) {
+		return;
+	}
+	public void remplirEau() {
+		return;
+	}
+	public void remplirEauCourant() {
 		return;
 	}
 	public double getReservoir() {
@@ -42,7 +48,7 @@ public class Rpatte extends Robot {
 	}
 	
 	@Override
-	boolean has_accessto(NatureTerrain nature) {
+	public boolean has_accessto(NatureTerrain nature) {
 		switch(nature) {
 			case EAU:
 				return false;
@@ -69,5 +75,7 @@ public class Rpatte extends Robot {
 		return (long) (litresAverser)/10; 
 	}
 
-
+	public double getReservoirCourant() {
+		return Double.MAX_VALUE;
+	}
 }
