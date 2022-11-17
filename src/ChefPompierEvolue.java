@@ -68,7 +68,47 @@ public class ChefPompierEvolue extends ChefPompier{
 		return incendieProche;
 	}
 	
+	public Robot closestRobot(Incendie incendie, Simulateur simulateur) {
+        Robot[] robots = donnees.getrobot();
+        Robot robotProche = null;
+        Double min = Double.POSITIVE_INFINITY;
+        for(Robot r : robots) {
+            if(canGo(r, simulateur) && r.has_accessto(incendie.getPosition().getNature()) && heuristicIncendie(incendie.getPosition(), r.positionCourante) < min) {
+                min = heuristicIncendie(incendie.getPosition(), r.positionCourante);
+                robotProche = r;
+            }
+        }
+        return robotProche;
+    }
 	
+	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
+
+		for (Incendie incendie : incendieTab) {
+//				for (Incendie incendie : incendieTab) {
+				//TODO: TEST ACCESS FOR FIRE
+			if (!(incendie.isAffecte())) {
+				Robot robot = closestRobot(incendie, simulateur);
+				if (robot != null) {
+					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
+					incendie.setAffecte(true);
+					while (incendie.getIntensiteCourante() != 0) {
+						robot.programmeEvents(incendie.getPosition(), simulateur);
+						robot.eteindreIncendie(simulateur, incendie);		
+	//						}
+					}
+				}
+			}
+		}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
 
 		for (Robot robot : robotTab) {
@@ -91,7 +131,7 @@ public class ChefPompierEvolue extends ChefPompier{
 		}
 	}
 		
-		
+		*/
 		
 		
 		
