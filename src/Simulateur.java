@@ -145,9 +145,9 @@ public class Simulateur implements Simulable {
 		
 		
         int xMax = gui.getWidth();
-        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+//        xMax -= (int)xMax*0.1;  //50 est la taille de la partie non utile de la fenetre
         int yMax = gui.getHeight();
-        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        yMax -= (int)yMax*0.13; // 80 est la taille de la partie non utile de la fenetre
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;
