@@ -59,7 +59,6 @@ public class Simulateur implements Simulable {
 		this.incendie = donnees.getIncendie();
 		gui.setSimulable(this);
 		draw();
-		drawEnd();
 	}
 	
 	/**
@@ -321,6 +320,8 @@ public class Simulateur implements Simulable {
 	}
 	
 	public void resetData() {
+		if(this.dateSimulation > 1)
+		{
 		try {
 		this.donnees = NewLecteurDonnees.lire(this.cheminMap);
 		}
@@ -339,6 +340,9 @@ public class Simulateur implements Simulable {
 		//
 		
 		this.incendie = donnees.getIncendie();
+		this.chef.donnees = donnees;
+//		gui.setSimulable(this);
+		}
 	}
 
 	

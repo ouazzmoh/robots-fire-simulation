@@ -23,7 +23,7 @@ public class ChefPompierEvolue extends ChefPompier{
 			robot.remplirReservoir(simulateur);
 			return false;
 		}*/
-		if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
+		if (robot.getDateArrive() + 1 > simulateur.getDateSimulation()) {
 			return false;
 		}
 		return true;
@@ -68,9 +68,8 @@ public class ChefPompierEvolue extends ChefPompier{
 		return incendieProche;
 	}
 	
-	public Robot closestRobot(Incendie incendie, Simulateur simulateur) {
-        Robot[] robots = donnees.getrobot();
-        Robot robotProche = null;
+	public Robot closestRobot(Incendie incendie, Simulateur simulateur, Robot[] robots) {
+		Robot robotProche = null;
         Double min = Double.POSITIVE_INFINITY;
         for(Robot r : robots) {
             if(canGo(r, simulateur) && r.has_accessto(incendie.getPosition().getNature()) && heuristicIncendie(incendie.getPosition(), r.positionCourante) < min) {
@@ -87,7 +86,7 @@ public class ChefPompierEvolue extends ChefPompier{
 //				for (Incendie incendie : incendieTab) {
 				//TODO: TEST ACCESS FOR FIRE
 			if (!(incendie.isAffecte())) {
-				Robot robot = closestRobot(incendie, simulateur);
+				Robot robot = closestRobot(incendie, simulateur, robotTab);
 				if (robot != null) {
 					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 					incendie.setAffecte(true);

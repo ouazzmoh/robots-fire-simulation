@@ -23,6 +23,7 @@ public abstract class Robot {
 		this.position = position;
 		this.carte = carte;
 		this.positionCourante = position;
+		this.dateArrive = (long) 0;
 		}
 	
 	public long getDateArrive() {

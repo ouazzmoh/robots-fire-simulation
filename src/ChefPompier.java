@@ -3,12 +3,10 @@ public abstract class ChefPompier {
 	
 	protected Carte carte;
 	protected DonneesSimulation donnees;
-//	protected boolean endSimulation;
 	
 	public ChefPompier(Carte carte, DonneesSimulation donnees) {
 		this.carte = carte;
 		this.donnees = donnees;
-//		this.endSimulation = false;
 	}
 
 

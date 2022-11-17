@@ -4,14 +4,12 @@ import java.util.zip.DataFormatException;
 
 import gui.GUISimulator;
 
-public class TestStratElementaire {
+public class TestStratEvolue {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
 
 			//mushroomOfHell-20x20
-			//desertOfDeath-20x20
-			//spiralOfMadness-50x50
 			String fichierName = "cartes/mushroomOfHell-20x20.map";
 			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
 			Carte carteToDraw = donneesInit.getCarte();
@@ -19,10 +17,8 @@ public class TestStratElementaire {
 			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
 			
 			
-			ChefPompier chefElem = new ChefPompierSimple(carteToDraw, donneesInit);
+			ChefPompier chefElem = new ChefPompierEvolue(carteToDraw, donneesInit);
 			Simulateur simulateur = new Simulateur(gui, donneesInit, chefElem, fichierName);
-
-
 
 
 		}catch (FileNotFoundException e) {
