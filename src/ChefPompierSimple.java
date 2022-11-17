@@ -16,12 +16,13 @@ public class ChefPompierSimple extends ChefPompier{
 //		if (!(robot.has_accessto(destination.getNature()))) {
 //			return false;
 //		}
-		if (robot.getReservoir() == 0) {
+		/*if (robot.getReservoir() == 0) {
+			
 			robot.programmeEvents(robot.closestWaterDestination(), simulateur);
 			robot.remplirReservoir(simulateur);
 			return false;
-		}
-		else if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
+		}*/
+		if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
 			return false;
 		}
 		return true;
@@ -38,11 +39,8 @@ public class ChefPompierSimple extends ChefPompier{
 						incendie.setAffecte(true);
 						robot.eteindreIncendie(simulateur, incendie);
 						while (incendie.getIntensiteCourante() != 0) {
-							robot.programmeEvents(robot.closestWaterDestination(), simulateur);
-							robot.remplirReservoir(simulateur);
 							robot.programmeEvents(incendie.getPosition(), simulateur);
-							robot.eteindreIncendie(simulateur, incendie);
-							
+							robot.eteindreIncendie(simulateur, incendie);						
 						}
 						break;
 					}

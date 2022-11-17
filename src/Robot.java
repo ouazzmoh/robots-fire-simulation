@@ -69,7 +69,7 @@ public abstract class Robot {
 		// si on ajoute l algo de Path on peut effectuer ce calcul sur n'importe quelle case
 		// on verifie deja si la case est accessible
 		double vitesse1 = this.getVitesse(caseArrivee.getNature());
-		double vitesse2 = this.getVitesse(this.position.getNature());
+		double vitesse2 = this.getVitesse(positionCourante.getNature());
 		double tailleCase = carte.getTailleCases();
 		return (tailleCase)/(((vitesse1+vitesse2)*1000)/(2*3600));
 	}
@@ -106,7 +106,8 @@ public abstract class Robot {
 		Case caseArrivee = carte.getVoisin(positionCourante, dir);
 		if (this.has_accessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
-			long dateToAdd = max((long) 1,(long) (temps) / 5) ; //temps d'attente pour le deplacement
+			System.out.println(temps);
+			long dateToAdd = max((long) 1,(long) (temps) / 6) ; //temps d'attente pour le deplacement
 			this.dateArrive = this.dateArrive + dateToAdd;
 			simulateur.ajouteEvenement(new EventRobotDeplace(this.dateArrive, dir, this, caseArrivee.getNature()));	
 			this.positionCourante = caseArrivee;
@@ -131,15 +132,17 @@ public abstract class Robot {
 			dateToAdd = max((long)1,this.tempsEteinte(litresAverser)/30);
 		}
 		else {
-			dateToAdd = max((long)1,this.tempsEteinte(incendie.getIntensiteCourante())/5);
+			dateToAdd = max((long)1,this.tempsEteinte(incendie.getIntensiteCourante())/30);
 		}
 		System.out.println("Robot is shuting down the fire, time_needed ---->" + dateToAdd + " steps");
 		this.dateArrive =this.dateArrive + dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotFire(this.dateArrive, this, simulateur.incendie));
 		try {
-		if (litresAverser > 0) {
+		if (litresAverser >= 0) {
 			incendie.setIntensiteCourante(incendie.getIntensiteCourante() - reservoir);
 			System.out.println("Il reste " + incendie.getIntensiteCourante() + " pour l'éteindre");
+			programmeEvents(closestWaterDestination(), simulateur);
+			remplirReservoir(simulateur);
 		}
 		else {
 			System.out.println("c bon");
@@ -161,7 +164,7 @@ public abstract class Robot {
 	 * @param simulateur
 	 */
 	public void remplirReservoir(Simulateur simulateur) {
-		long dateToAdd = max((long)1, this.tempsCharge()/50); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
+		long dateToAdd = max((long)1, this.tempsCharge()/100); //temps d'attente pour le remplissage du reservoir on divise par 20 pour la rapidité
 		System.out.println("Le robot est en train de remplir son reservoir, temps necessaire ----->" + dateToAdd + "steps");
 		this.dateArrive = this.dateArrive+ dateToAdd;
 		simulateur.ajouteEvenement(new EventRobotCharge(this.dateArrive, this));
