@@ -5,6 +5,7 @@ public class DonneesSimulation {
 	 * la carte, la taille des cases, le format et les cases (ou encore les natures des terrains)
 	 * Informations sur les incendies : leurs positions et leurs intensités
 	 * Informations sur les robots : leurs positions, leurs types, vitesse et réservoir
+	 * intensiteTotale: La somme des intensite des incendies sur la carte
 	 */
 	private Carte carte;
 	private Incendie[] incendies;
@@ -20,6 +21,7 @@ public class DonneesSimulation {
 		this.carte = carte;
 		this.incendies = incendies;
 		this.robots = robots;
+		
 	}
 	public Carte getCarte() {
 		return carte;

@@ -34,16 +34,42 @@ public class Simulateur implements Simulable {
 	Incendie[] incendie;
 	
 	/**ChefPompier**/
-	ChefPompierEvolue chef;
+	ChefPompier chef;
 	
 	
 	/**Fichier de la carte**/
 	String cheminMap;
-
 	
-	/** Constructeur, et association a la gui*/
-
-	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, ChefPompierEvolue chef, String cheminMap) {
+	
+	/**
+	 * Constructeur pour tester les maps
+	 * @param gui
+	 * @param donneesInit
+	 */
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit) {
+		this.gui = gui;
+		this.donnees = donneesInit;
+		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
+		
+		//The structure where we store events
+		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
+		this.evenements.put((long)1, new LinkedList<Evenement>());
+		//
+		
+		this.incendie = donnees.getIncendie();
+		gui.setSimulable(this);
+		draw();
+		drawEnd();
+	}
+	
+	/**
+	 * Constructeur pour la simulation génerale
+	 * @param gui
+	 * @param donneesInit
+	 * @param chef
+	 * @param cheminMap
+	 */
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, ChefPompier chef, String cheminMap) {
 		this.gui = gui;
 		this.donnees = donneesInit;
 		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
@@ -151,7 +177,7 @@ public class Simulateur implements Simulable {
 			int x = positionCase.getColonne();
 			int y = positionCase.getLigne();
 			if (incendieTableau[i].getIntensite() != 0) {
-				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/fire1.png", tailleCases_width, tailleCases_length, null));
+				gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length, "./images/FIRE.gif", tailleCases_width, tailleCases_length, null));
 				//incendieTableau[i].setAffecte(false);
 			}
 		}
@@ -166,6 +192,32 @@ public class Simulateur implements Simulable {
 			int y = positionCase.getLigne();
 			gui.addGraphicalElement(new ImageElement(x*tailleCases_width, y*tailleCases_length,  "./images/"+ robotTableau[i].returnType() + (int)robotTableau[i].waterBar() +".png", tailleCases_width, tailleCases_length, null));
 		}
+	}
+	
+	
+	private void drawEnd() {
+
+        int xMax = gui.getWidth();
+        xMax -= xMax % 10 + 50;  //50 est la taille de la partie non utile de la fenetre
+        int yMax = gui.getHeight();
+        yMax -= yMax % 10 + 80; // 80 est la taille de la partie non utile de la fenetre
+        
+        int imageX = (int)(xMax/2);
+        int imageY = (int)(yMax/2 - 0.5*yMax/2);
+//        int imageX = (int)(xMax/2);
+//        int imageY = (int)(yMax/2);
+        int imageWidth = (int)(xMax*0.5);
+        int imageHeight = (int)(yMax*0.5);
+        
+        int imageX2 = (int)(xMax/2- 0.5*xMax);
+        int imageY2 = (int)(yMax/2 - 0.5*yMax/2);
+//        int imageX = (int)(xMax/2);
+//        int imageY = (int)(yMax/2);
+        int imageWidth2 = (int)(xMax*0.5);
+        int imageHeight2 = (int)(yMax*0.5);
+		
+		gui.addGraphicalElement(new ImageElement(imageX, imageY, "./images/DANCEROBOT.gif", imageWidth, imageHeight, null));
+		gui.addGraphicalElement(new ImageElement(imageX2, imageY2, "./images/GG.gif", imageWidth2, imageHeight2, null));
 	}
 
 	
@@ -191,6 +243,7 @@ public class Simulateur implements Simulable {
 			}
 			else {
 				incrementeDate();
+				
 				System.out.println("*Il n y'a pas d'evenements a faire dans cette date, on incremente la date*");
 			}
 			
@@ -208,6 +261,7 @@ public class Simulateur implements Simulable {
 //			}
 		}
 		else {
+			drawEnd();
 			System.out.println("***La simulation est terminée***");
 		}
 	
@@ -246,7 +300,7 @@ public class Simulateur implements Simulable {
 		this.incendie = incendie;
 	}
 
-	public ChefPompierEvolue getChef() {
+	public ChefPompier getChef() {
 		return chef;
 	}
 

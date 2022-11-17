@@ -1,30 +1,13 @@
 import java.util.*;
 
-public class ChefPompierEvolue {
+public class ChefPompierEvolue extends ChefPompier{
 
-	private Carte carte;
-	private DonneesSimulation donnees;
-	
-	
+
 	public ChefPompierEvolue(Carte carte, DonneesSimulation donnees) {
-		this.carte = carte;
-		this.donnees = donnees;
+		super(carte, donnees);
 	}
 
 
-	public Carte getCarte() {
-		return carte;
-	}
-	public void setCarte(Carte carte) {
-		this.carte = carte;
-	}
-	public DonneesSimulation getDonnees() {
-		return donnees;
-	}
-	public void setDonnees(DonneesSimulation donnees) {
-		this.donnees = donnees;
-	}
-	
 	
 	
 	/**
@@ -35,6 +18,8 @@ public class ChefPompierEvolue {
 	 */
 	public boolean canGo(Robot robot, Simulateur simulateur) {
 		if (robot.getReservoir() == 0) {
+			robot.programmeEvents(robot.closestWaterDestination(), simulateur);
+			robot.remplirReservoir(simulateur);
 			return false;
 		}
 		else if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
@@ -61,7 +46,7 @@ public class ChefPompierEvolue {
 	 * Méthode closestIncendie, qui renvoie la case de nature EAU la plus proche au robot
 	 * @return caseProche
 	 */
-	public Case closestIncendie(Case positionCourante) {	
+	public Incendie closestIncendie(Case positionCourante) {	
 		Incendie[] incendieTableau = donnees.getIncendie();
 		Case caseProche = incendieTableau[0].getPosition();
 		Double min = Double.POSITIVE_INFINITY;
@@ -71,45 +56,26 @@ public class ChefPompierEvolue {
 				caseProche = incendie.getPosition();
 			}
 		}
-		return caseProche;
-	}
-	
-	/**
-	 * Méthode closestIncendieDestination, qui renvoie la case voisine de la source d'incendie la plus proche au robot.
-	 * @return nouvelleDestination
-	 */
-	public Incendie closestIncendieDestination(Robot robot) {
-		Case destinationTemp = closestIncendie(robot.positionCourante);
-		double min = Double.POSITIVE_INFINITY;
-		Case nouvelleDestination = null;
-		for(Direction d : Direction.values()) {
-			if (carte.voisinExiste(destinationTemp, d) && robot.has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
-				if(heuristicIncendie(carte.getVoisin(destinationTemp, d), robot.positionCourante) < min) {
-					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
-					min = heuristicIncendie(nouvelleDestination, robot.positionCourante);
-				}
-			}
-		}
-		
-		Incendie incendieDestination = null;
+		Incendie incendieProche = null;
 		for (Incendie incendie : donnees.getIncendie()) {
-			if (incendie.getPosition().equals(nouvelleDestination)) {
-				incendieDestination = incendie;
+			if (incendie.getPosition().equals(caseProche)) {
+				incendieProche = incendie;
 				break; 	
 			}
 		}
 		
-		return incendieDestination;
-
+		return incendieProche;
 	}
+	
 	
 	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
 
 		for (Robot robot : robotTab) {
 			if (canGo(robot, simulateur)) {
 //				for (Incendie incendie : incendieTab) {
-				Incendie incendie = closestIncendieDestination(robot);
-				if (incendie.getIntensiteCourante() != 0 && robot.access(incendie.getPosition())) {
+				//TODO: TEST ACCESS FOR FIRE
+				Incendie incendie = closestIncendie(robot.positionCourante);
+				if (!(incendie.isAffecte()) && robot.access(incendie.getPosition())) {
 					robot.programmeEvents(incendie.getPosition(), simulateur);
 					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 					incendie.setAffecte(true);
