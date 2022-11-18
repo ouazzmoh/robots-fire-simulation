@@ -7,11 +7,10 @@ public class ChefPompierEvolue extends ChefPompier{
 
 	/**
 	 * Constructeur public, crée un nouveau chefPompierEvolue
-	 * @param carte
 	 * @param donnees
 	 */
 	public ChefPompierEvolue(Carte carte, DonneesSimulation donnees) {
-		super(carte, donnees);
+		super(donnees);
 	}
 
 
@@ -94,38 +93,33 @@ public class ChefPompierEvolue extends ChefPompier{
         return robotProche;
     }
 	
-//	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
-//
-//		for (Incendie incendie : incendieTab) {
-////				for (Incendie incendie : incendieTab) {
-//				//TODO: TEST ACCESS FOR FIRE
-//			if (!(incendie.isAffecte())) {
-//				Robot robot = closestRobot(incendie, simulateur, robotTab);
-//				if (robot != null) {
-//					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
-//					incendie.setAffecte(true);
-//					while (incendie.getIntensiteCourante() != 0) {
-//						robot.programmeEvents(incendie.getPosition(), simulateur);
-//						robot.eteindreIncendie(simulateur, incendie);		
-//	//						}
-//					}
-//				}
-//			}
-//		}
-//}
+	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
+
+		for (Incendie incendie : incendieTab) {
+			if (!(incendie.isAffecte())) {
+				Robot robot = closestRobot(incendie, simulateur, robotTab);
+				if (robot != null) {
+					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
+					incendie.setAffecte(true);
+					while (incendie.getIntensiteCourante() != 0) {
+						robot.programmeEvents(incendie.getPosition(), simulateur);
+						robot.eteindreIncendie(simulateur, incendie);		
+					}
+				}
+			}
+		}
+	}
 	
 	/**
-	 * Méthode stratégie, qui génère une stratégie évoluée pour eteindre toutes les incendies.
+	 * Méthode de strategie qui pour chaque robot, elle affecte l'incendie la plus proche
 	 * @param simulateur
 	 * @param robotTab
 	 * @param incendieTab
 	 */
-	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
+	public void strategie2(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
 
 		for (Robot robot : robotTab) {
 			if (canGo(robot, simulateur)) {
-//				for (Incendie incendie : incendieTab) {
-				//TODO: TEST ACCESS FOR FIRE
 				Incendie incendie = closestIncendie(robot.positionCourante);
 				if (!(incendie.isAffecte()) && robot.hasAccessto(incendie.getPosition().getNature())) {
 					robot.programmeEvents(incendie.getPosition(), simulateur);
@@ -135,12 +129,15 @@ public class ChefPompierEvolue extends ChefPompier{
 					while (incendie.getIntensiteCourante() != 0) {
 						robot.programmeEvents(incendie.getPosition(), simulateur);
 						robot.eteindreIncendie(simulateur, incendie);		
-//						}
 					}
 				}
 			}
 		}
 	}
 }
+
+
+	
+
 	
 

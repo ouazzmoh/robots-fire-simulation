@@ -9,7 +9,7 @@ public class ChefPompierSimple extends ChefPompier{
 	 * @param donnees
 	 */
 	public ChefPompierSimple(Carte carte, DonneesSimulation donnees) {
-		super(carte, donnees);
+		super(donnees);
 	}
 
 	/**
@@ -19,15 +19,6 @@ public class ChefPompierSimple extends ChefPompier{
 	 * @return boolean
 	 */
 	public boolean canGoElementaire(Robot robot, Simulateur simulateur) {
-//		if (!(robot.has_accessto(destination.getNature()))) {
-//			return false;
-//		}
-		/*if (robot.getReservoir() == 0) {
-			
-			robot.programmeEvents(robot.closestWaterDestination(), simulateur);
-			robot.remplirReservoir(simulateur);
-			return false;
-		}*/
 		if (robot.getDateArrive() +1 > simulateur.getDateSimulation()) {
 			return false;
 		}
@@ -51,13 +42,7 @@ public class ChefPompierSimple extends ChefPompier{
 				}
 			}
 		}
-	}
-		
-		
-		
-		
-		
-		
-	}
+	}		
+}
 	
 

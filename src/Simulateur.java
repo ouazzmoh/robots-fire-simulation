@@ -18,8 +18,6 @@ import java.util.zip.DataFormatException;
  */
 public class Simulateur implements Simulable {
 	
-//	private static final boolean TRUE = false;
-
 	/** Interface graphique */
 	private GUISimulator gui;
 	
@@ -48,7 +46,7 @@ public class Simulateur implements Simulable {
 	 * @param gui
 	 * @param donneesInit
 	 */
-	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit) {
+	public Simulateur(GUISimulator gui, DonneesSimulation donneesInit, String cheminMap) {
 		this.gui = gui;
 		this.donnees = donneesInit;
 		this.dateSimulation = 1;  //se renetialise a 1 au debut des evenements : on n'a executer aucun evenement
@@ -57,6 +55,7 @@ public class Simulateur implements Simulable {
 		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
 		this.evenements.put((long)1, new LinkedList<Evenement>());
 		//
+		this.cheminMap = cheminMap;
 		
 		this.incendie = donnees.getIncendie();
 		gui.setSimulable(this);
@@ -228,7 +227,10 @@ public class Simulateur implements Simulable {
 		Incendie[] incendieTab = donnees.getIncendie();
 		Robot[] robotTab = donnees.getrobot();
 		if (!(simulationTerminee())) {		
+			//Si la simulation utilise un chef pompier on met a jour la strategie
+			if (this.chef != null) {
 			chef.strategie(this, robotTab, incendieTab);
+			}
 			System.out.println("Date courante :" + this.dateSimulation);
 			LinkedList<Evenement> currListEvents = evenements.get(this.dateSimulation);	
 			
@@ -325,14 +327,14 @@ public class Simulateur implements Simulable {
 		
 		this.dateSimulation = 1; 
 		
-		//The structure where we store events
-		this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
-		this.evenements.put((long)1, new LinkedList<Evenement>());
-		//
+		if(this.chef != null) {
+			this.evenements = new TreeMap<Long, LinkedList<Evenement>> ();
+			this.evenements.put((long)1, new LinkedList<Evenement>());
+			this.chef.donnees = this.donnees; 
+		}
 		
 		this.incendie = donnees.getIncendie();
-		this.chef.donnees = donnees;
-//		gui.setSimulable(this);
+		gui.setSimulable(this);
 		}
 	}
 

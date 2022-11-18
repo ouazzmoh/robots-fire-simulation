@@ -4,12 +4,9 @@ import java.util.zip.DataFormatException;
 
 import gui.GUISimulator;
 
-public class TestStratEvolue {
+public class TestElementaireMap2 {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
-
-			//mushroomOfHell-20x20
 			String fichierName = "cartes/mushroomOfHell-20x20.map";
 			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
 			Carte carteToDraw = donneesInit.getCarte();
@@ -17,14 +14,15 @@ public class TestStratEvolue {
 			GUISimulator gui = new GUISimulator(500, 500, Color.WHITE);
 			
 			
-			ChefPompier chefElem = new ChefPompierEvolue(carteToDraw, donneesInit);
+			ChefPompier chefElem = new ChefPompierSimple(carteToDraw, donneesInit);
 			Simulateur simulateur = new Simulateur(gui, donneesInit, chefElem, fichierName);
+
 
 
 		}catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
-            System.out.println("\n\t**format du fichier " + args[0] + " invalide: " + e.getMessage());
+            System.out.println("\n\t**format du fichier qui correspond åa " + args[0] + " invalide: " + e.getMessage());
         
         }
 

@@ -3,25 +3,17 @@
  */
 public abstract class ChefPompier {
 	
-	protected Carte carte;
 	protected DonneesSimulation donnees;
 	
 	/**
 	 * Constructeur public, crée un nouveau chefPompier
 	 * @param donnees
 	 */
-	public ChefPompier(Carte carte, DonneesSimulation donnees) {
-		this.carte = carte;
+	public ChefPompier(DonneesSimulation donnees) {
 		this.donnees = donnees;
 	}
 
 
-	public Carte getCarte() {
-		return carte;
-	}
-	public void setCarte(Carte carte) {
-		this.carte = carte;
-	}
 	public DonneesSimulation getDonnees() {
 		return donnees;
 	}

@@ -7,41 +7,27 @@ import gui.GUISimulator;
 public class TestDeplacement {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
+			
+			String fichierName = "cartes/carteSujet.map";
+			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
+			Carte carteToDraw = donneesInit.getCarte();
+			
+			GUISimulator gui = new GUISimulator(500, 500, Color.WHITE);
+			Simulateur simulateur = new Simulateur(gui, donneesInit, fichierName);
+			
+			Robot[] robots = simulateur.getDonnees().getrobot();
+			Robot robotTodeplace = robots[1];
+			
+			robotTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
+			robotTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, simulateur);
 
-			DonneesSimulation donnees = NewLecteurDonnees.lire("cartes/carteSujet.map");
-			Carte carteToDraw = donnees.getCarte();
-			
-<<<<<<< HEAD
-			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees);
-=======
-			GUISimulator gui = new GUISimulator(1920, 1080, Color.RED);
-			Simulateur simulateur = new Simulateur(gui, donnees, 70, incendieTableau);
->>>>>>> b38ae022d0f97b8262b2165a45921775b2931313
-			
-			Robot[] robots = donnees.getrobot();
-			Robot robotsTodeplace = robots[1];
-			
-			//Deplacer le robot in the current date of simulateur
-			robotsTodeplace.deplacerEffectivement(Direction.NORD, carteToDraw, 1,simulateur);
-			robotsTodeplace.eteindreIncendie(1, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 2 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 3 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.OUEST, carteToDraw, 4 ,simulateur);
-			robotsTodeplace.remplirReservoir(4, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 5 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 6 ,simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 7 ,simulateur);
-			robotsTodeplace.eteindreIncendie(7, simulateur);
-			robotsTodeplace.deplacerEffectivement(Direction.EST, carteToDraw, 8 ,simulateur);
-<<<<<<< HEAD
-			robotsTodeplace.eteindreIncendie(9, simulateur);
-			System.out.println("TEST");
-=======
-			robotsTodeplace.eteindreIncendie(incendieTableau, 9, simulateur);
->>>>>>> b38ae022d0f97b8262b2165a45921775b2931313
 
 
 
