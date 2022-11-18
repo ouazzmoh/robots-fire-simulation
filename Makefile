@@ -25,54 +25,55 @@ all: testInvader testLecture testCarte testDeplacement testPath testElementaire 
 
 #test fourni par le sujet
 testInvader:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestInvader.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestInvader.java
 
 testCarte:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestCarte.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestCarte.java
 
 #Scenario simple d'un deplacement
 testDeplacement:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestDeplacement.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestDeplacement.java
 
 #Scenario simple d'un robot qui trouve son chemin	
 testPath:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestPath.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestPath.java
 	
 testElementaire:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaire.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestElementaire.java
 	
 
 testEvolue:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolue.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/tests/TestEvolue.java
 
 testLecture:
 	javac -d bin -sourcepath src src/tests/TestLecteurDonnees.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
-#   > java -classpath bin:gui_bin/gui.jar TestInvader
+#   > java -classpath bin:bin/gui.jar TestInvader
 # ou bien lancer l'execution en passant par ce Makefile:vi
 #   > make exeInvader
 exeInvader: 
-	java -classpath bin:gui_bin/gui.jar tests/TestInvader
+	java -classpath bin:bin/gui.jar tests/TestInvader
 	
 exeCarte: 
-	java -classpath bin:gui_bin/gui.jar tests/TestCarte
+	java -classpath bin:bin/gui.jar tests/TestCarte
 
 exeDeplacement: 
-	java -classpath bin:gui_bin/gui.jar tests/TestDeplacement
+	java -classpath bin:bin/gui.jar tests/TestDeplacement
 	
 exePath: 
-	java -classpath bin:gui_bin/gui.jar tests/TestPath
+	java -classpath bin:bin/gui.jar tests/TestPath
 	
 exeElementaire: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementaire $(CARTE)
+	java -classpath bin:bin/gui.jar tests/TestElementaire $(CARTE)
 		
 exeEvolue: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvolue $(CARTE)
+	java -classpath bin:bin/gui.jar tests/TestEvolue $(CARTE)
 	
 exeLecture: 
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
 clean:
 	rm -rf bin/*/*.class
+	rm -rf bin/*.class
