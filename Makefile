@@ -21,7 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testInvader testLecture testCarte testDeplacement testPath  testElementaireMap1 testElementaireMap2 testElementaireMap3 testElementaireMap4 testEvolueMap1 testEvolueMap2 testEvolueMap3 testEvolueMap4  
+all: testInvader testLecture testCarte testDeplacement testPath  testElementaireMap1 testElementaireMap2 testElementaireMap3 testElementaireMap4 testElementairePerso testEvolueMap1 testEvolueMap2 testEvolueMap3 testEvolueMap4 testEvoluePerso  
 
 #test fourni par le sujet
 testInvader:
@@ -47,6 +47,8 @@ testElementaireMap3:
 	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap3.java
 testElementaireMap4:
 	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap4.java
+testElementairePerso:
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementairePerso.java
 	
 #Les tests de la strategie evolue	
 testEvolueMap1:
@@ -57,6 +59,8 @@ testEvolueMap3:
 	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap3.java
 testEvolueMap4:
 	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap4.java
+testEvoluePerso:
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvoluePerso.java
 
 testLecture:
 	javac -d bin -sourcepath src src/tests/TestLecteurDonnees.java
@@ -89,6 +93,9 @@ exeElementaireMap3:
 
 exeElementaireMap4: 
 	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap4
+
+exeElementairePerso: 
+	java -classpath bin:gui_bin/gui.jar tests/TestElementairePerso $(CARTE)
 	
 exeEvolueMap1: 
 	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap1
@@ -102,8 +109,11 @@ exeEvolueMap3:
 exeEvolueMap4: 
 	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap4
 	
+exeEvoluePerso: 
+	java -classpath bin:gui_bin/gui.jar tests/TestEvoluePerso $(CARTE)
+	
 exeLecture: 
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
 clean:
-	rm -rf bin/*.class
+	rm -rf bin/*/*.class

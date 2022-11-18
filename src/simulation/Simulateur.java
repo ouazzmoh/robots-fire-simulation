@@ -147,7 +147,7 @@ public class Simulateur implements Simulable {
         int xMax = gui.getWidth();
         xMax -= (int)xMax*0.02;  // pour eliminer les cases du toplevel du gui
         int yMax = gui.getHeight();
-        yMax -= (int)yMax*0.13; // pour eliminer les cases du toplevel du gui
+        yMax -= (int)yMax*0.15; // pour eliminer les cases du toplevel du gui
         
 		int tailleCases_length = (yMax)/nbLig;
 		int tailleCases_width = (xMax)/nbCol;

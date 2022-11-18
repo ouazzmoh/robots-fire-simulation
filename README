@@ -7,16 +7,27 @@ En plus des tests fournis par les enseignants, on a ajouté:
 	* TestPath: Exemple simple d'un robot qui trouve le plus court chemin
 	* TestElementaireMapi : Exemple de simulation avec la strategie elementaire(i dans {1,2,3,4})
 	* TestEvolueeMapi : Exemple de simulation avec la strategie evolue(i dans {1,2,3,4})
+	* TestElementairePerso : Exemple de simulation avec la strategie elementaire en passant un fichier .map comme argument
+	* TestElementairePerso : Exemple de simulation avec la strategie evolue en passant un fichier .map comme argument
 	
 La compilation genere les executables:
 	* exeDeplacement
 	* exePath
 	* exeElementaireMapi (i dans {1,2,3,4})
 	* exeEvolueMapi (i dans {1,2,3,4})
-	
+
+********************************** HOW TO USE ?************************************
 Pour compiler tous les fichiers : make all
 
 Pour executer par exemple la strategie evolue sur la carte2: make exeEvolueMap2
+
+Pour executer par exemple la strategie elementaire sur la carte3: make exeEvolueMap3
+
+Pour executer par exemple la strategie evolue sur la carte "mushroomOfHell-20x20.map" : make exeEvoluePerso CARTE=mushroomOfHell-20x20
+
+Pour executer par exemple la strategie elementaire sur la carte "desertOfDeath-20x20.map" : make exeElementairePerso CARTE=desertOdDeath-20x20
+***********************************************************************************
+
 
 
 Pour fournir une autre carte a la simulation:
