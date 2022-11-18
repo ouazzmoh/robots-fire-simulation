@@ -21,7 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testInvader testLecture testCarte testDeplacement testPath  testElementaireMap1 testElementaireMap2 testElementaireMap3 testElementaireMap4 testElementairePerso testEvolueMap1 testEvolueMap2 testEvolueMap3 testEvolueMap4 testEvoluePerso  
+all: testInvader testLecture testCarte testDeplacement testPath testElementaire testEvolue  
 
 #test fourni par le sujet
 testInvader:
@@ -37,30 +37,13 @@ testDeplacement:
 #Scenario simple d'un robot qui trouve son chemin	
 testPath:
 	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestPath.java
-
-#Les tests de la strategie elementaire	
-testElementaireMap1:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap1.java
-testElementaireMap2:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap2.java
-testElementaireMap3:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap3.java
-testElementaireMap4:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap4.java
-testElementairePerso:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementairePerso.java
 	
-#Les tests de la strategie evolue	
-testEvolueMap1:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap1.java
-testEvolueMap2:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap2.java
-testEvolueMap3:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap3.java
-testEvolueMap4:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap4.java
-testEvoluePerso:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvoluePerso.java
+testElementaire:
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaire.java
+	
+
+testEvolue:
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolue.java
 
 testLecture:
 	javac -d bin -sourcepath src src/tests/TestLecteurDonnees.java
@@ -82,35 +65,11 @@ exeDeplacement:
 exePath: 
 	java -classpath bin:gui_bin/gui.jar tests/TestPath
 	
-exeElementaireMap1: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap1
-
-exeElementaireMap2: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap2
-
-exeElementaireMap3: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap3
-
-exeElementaireMap4: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap4
-
-exeElementairePerso: 
-	java -classpath bin:gui_bin/gui.jar tests/TestElementairePerso $(CARTE)
-	
-exeEvolueMap1: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap1
-
-exeEvolueMap2: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap2
-
-exeEvolueMap3: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap3
-
-exeEvolueMap4: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap4
-	
-exeEvoluePerso: 
-	java -classpath bin:gui_bin/gui.jar tests/TestEvoluePerso $(CARTE)
+exeElementaire: 
+	java -classpath bin:gui_bin/gui.jar tests/TestElementaire $(CARTE)
+		
+exeEvolue: 
+	java -classpath bin:gui_bin/gui.jar tests/TestEvolue $(CARTE)
 	
 exeLecture: 
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
