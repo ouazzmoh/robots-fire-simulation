@@ -6,7 +6,10 @@ import java.util.Scanner;
 import java.util.zip.DataFormatException;
 import java.util.ArrayList;
 
-
+/**
+ * CLasse newLecteurDonnees, qui lit toutes les données ( carte incendies, robots..) et crée les objets associés utiles
+ * pour la simulation
+ */
 public class NewLecteurDonnees {
 	public static DonneesSimulation lire(String fichierDonnees)
 	        throws FileNotFoundException, DataFormatException {
@@ -88,25 +91,7 @@ public class NewLecteurDonnees {
 
         try {
             chaineNature = scanner.next();
-            if (chaineNature.equals("EAU")) {
-            	caselue.setNature(NatureTerrain.EAU);
-            }
-            else if (chaineNature.equals("ROCHE")) {
-            	caselue.setNature(NatureTerrain.ROCHE);
-            }
-            else if (chaineNature.equals("FORET")) {
-            	caselue.setNature(NatureTerrain.FORET);
-            }
-            else if (chaineNature.equals("TERRAIN_LIBRE")) {
-            	caselue.setNature(NatureTerrain.TERRAIN_LIBRE);
-            }
-            else if (chaineNature.equals("HABITAT")) {
-            	caselue.setNature(NatureTerrain.HABITAT);
-            }
-            
-            // si NatureTerrain est un Enum, vous pouvez recuperer la valeur
-            // de l'enum a partir d'une String avec:
-            //			NatureTerrain nature = NatureTerrain.valueOf(chaineNature);
+            caselue.setNature(NatureTerrain.valueOf(chaineNature));
 
             verifieLigneTerminee();
 

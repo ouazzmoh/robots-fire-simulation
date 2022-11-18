@@ -1,15 +1,15 @@
 
-
+/**
+ * La classe Drone, une classe fille de la classe robot, qui caractérise un nouveau type de robots:
+ * Les drones, qui ont une vitesse maximale de 150 km/h, un réservoir de 10000 L et qui peuvent 
+ * traverser tout type de terrain. 
+ */
 public class Drone extends Robot {
-	/**
-	 * La classe Drone, une classe fille de la classe robot, qui caractérise un nouveau type de robots:
-	 * Les drones, qui ont une vitesse maximale de 150 km/h, un réservoir de 10000 L et qui peuvent 
-	 * traverser tout type de terrain. 
-	 */
+
 	private double reservoir;
 	private double reservoirCourant;
 	/**
-	 * Constructeur public, qiu crée un nouveau drone qui a une vitesse par défaut (ie 100 km/h)
+	 * Constructeur public, qui crée un nouveau drone qui a une vitesse par défaut (ie 100 km/h)
 	 * @param position case dans laquelle le drone se trouve dans la carte
 	 * @param reservoir volume d'eau dans son reservoir
 	 */
@@ -54,6 +54,9 @@ public class Drone extends Robot {
 	public void deverserEauCourant(int vol) {
 		reservoir -= vol;
 	}
+	/**
+	 * Méthode remplirEau, qui remplit le réservoir du drone.
+	 */
 	public void remplirEau() {
 		reservoir = 10000;
 	}
@@ -62,7 +65,7 @@ public class Drone extends Robot {
 	}
 	
 	@Override
-	public boolean has_accessto(NatureTerrain nature) {
+	public boolean hasAccessto(NatureTerrain nature) {
 		return true;
 	}
 	
@@ -93,10 +96,19 @@ public class Drone extends Robot {
 		return waterBar;
 	}
 	
+	/**
+	 * méthode tempsCharge, retourne le temps nécessaire pour remplir le réservoir
+	 * @return tempscharge
+	 */
 	public long tempsCharge() {
 		return (long) (30 * 60); //30min
 	}
 	
+	/**
+	 * Méthode tempsEteinte, renvoie le temps nécessaire pour verser un volume donné.
+	 * @param litresAverser
+	 * @return tempsEteinte
+	 */
 	public long tempsEteinte(double litresAverser) {
 		return (long) (30 * litresAverser)/10000; 
 	}

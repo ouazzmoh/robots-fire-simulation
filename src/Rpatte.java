@@ -1,10 +1,8 @@
 
-
+/**
+ * la classe Rpatte, une classe fille de la classe Robot, les robots à pattes n'ont pas de reservoir
+ */
 public class Rpatte extends Robot {
-	/**
-	 * la classe Rpatte, une classe fille de la classe Robot, les robots à pattes n'ont pas de reservoir
-	 */
-	
 	/**
 	 * Constructeur public, qui crée un nouveau Robot à pattes avec la vitesse par défaut 30 km/h
 	 * @param position case dans laquelle le robot se trouve
@@ -48,7 +46,7 @@ public class Rpatte extends Robot {
 	}
 	
 	@Override
-	public boolean has_accessto(NatureTerrain nature) {
+	public boolean hasAccessto(NatureTerrain nature) {
 		switch(nature) {
 			case EAU:
 				return false;

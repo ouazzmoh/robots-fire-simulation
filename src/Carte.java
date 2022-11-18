@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+/**
+ * classe Carte, caracterisée par la taille de ses cases (en mètres, et pas la taille de tracé en pixels) , son nombre de lignes
+ * son nombres de colonnes qui sert à définir la matrice des cases, enfin la matrice des cases
+ * qui contient les diffrentes cases.
+ */
 public class Carte {
-	/**
-	 * classe Carte, caracterisée par la taille de ses cases (en mètres, et pas la taille de tracé en pixels) , son nombre de lignes
-	 * son nombres de colonnes qui sert à définir la matrice des cases, enfin la matrice des cases
-	 * qui contient les diffrentes cases.
-	 */
+	
 	private int tailleCases;
 	private int nbLignes;
 	private int nbColonnes;

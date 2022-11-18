@@ -2,11 +2,11 @@
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+/**
+ * Classe Path, qui, étant donné une source, un destination, un robot et une carte, peut nous génerer un plus court chemin de 
+ * la case Source vers la case destination en utilisant l'algorithme A*
+ */
 public class Path {
-	/**
-	 * Classe Path, qui, étant donné une source, un destination, un robot et une carte, peut nous génerer un plus court chemin de 
-	 * la case Source vers la case destination en utilisant l'algorithme A*
-	 */
 	private Case source;
 	private Case destination;
 	private Robot robot;
@@ -176,7 +176,7 @@ public class Path {
 			Case caseCourante = queue.poll(); // case prioritaire
 			double min = Double.POSITIVE_INFINITY;
 			for(Direction d : Direction.values()) {
-				if (carte.voisinExiste(caseCourante, d) && robot.has_accessto(carte.getVoisin(caseCourante, d).getNature())) {
+				if (carte.voisinExiste(caseCourante, d) && robot.hasAccessto(carte.getVoisin(caseCourante, d).getNature())) {
 					Case caseFille = carte.getVoisin(caseCourante, d);
 					double pasTemp = get(nbPas, caseCourante) + 1.0; // on incrémente le nb de pas
 					double coutTemp = pasTemp + heuristic(caseFille);

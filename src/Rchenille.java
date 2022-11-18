@@ -1,11 +1,10 @@
 
-
+/**
+ * Classe Rchenille, une classe fille de la classe Robot, qui caractérise un nouveau type de robots:
+ * Les robots à chenilles, qui not une vitesse maximale de 80km/h, un reservoir de 2000 L,
+ * et qui ne peuvent pas traverser l'eau et les roches.
+ */
 public class Rchenille extends Robot {
-	/**
-	 * Classe Rchenille, une classe fille de la classe Robot, qui caractérise un nouveau type de robots:
-	 * Les robots à chenilles, qui not une vitesse maximale de 80km/h, un reservoir de 2000 L,
-	 * et qui ne peuvent pas traverser l'eau et les roches.
-	 */
 	private double reservoir;
 	private double reservoirCourant;
 	/**
@@ -66,7 +65,7 @@ public class Rchenille extends Robot {
 		reservoirCourant -= vol;
 	}
 	@Override
-	public boolean has_accessto(NatureTerrain nature) {
+	public boolean hasAccessto(NatureTerrain nature) {
 		switch(nature) {
 			case EAU:
 				return false;

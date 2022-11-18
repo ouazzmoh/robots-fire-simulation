@@ -1,11 +1,9 @@
 import java.util.*;
 
+/**
+ * Classe Robot, une classe abstraite des Robots, qui vont éteindre les incendies
+ */
 public abstract class Robot {
-	
-	
-	/**
-	 * Classe Robot, une classe abstraite des Robots, qui vont éteindre les incendies
-	 */
 	protected double vitesse;
 	protected Case position;
 	protected Carte carte;
@@ -103,7 +101,7 @@ public abstract class Robot {
 	 */
 	public void deplacerEffectivement(Direction dir, Carte carte, Simulateur simulateur) {
 		Case caseArrivee = carte.getVoisin(positionCourante, dir);
-		if (this.has_accessto(caseArrivee.getNature())) {
+		if (this.hasAccessto(caseArrivee.getNature())) {
 			double temps = tempsDeplacement(caseArrivee, carte);
 			System.out.println(temps);
 			long dateToAdd = max((long) 1,(long) (temps) / 6) ; //temps d'attente pour le deplacement
@@ -213,7 +211,7 @@ public abstract class Robot {
 	
 	
 	public boolean access(Case destination) {
-		if (this.has_accessto(destination.getNature())) {
+		if (this.hasAccessto(destination.getNature())) {
 			if (calculePath(destination) != null) {
 				return true;
 			}
@@ -261,7 +259,7 @@ public abstract class Robot {
 		double min = Double.POSITIVE_INFINITY;
 		Case nouvelleDestination = null;
 		for(Direction d : Direction.values()) {
-			if (carte.voisinExiste(destinationTemp, d) && has_accessto(carte.getVoisin(destinationTemp, d).getNature())) {
+			if (carte.voisinExiste(destinationTemp, d) && hasAccessto(carte.getVoisin(destinationTemp, d).getNature())) {
 				if(heuristicEau(carte.getVoisin(destinationTemp, d)) < min) {
 					nouvelleDestination = carte.getVoisin(destinationTemp,  d);
 					min = heuristicEau(nouvelleDestination);
@@ -271,14 +269,15 @@ public abstract class Robot {
 		return nouvelleDestination;
 
 	}
-	
-	
-	
-	
-	
-	
+	/**
+	 * Méthode, qui retourne le type du robot
+	 * @return type
+	 */
 	abstract public String returnType();
-	
+	/**
+	 * Méthode waterBar, qui nous donne une idée sur le pourcentage de l'eau restante dans le reservoir.
+	 * @return waterBar
+	 */
 	abstract public double waterBar();
 
 	
@@ -319,5 +318,5 @@ public abstract class Robot {
 	 * @param nature nature du terrain de la case 
 	 * @return boolean : true si le robot peur acceder a ce type de terrain, false sinon.
 	 */
-	abstract public boolean has_accessto(NatureTerrain nature);
+	abstract public boolean hasAccessto(NatureTerrain nature);
 }

@@ -1,29 +1,27 @@
+/**
+ * Classe fille de la clasee Evenement, c'est l'evenement du déplacement du robot.
+ */
 public class EventRobotDeplace extends Evenement {
-	private Direction message ;
+	private Direction direction ;
 	Robot robot;
 	NatureTerrain nouvelleNature;
 	
 	/**
-	 * Constructeur de l'evenement du deplacement du robot
+	 * Constructeur de l'evenement du deplacement du robot vers une direction donnée.
 	 * @param date
 	 * @param message
 	 * @param robot
-	 * @param nouvelleNature
 	 */
-	public EventRobotDeplace(long date , Direction message , Robot robot, NatureTerrain nouvelleNature) {
+	public EventRobotDeplace(long date , Direction direction , Robot robot, NatureTerrain nouvelleNature) {
 		super(date);
-		this.message = message ;
+		this.direction = direction ;
 		this.robot = robot;
 		this.nouvelleNature = nouvelleNature;
 	}
 	
-	
-	/**
-	 * Fonction d'execution, change la position du robot
-	 */
 	public void execute () {
-		System.out.println(this.getDate() + this.robot.vitesse + " robot est deplacé vers le "+ this.message ) ;
-		Case nouvellePosition = robot.carte.getVoisin(robot.getPosition(), message);
+		System.out.println(this.getDate() + this.robot.vitesse + " robot est deplacé vers le "+ this.direction ) ;
+		Case nouvellePosition = robot.carte.getVoisin(robot.getPosition(), direction);
 		this.robot.setPosition(nouvellePosition);
 	}
 }

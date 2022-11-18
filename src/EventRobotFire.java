@@ -1,9 +1,16 @@
 
-
+/**
+ * Classe fille de ma classe Evenement, c'est l'evenement de l'extinction du feu.
+ */
 public class EventRobotFire extends Evenement {
 	private Robot robot;
 	private Incendie[] incendieTableau;
-	
+	/**
+	 * Constructeur public, crée un nouveau evenement EventRobotFire
+	 * @param date
+	 * @param robot
+	 * @param incendieTableau
+	 */
 	public EventRobotFire(long date , Robot robot, Incendie[] incendieTableau) {
 		super(date);
 		this.robot = robot;

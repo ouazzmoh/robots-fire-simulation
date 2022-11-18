@@ -3,29 +3,16 @@ import gui.ImageElement;
 import java.util.Objects;
 
 import gui.GUISimulator;
-
+/**
+ * classe case, qui nous permet de caractériser une case par :
+ * la ligne et la colonne  où elle se trouve
+ * et la nature de terrain dans cette case 
+ */
 public class Case {
-	/**
-	 * classe case, qui nous permet de caractériser une case par :
-	 * la ligne et la colonne  où elle se trouve
-	 * et la nature de terrain dans cette case 
-	 */
 	private int ligne;
 	private int colonne;
 	private NatureTerrain nature;
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Case other = (Case) obj;
-		return colonne == other.colonne && ligne == other.ligne;
-	}
-	
+		
 	/**
 	 * Constructeur public qui crée un case sans connaitre la  nature de terrain
 	 * @param ligne ligne où elle se triuve dans la carte
@@ -66,6 +53,17 @@ public class Case {
 	 */
 	public void setNature(NatureTerrain nature) {
 		this.nature = nature;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Case other = (Case) obj;
+		return colonne == other.colonne && ligne == other.ligne;
 	}
 	
 }

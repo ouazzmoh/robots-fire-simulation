@@ -1,10 +1,9 @@
 
-
+/**
+ * Classe Rroue, une classe fille de la classe Robot, qui définit un nouveau type de robot : robot à roues
+ * qui a un reservoir de 5000 L et une vitesse par défaut de 80 km/h
+ */
 public class Rroue extends Robot {
-	/**
-	 * Classe Rroue, une classe fille de la classe Robot, qui définit un nouveau type de robot : robot à roues
-	 * qui a un reservoir de 5000 L et une vitesse par défaut de 80 km/h
-	 */
 	private double reservoir;
 	private double reservoirCourant;
 
@@ -63,7 +62,7 @@ public class Rroue extends Robot {
 		reservoirCourant = 5000;
 	}
 	@Override
-	public boolean has_accessto(NatureTerrain nature) {
+	public boolean hasAccessto(NatureTerrain nature) {
 		switch(nature) {
 			case TERRAIN_LIBRE:
 				return true;
@@ -101,11 +100,19 @@ public class Rroue extends Robot {
 		
 		return waterBar;
 	}
-	
+	/**
+	 * méthode tempsCharge, retourne le temps nécessaire pour remplir le réservoir
+	 * @return tempscharge
+	 */
 	public long tempsCharge() {
 		return (long) (10 * 60); //5min
 	}
 	
+	/**
+	 * Méthode tempsEteinte, renvoie le temps nécessaire pour verser un volume donné.
+	 * @param litresAverser
+	 * @return tempsEteinte
+	 */
 	public long tempsEteinte(double litresAverser) {
 		return (long) (5 * litresAverser)/100; 
 	}

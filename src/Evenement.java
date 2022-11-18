@@ -1,12 +1,17 @@
 import java.util.Objects;
 
+
+/**
+ * classe abstraite qui permet la gestion des evenements 
+ */
 public abstract class Evenement {
-	
-	/**
-	 * classe abstraite qui permet la gestion des evenements 
-	 */
+
 	private long Date;
 	
+	/**
+	 * Constructeur public, crée un nouvel évenement.
+	 * @param Date
+	 */
 	public Evenement(long Date) {
 		this.Date = Date;
 	}
@@ -15,6 +20,9 @@ public abstract class Evenement {
 		return this.Date;
 	}
 	
+	/**
+	 * Méthode abstraite execute, execute l'évenement
+	 */
 	public abstract void execute();
 	
 	

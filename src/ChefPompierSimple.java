@@ -1,16 +1,22 @@
 import java.util.*;
-
+/**
+ * Classe ChefPompierSimple, classe fille de chefPompier, dont la strategie est d'affecter aléatoirement un robot disponible 
+ * à une incendie.
+ */
 public class ChefPompierSimple extends ChefPompier{
-
+	/**
+	 * Constructeur public, qui crée un nouveau ChefPompierSimple dont la stratégie est élémentaire.
+	 * @param donnees
+	 */
 	public ChefPompierSimple(Carte carte, DonneesSimulation donnees) {
 		super(carte, donnees);
 	}
 
 	/**
-	 * Fonction qui retourne si le robot est capable de partir
+	 * Méthode qui vérifie si un robot est disponible ou pas
 	 * @param robot
 	 * @param destination
-	 * @return
+	 * @return boolean
 	 */
 	public boolean canGoElementaire(Robot robot, Simulateur simulateur) {
 //		if (!(robot.has_accessto(destination.getNature()))) {
@@ -28,8 +34,8 @@ public class ChefPompierSimple extends ChefPompier{
 		return true;
 	}
 	
+	
 	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
-
 		for (Robot robot : robotTab) {
 			if (canGoElementaire(robot, simulateur)) {
 				for (Incendie incendie : incendieTab) {

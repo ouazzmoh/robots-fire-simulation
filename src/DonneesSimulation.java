@@ -1,12 +1,12 @@
-
+/**
+ * Classe DonneesSimulation, une classe qui regroupe toutes les données dont le simulateur aura besoin, à savoir :
+ * la carte, la taille des cases, le format et les cases (ou encore les natures des terrains)
+ * Informations sur les incendies : leurs positions et leurs intensités
+ * Informations sur les robots : leurs positions, leurs types, vitesse et réservoir
+ * intensiteTotale: La somme des intensite des incendies sur la carte
+ */
 public class DonneesSimulation {
-	/**
-	 * Classe DonneesSimulation, une classe qui regroupe toutes les données dont le simulateur aura besoin, à savoir :
-	 * la carte, la taille des cases, le format et les cases (ou encore les natures des terrains)
-	 * Informations sur les incendies : leurs positions et leurs intensités
-	 * Informations sur les robots : leurs positions, leurs types, vitesse et réservoir
-	 * intensiteTotale: La somme des intensite des incendies sur la carte
-	 */
+
 	private Carte carte;
 	private Incendie[] incendies;
 	private Robot[] robots;

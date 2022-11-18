@@ -1,4 +1,6 @@
-
+/**
+ * Classe EventMessage, classe fille de Evenement.
+ */
 public class EventMessage extends Evenement {
 	private String message ;
 	

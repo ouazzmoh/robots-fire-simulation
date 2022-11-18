@@ -13,7 +13,9 @@ import java.util.zip.DataFormatException;
 /**Classe qui implement simulable
  * Le but c'est de visualiser les donnees recu par NewLecteurDonnees
  * Input: donnees = (carte, incendies, robots)
- * Output: visualisation de tout les elements de la simulation**/
+ * Output: visualisation de tout les elements de la simulation
+ * 
+ */
 public class Simulateur implements Simulable {
 	
 //	private static final boolean TRUE = false;
@@ -305,7 +307,9 @@ public class Simulateur implements Simulable {
 		draw();
 		
 	}
-	
+	/**
+	 * Méthode resetData, relit les données à nouveau pour les afficher après avoir cliqué sur "Début"
+	 */
 	public void resetData() {
 		if(this.dateSimulation > 1)
 		{

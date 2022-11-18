@@ -1,8 +1,15 @@
 import java.util.*;
-
+/**
+ * Classe ChefPompierEvloue, classe fille de chefPompier, dont la strategie est d'affecter le robot disponible 
+ * le plus proche aux incendies.
+ */
 public class ChefPompierEvolue extends ChefPompier{
 
-
+	/**
+	 * Constructeur public, crée un nouveau chefPompierEvolue
+	 * @param carte
+	 * @param donnees
+	 */
 	public ChefPompierEvolue(Carte carte, DonneesSimulation donnees) {
 		super(carte, donnees);
 	}
@@ -11,10 +18,10 @@ public class ChefPompierEvolue extends ChefPompier{
 	
 	
 	/**
-	 * Fonction qui retourne si le robot est capable de partir
+	 * Méthode qui retourne la disponibilité du robotr
 	 * @param robot
 	 * @param destination
-	 * @return
+	 * @return boolean
 	 */
 	public boolean canGo(Robot robot, Simulateur simulateur) {
 		/*
@@ -44,8 +51,8 @@ public class ChefPompierEvolue extends ChefPompier{
 	}
 	
 	/**
-	 * Méthode closestIncendie, qui renvoie la case de nature EAU la plus proche au robot
-	 * @return caseProche
+	 * Méthode closestIncendie, qui renvoie l'incendie la plus proche au robot de position positionCourante
+	 * @return incendieProche
 	 */
 	public Incendie closestIncendie(Case positionCourante) {	
 		Incendie[] incendieTableau = donnees.getIncendie();
@@ -68,11 +75,18 @@ public class ChefPompierEvolue extends ChefPompier{
 		return incendieProche;
 	}
 	
+	/**
+	 * Méthode qui renvoie le robot(disponible) le plus proche à l'incendie donnée.
+	 * @param incendie
+	 * @param simulateur
+	 * @param robots
+	 * @return robotProche
+	 */
 	public Robot closestRobot(Incendie incendie, Simulateur simulateur, Robot[] robots) {
 		Robot robotProche = null;
         Double min = Double.POSITIVE_INFINITY;
         for(Robot r : robots) {
-            if(canGo(r, simulateur) && r.has_accessto(incendie.getPosition().getNature()) && heuristicIncendie(incendie.getPosition(), r.positionCourante) < min) {
+            if(canGo(r, simulateur) && r.hasAccessto(incendie.getPosition().getNature()) && heuristicIncendie(incendie.getPosition(), r.positionCourante) < min) {
                 min = heuristicIncendie(incendie.getPosition(), r.positionCourante);
                 robotProche = r;
             }
@@ -100,14 +114,12 @@ public class ChefPompierEvolue extends ChefPompier{
 //		}
 //}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Méthode stratégie, qui génère une stratégie évoluée pour eteindre toutes les incendies.
+	 * @param simulateur
+	 * @param robotTab
+	 * @param incendieTab
+	 */
 	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
 
 		for (Robot robot : robotTab) {
@@ -129,12 +141,6 @@ public class ChefPompierEvolue extends ChefPompier{
 			}
 		}
 	}
-		
-		
-		
-		
-		
-		
-	}
+}
 	
 

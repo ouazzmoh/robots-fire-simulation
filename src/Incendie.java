@@ -1,13 +1,13 @@
+
+/**
+ * Classe Incendie, une classe qui nous donne toutes les informations d'une incendie:
+ * ses coordonnées dans la carte
+ * Son intensité (nb de litres nécessaire pour éteindre le feu
+ */
 public class Incendie {
-	/**
-	 * Classe Incendie, une classe qui nous donne toutes les informations d'une incendie:
-	 * ses coordonnées dans la carte
-	 * Son intensité (nb de litres nécessaire pour éteindre le feu
-	 */
 	private Case position;
 	private double intensite;
-	private boolean affecte;
-	
+	private boolean affecte; // true si l'incendie est affectée à un robot.
 	private double intensiteCourante;
 	
 	
