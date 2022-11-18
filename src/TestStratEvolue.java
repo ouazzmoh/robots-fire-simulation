@@ -14,7 +14,7 @@ public class TestStratEvolue {
 			DonneesSimulation donneesInit = NewLecteurDonnees.lire(fichierName);
 			Carte carteToDraw = donneesInit.getCarte();
 			
-			GUISimulator gui = new GUISimulator(500, 500, Color.RED);
+			GUISimulator gui = new GUISimulator(500, 500, Color.WHITE);
 			
 			
 			ChefPompier chefElem = new ChefPompierEvolue(carteToDraw, donneesInit);

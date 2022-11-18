@@ -144,7 +144,7 @@ public class Simulateur implements Simulable {
 		
 		
         int xMax = gui.getWidth();
-//        xMax -= (int)xMax*0.1;  //50 est la taille de la partie non utile de la fenetre
+        xMax -= (int)xMax*0.02;  //50 est la taille de la partie non utile de la fenetre
         int yMax = gui.getHeight();
         yMax -= (int)yMax*0.13; // 80 est la taille de la partie non utile de la fenetre
         
@@ -245,19 +245,6 @@ public class Simulateur implements Simulable {
 				
 				System.out.println("*Il n y'a pas d'evenements a faire dans cette date, on incremente la date*");
 			}
-			
-			//Fastening
-//			boolean makeFast = true;
-//			int skipStep = 10;
-//			for (int i = 1; i <skipStep + 1; i++) {
-//				if (evenements.get(this.dateSimulation+i) != null && !(evenements.get(this.dateSimulation+i).isEmpty())) {
-//					makeFast = false;
-//				}
-//			}
-//			
-//			if (makeFast) {
-//				dateSimulation += skipStep;
-//			}
 		}
 		else {
 			drawEnd();

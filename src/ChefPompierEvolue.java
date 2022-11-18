@@ -80,25 +80,25 @@ public class ChefPompierEvolue extends ChefPompier{
         return robotProche;
     }
 	
-	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
-
-		for (Incendie incendie : incendieTab) {
-//				for (Incendie incendie : incendieTab) {
-				//TODO: TEST ACCESS FOR FIRE
-			if (!(incendie.isAffecte())) {
-				Robot robot = closestRobot(incendie, simulateur, robotTab);
-				if (robot != null) {
-					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
-					incendie.setAffecte(true);
-					while (incendie.getIntensiteCourante() != 0) {
-						robot.programmeEvents(incendie.getPosition(), simulateur);
-						robot.eteindreIncendie(simulateur, incendie);		
-	//						}
-					}
-				}
-			}
-		}
-}
+//	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
+//
+//		for (Incendie incendie : incendieTab) {
+////				for (Incendie incendie : incendieTab) {
+//				//TODO: TEST ACCESS FOR FIRE
+//			if (!(incendie.isAffecte())) {
+//				Robot robot = closestRobot(incendie, simulateur, robotTab);
+//				if (robot != null) {
+//					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
+//					incendie.setAffecte(true);
+//					while (incendie.getIntensiteCourante() != 0) {
+//						robot.programmeEvents(incendie.getPosition(), simulateur);
+//						robot.eteindreIncendie(simulateur, incendie);		
+//	//						}
+//					}
+//				}
+//			}
+//		}
+//}
 	
 	
 	
@@ -107,7 +107,7 @@ public class ChefPompierEvolue extends ChefPompier{
 	
 	
 	
-	/*
+	
 	public void strategie(Simulateur simulateur,Robot[] robotTab, Incendie[] incendieTab) {
 
 		for (Robot robot : robotTab) {
@@ -130,7 +130,7 @@ public class ChefPompierEvolue extends ChefPompier{
 		}
 	}
 		
-		*/
+		
 		
 		
 		

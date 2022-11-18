@@ -16,6 +16,7 @@ public class Rroue extends Robot {
 	public Rroue(Case position, Carte carte, double reservoir) {
 		super(80, position, carte);
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	/**
 	 * Constructeur public, qui crée un nouveau robot à roue avec une vitesse donnée
@@ -26,6 +27,7 @@ public class Rroue extends Robot {
 	public Rroue(double vitesse, Case position, Carte carte, double reservoir) {
 		super(vitesse, position, carte);
 		this.reservoir = reservoir;
+		this.reservoirCourant = reservoir;
 	}
 	@Override
 	public String toString() {
