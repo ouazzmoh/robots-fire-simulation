@@ -36,3 +36,7 @@ Pour executer par exemple la strategie evolue sur la carte "mushroomOfHell-20x20
 --Remarque:
 	*Le reset cause quelque problemes pour les tests sans chefPompier (TestPath et TestDeplacement) mais fonctionne parfaitement
 	pour les tests avec une strategie (Un chefPompier)
+
+	*Pour la carte "carteSujet.map" la taille des cases fournis est très grande, donc on vous conseille de changer le temps de simulation sur l'interface.
+
+	*Nous avons changer le chemin du gui.jar car le chemin bin nous a cause des problemes avec l'IDE, l'archive se trouve dans gui_bin et nous avons fait les changements necessaire dans le Makefile
