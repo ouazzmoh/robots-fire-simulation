@@ -1,23 +1,38 @@
-Ensimag 2A POO - TP 2022/23
+Ensimag 2A POO - TP 2022/23 
+Equipe : 43
 ============================
 
-- src: contient les classes fournies par les enseignants
-  -> LecteurDonnees.java         : lit tous les elements d'un fichier de description de donnees (cases, incendies et robots) et les affiche.
-                                   A vous de MODIFIER cette classe (ou en ecrire une nouvelle) pour creer les objets correspondants à vos propres classes
-  -> TestLecteurDonnees.java     : lit un fichier de donnees et affiche son contenu
-  -> TestInvader                 : cree un simulateur "mini Invaders" dans une fenetre graphique
+En plus des tests fournis par les enseignants, on a ajouté:
+	* TestDeplacement: Exemple simple pour le deplacement d'un robot
+	* TestPath: Exemple simple d'un robot qui trouve le plus court chemin
+	* TestElementaireMapi : Exemple de simulation avec la strategie elementaire(i dans {1,2,3,4})
+	* TestEvolueeMapi : Exemple de simulation avec la strategie evolue(i dans {1,2,3,4})
+	
+La compilation genere les executables:
+	* exeDeplacement
+	* exePath
+	* exeElementaireMapi (i dans {1,2,3,4})
+	* exeEvolueMapi (i dans {1,2,3,4})
+	
+Pour compiler tous les fichiers : make all
+
+Pour executer par exemple la strategie evolue sur la carte2: make exeEvolueMap2
+
+
+Pour fournir une autre carte a la simulation:
+	*TestElementairePerso: pour la strategie elementaire
+	*TestEvoluePerso: pour la strategie evolue
+
+
+- src: contient les classes
 
 - cartes: quelques exemples de fichiers de donnees
 
-- bin/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestInvader.java
+- gui_bin/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestInvader.java
 
-- doc: la documentation (API) des classes de l'interface graphique contenues dans gui.jar. Point d'entrée: index.html
-
-- Makefile: quelques explications sur la compilation en ligne, notamment la notion de classpath et l'utilisation de gui.jar
+- doc: la documentation (API) des classes 
 
 
-
-==================FROM Ouazzmoh======================
-Firstly, read the README file which contains specifications from project creators
-To import into eclipse: file -> import -> Existing Projects Into Workspace
-Import problems have been resolved, so TestInvader should be working in eclipse.
+--Remarque:
+	*Le reset cause quelque problemes pour les tests sans chefPompier (TestPath et TestDeplacement) mais fonctionne parfaitement
+	pour les tests avec une strategie (Un chefPompier)

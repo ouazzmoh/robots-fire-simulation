@@ -25,41 +25,41 @@ all: testInvader testLecture testCarte testDeplacement testPath  testElementaire
 
 #test fourni par le sujet
 testInvader:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestInvader.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestInvader.java
 
 testCarte:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestCarte.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestCarte.java
 
 #Scenario simple d'un deplacement
 testDeplacement:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestDeplacement.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestDeplacement.java
 
 #Scenario simple d'un robot qui trouve son chemin	
 testPath:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestPath.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestPath.java
 
 #Les tests de la strategie elementaire	
 testElementaireMap1:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestElementaireMap1.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap1.java
 testElementaireMap2:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestElementaireMap2.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap2.java
 testElementaireMap3:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestElementaireMap3.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap3.java
 testElementaireMap4:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestElementaireMap4.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestElementaireMap4.java
 	
 #Les tests de la strategie evolue	
 testEvolueMap1:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestEvolueMap1.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap1.java
 testEvolueMap2:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestEvolueMap2.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap2.java
 testEvolueMap3:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestEvolueMap3.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap3.java
 testEvolueMap4:
-	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/TestEvolueMap4.java
+	javac -d bin -classpath gui_bin/gui.jar -sourcepath src src/tests/TestEvolueMap4.java
 
 testLecture:
-	javac -d bin -sourcepath src src/TestLecteurDonnees.java
+	javac -d bin -sourcepath src src/tests/TestLecteurDonnees.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -67,40 +67,40 @@ testLecture:
 # ou bien lancer l'execution en passant par ce Makefile:vi
 #   > make exeInvader
 exeInvader: 
-	java -classpath bin:gui_bin/gui.jar TestInvader
+	java -classpath bin:gui_bin/gui.jar tests/TestInvader
 	
 exeCarte: 
-	java -classpath bin:gui_bin/gui.jar TestCarte
+	java -classpath bin:gui_bin/gui.jar tests/TestCarte
 
 exeDeplacement: 
-	java -classpath bin:gui_bin/gui.jar TestDeplacement
+	java -classpath bin:gui_bin/gui.jar tests/TestDeplacement
 	
 exePath: 
-	java -classpath bin:gui_bin/gui.jar TestPath
+	java -classpath bin:gui_bin/gui.jar tests/TestPath
 	
 exeElementaireMap1: 
-	java -classpath bin:gui_bin/gui.jar TestElementaireMap1
+	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap1
 
 exeElementaireMap2: 
-	java -classpath bin:gui_bin/gui.jar TestElementaireMap2
+	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap2
 
 exeElementaireMap3: 
-	java -classpath bin:gui_bin/gui.jar TestElementaireMap3
+	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap3
 
 exeElementaireMap4: 
-	java -classpath bin:gui_bin/gui.jar TestElementaireMap4
+	java -classpath bin:gui_bin/gui.jar tests/TestElementaireMap4
 	
 exeEvolueMap1: 
-	java -classpath bin:gui_bin/gui.jar TestEvolueMap1
+	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap1
 
 exeEvolueMap2: 
-	java -classpath bin:gui_bin/gui.jar TestEvolueMap2
+	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap2
 
 exeEvolueMap3: 
-	java -classpath bin:gui_bin/gui.jar TestEvolueMap3
+	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap3
 
 exeEvolueMap4: 
-	java -classpath bin:gui_bin/gui.jar TestEvolueMap4
+	java -classpath bin:gui_bin/gui.jar tests/TestEvolueMap4
 	
 exeLecture: 
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
