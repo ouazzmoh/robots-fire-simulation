@@ -16,6 +16,11 @@ public class EventRobotFire extends Evenement {
 		this.robot = robot;
 		this.incendieTableau = incendieTableau;
 	}
+	/**
+	 * eteindre immediatement l'incendie qui se trouve dans la case courante du robot
+	 * tout en modifiant l'intensité et le reservoir
+	 * si il n'y a pas d'incendie dans cette case une exception sera levée
+	 */
 	public void execute () {
 		//Chercher l'incendie a eteidndre
 		Incendie fireToKill = null;

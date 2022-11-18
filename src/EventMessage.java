@@ -1,5 +1,5 @@
 /**
- * Classe EventMessage, classe fille de Evenement.
+ * Classe EventMessage, classe fille de Evenement qui permet d'afficher un message.
  */
 public class EventMessage extends Evenement {
 	private String message ;

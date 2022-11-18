@@ -12,6 +12,9 @@ public class EventRobotCharge extends Evenement {
 		super(date);
 		this.robot = robot;
 	}
+	/**
+	 * remplir le reservoir d'un robot
+	 */
 	public void execute () {
 		System.out.println(this.getDate() + " charge son reservoir ") ;
 		robot.remplirEau();

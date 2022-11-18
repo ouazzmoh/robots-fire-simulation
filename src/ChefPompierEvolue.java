@@ -127,7 +127,7 @@ public class ChefPompierEvolue extends ChefPompier{
 //				for (Incendie incendie : incendieTab) {
 				//TODO: TEST ACCESS FOR FIRE
 				Incendie incendie = closestIncendie(robot.positionCourante);
-				if (!(incendie.isAffecte()) && robot.access(incendie.getPosition())) {
+				if (!(incendie.isAffecte()) && robot.hasAccessto(incendie.getPosition().getNature())) {
 					robot.programmeEvents(incendie.getPosition(), simulateur);
 					System.out.println("**** incendie" + incendie + "affecte au robot" + robot + "******");
 					incendie.setAffecte(true);

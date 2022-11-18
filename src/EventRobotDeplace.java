@@ -19,6 +19,9 @@ public class EventRobotDeplace extends Evenement {
 		this.nouvelleNature = nouvelleNature;
 	}
 	
+	/**
+	 * changer la position d'un robot qui sera directement dessiner par le simulateur
+	 */
 	public void execute () {
 		System.out.println(this.getDate() + this.robot.vitesse + " robot est deplacé vers le "+ this.direction ) ;
 		Case nouvellePosition = robot.carte.getVoisin(robot.getPosition(), direction);

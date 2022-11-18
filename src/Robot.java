@@ -93,8 +93,8 @@ public abstract class Robot {
 	
 
 	/**
-	 * Méthode qui nous permet de ajouter l evenement effectif dans la liste des
-	 * evenements qui sera executé dans une date calculée
+	 * Méthode qui nous permet de ajouter l evenement effectif de déplacement dans la liste des
+	 * evenements qui sera executé directement dans une date calculée en fonction des données du robot
 	 * @param dir Direction (NORD, SUD, OUEST, EST)
 	 * @param carte map 
 	 * @param simulateur simulateur du jeu
@@ -115,7 +115,7 @@ public abstract class Robot {
 	/**********Les methodes pour les incendies************/
 	
 	/**
-	 * Fonction pour eteindre les incendies
+	 * Fonction pour eteindre les incendies dans une date précise calculée en fonction des parametres du robot
 	 * On suppose que le robot est deja sur une case avec incendie
 	 * @param incendieTableau
 	 * @param dateCourante
@@ -159,7 +159,7 @@ public abstract class Robot {
 	
 	/*********Les methodes pour le remplissage d'eau*********/
 	/**
-	 * Fonction pour remplir le reservoir du robot
+	 * Fonction pour remplir le reservoir du robot dans une date précise calculée en fonction des parametres du robot
 	 * @param dateCourante
 	 * @param simulateur
 	 */
@@ -207,16 +207,6 @@ public abstract class Robot {
 				//On suppose ici qu'on arrive a une incendie
 				}
 		}
-	}
-	
-	
-	public boolean access(Case destination) {
-		if (this.hasAccessto(destination.getNature())) {
-			if (calculePath(destination) != null) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	/**
